@@ -1,3 +1,15 @@
 index:
   path: /
   defaults: { _controller: AppBundle:Default:index }
+
+
+setup:
+  path: /setup
+  defaults: { _controller: AppBundle:Registration:register }
+
+login:
+    path: /login
+    defaults: { _controller: AppBundle:Security:login }
+
+logout:
+    path: /logout
