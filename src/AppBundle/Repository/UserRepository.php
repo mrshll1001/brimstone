@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+  /**
+   * Brimstone operates with a single user object so this method provides means of simply querying for the single user
+   */
+  public function getSingleUser()
+  {
+    $qb = $this->createQueryBuilder('u'); // Create the builder for the DQL
+    $qb->where('u.id IS NOT NULL');       // Generic query guaranteed to have a result.
+
+    return $qb->getQuery()->getOneOrNullResult(); // Returns either a single result or 'null' http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/dql-doctrine-query-language.html
+  }
 }
