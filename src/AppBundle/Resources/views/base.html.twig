@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% block body %}
+
+    {% endblock body %}
+
+
+
+    {# Presume that custom scripts want to begin after the compulsory scripts have loaded #}
+    {% block script %}{% endblock script %}
+  </body>
+</html>

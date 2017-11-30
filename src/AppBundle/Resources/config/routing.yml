@@ -2,7 +2,6 @@ index:
   path: /
   defaults: { _controller: AppBundle:Default:index }
 
-
 setup:
   path: /setup
   defaults: { _controller: AppBundle:Registration:register }
