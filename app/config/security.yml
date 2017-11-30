@@ -38,4 +38,4 @@ security:
 
     access_control:
       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-      - {path: ^/admin*, role: ROLE_USER}
+      - { path: ^/admin*, role: ROLE_USER }
