@@ -44,6 +44,14 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * One user has one UserProfile
+     * @ORM\OneToOne(targetEntity="UserProfile")
+     * @ORM\JoinColumn(name="userprofile_id", referencedColumnName="id")
+     */
+    private $profile;
+
+
     public function __construct()
     {
         $this->isActive = true;
@@ -195,5 +203,29 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    /**
+     * Set profile
+     *
+     * @param \AppBundle\Entity\UserProfile $profile
+     *
+     * @return User
+     */
+    public function setProfile(\AppBundle\Entity\UserProfile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \AppBundle\Entity\UserProfile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }

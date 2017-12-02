@@ -19,4 +19,14 @@ class AdminController extends Controller
   {
     return $this->render('AppBundle:admin:control_panel.html.twig', array());
   }
+
+
+  /**
+  * Shortcut class for returning the user
+  * @return Usser object
+  */
+  protected function getUser()
+  {
+    return $this->get('security.token_storage')->getToken()->getUser();
+  }
 }
