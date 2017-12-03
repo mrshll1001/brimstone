@@ -1,0 +1,14 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+  {# Holds the navigation bar #}
+  {% block navbar %}
+    {% include 'AppBundle:nav:admin_navbar.html.twig'  %}
+  {% endblock navbar %}
+
+
+  {# Block designed to be overridden to provide the page's content space. Note: you still need a <div class=container> #}
+  {% block content %}
+  {% endblock content %}
+
+{% endblock body %}
