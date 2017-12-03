@@ -57,7 +57,24 @@ class AdminController extends Controller
       $user = $this->getUser(); // Get the user
       $this->checkUser($user); // Check them
 
-      return $this->render('AppBundle:admin:user_settings.html.twig', array());
+      /* We need multiple forms on this page so we're going to handle them each in turn */
+
+      /* First, the QuickProfile form to let the user update their profile information */
+      $quickProfileForm = $this->createForm(QuickProfileType::class, $user->getProfile()); // Create the form with the profile object on the user
+
+      $quickProfileForm->handleRequest($request); // Handle the request here first
+
+      if ($quickProfileForm->isSubmitted() && $quickProfileForm->isValid())
+      {
+        $user->setProfile($quickProfileForm->getData()); // Update the object
+        $em = $this->getDoctrine()->getManager();       // Get the Doctrine EM
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('user_settings');
+      }
+
+      return $this->render('AppBundle:admin:user_settings.html.twig', array('quickProfileForm' => $quickProfileForm->createView() ));
 
     } catch (NullProfileException $e)
     {

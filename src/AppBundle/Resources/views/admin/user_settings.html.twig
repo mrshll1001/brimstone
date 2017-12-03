@@ -1,7 +1,31 @@
 {% extends 'AppBundle:admin:admin_base.html.twig' %}
 
 {% block content %}
-<h1>Settings page</h1>
 
+<div class="container">
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Profile Settings</span>
+
+          {% include 'AppBundle:form:quick_profile.html.twig' with {'form': quickProfileForm} only %}
+
+          <div class="divider"></div>
+          <br />
+          <span class="card-title">Change Password</span>
+
+
+        </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
