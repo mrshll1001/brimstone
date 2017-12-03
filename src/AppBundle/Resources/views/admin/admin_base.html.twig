@@ -1,5 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block css %}
+<link rel="stylesheet" href="{{asset('css/admin.css')}}">
+{% endblock css %}
+
 {% block body %}
   {# Holds the navigation bar #}
   {% block navbar %}
