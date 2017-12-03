@@ -1,3 +1,7 @@
 control_panel:
   path: /
   defaults: { _controller: AppBundle:Admin:controlPanel }
+
+configure_initial_profile:
+  path: /configure
+  defaults: { _controller: AppBundle:Admin:configureInitialProfile }
