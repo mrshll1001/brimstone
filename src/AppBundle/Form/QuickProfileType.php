@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextAreaType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
 
@@ -23,7 +23,7 @@ class QuickProfileType extends AbstractType
       'required' => true
 
     ))
-    ->add('description', TextAreaType::class, array(
+    ->add('description', TextareaType::class, array(
       'required' => true,
       'label' => "A quick description of you",
       'attr'=>array('class'=>'materialize-textarea', 'placeholder'=>"(max 255 characters)") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css

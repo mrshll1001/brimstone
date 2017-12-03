@@ -8,9 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 /* Entities */
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserProfile;
 
 /* Exceptions */
 use AppBundle\Exception\NullProfileException;
+
+/* Forms */
+use AppBundle\Form\QuickProfileType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -18,18 +22,18 @@ use AppBundle\Exception\NullProfileException;
 class AdminController extends Controller
 {
 
-  /**
+  /**=======================================================================================================
    * Renders the Control Panel
+   *=======================================================================================================
    */
   public function controlPanelAction(Request $request)
   {
 
-    /* try to execute the code, but there's no profile yet we need to set it up */
+    /* try to execute the code, but if there's no profile yet we need to set it up */
     try
     {
       $user = $this->getUser(); // Get the User
       $this->checkUser($user);  // Check stuff about them
-
 
       return $this->render('AppBundle:admin:control_panel.html.twig', array());
 
@@ -39,35 +43,90 @@ class AdminController extends Controller
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
     }
 
+  }
 
+  /**=======================================================================================================
+   * Settings page. Contains a variety of forms to allow the user to modify their profile or website settings
+   *=======================================================================================================
+   */
+  public function userSettingsAction(Request $request)
+  {
+    /* Perform standard checks */
+    try
+    {
+      $user = $this->getUser(); // Get the user
+      $this->checkUser($user); // Check them
 
+      return $this->render('AppBundle:admin:user_settings.html.twig', array());
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
 
   }
 
-  /**
+  /**=======================================================================================================
    * After logging in for the first time users should be directed here to initialise their UserProfile object
+   *=======================================================================================================
    */
   public function configureInitialProfileAction(Request $request)
   {
-    return $this->render('AppBundle:admin:configure_initial_profile.html.twig', array());
+    /* First perform a check to see if they've actually got a profile. If they have, redirect to the settings page */
+    if (!is_null($this->getUser()->getProfile()))
+    {
+      return $this->redirectToRoute('user_settings');
+    }
+
+
+    /* Build the form around a new UserProfile object */
+    $userProfile = new UserProfile();
+    $form = $this->createForm(QuickProfileType::class, $userProfile);
+
+    /* Handle form submission */
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) // Check the form was submitted
+    {
+      /* If form is submitted, store the user profile object and associate it with the user */
+
+      $userProfile = $form->getData();                 // Acquire the data from the form
+      $em = $this->getDoctrine()->getManager();       // Get the EM from Doctrine
+
+      $user = $this->getUser();                     // Get the user
+
+      $em->persist($userProfile);                 // Persist it
+      $user->setProfile($userProfile);           // Associate it with teh user
+      $em->persist($user);                      // Persist the user just-in-caase
+      $em->flush();                            // Flush
+
+
+      /* Finally, redirect to the control panel page */
+      return $this->redirectToRoute('control_panel');
+    }
+
+    // Form handling
+    return $this->render('AppBundle:admin:configure_initial_profile.html.twig', array('form' => $form->createView() ));
   }
 
 
-  /**
+  /**=======================================================================================================
   * Shortcut class for returning the user
   * @return Usser object
+  *=======================================================================================================
   */
   protected function getUser()
   {
     return $this->get('security.token_storage')->getToken()->getUser();
   }
 
-  /**
+  /**=======================================================================================================
    * Performs various checks on the user and redirects appropriately based on the resulting conditions
+   *=======================================================================================================
    */
   protected function checkUser(User $user)
   {
-    echo $user->getProfile();
     /* If user's UserProfile object is null, redirect them to the Configuration */
     if (is_null($user->getProfile()))
     {
