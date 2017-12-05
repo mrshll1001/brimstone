@@ -12,20 +12,30 @@
 
           {% include 'AppBundle:form:quick_profile.html.twig' with {'form': quickProfileForm} only %}
 
-          <div class="divider"></div>
-          <br />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+
+      <div class="card">
+        <div class="card-content">
           <span class="card-title">Change Password</span>
 
-
-        </div>
-
+          {% include 'AppBundle:form:change_password.html.twig' with {'form': changePasswordForm} only %}
 
         </div>
       </div>
 
-
     </div>
   </div>
+
+
+
 </div>
+
 
 {% endblock content %}

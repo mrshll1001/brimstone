@@ -15,6 +15,7 @@ use AppBundle\Exception\NullProfileException;
 
 /* Forms */
 use AppBundle\Form\QuickProfileType;
+use AppBundle\Form\ChangePasswordType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -71,10 +72,35 @@ class AdminController extends Controller
         $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('user_settings');
+        return $this->redirectToRoute('user_settings'); // Return to the settings page
       }
 
-      return $this->render('AppBundle:admin:user_settings.html.twig', array('quickProfileForm' => $quickProfileForm->createView() ));
+
+      /* Now we handle the change password form */
+      $changePasswordForm = $this->createForm(ChangePasswordType::class); // We don't give this a user object as we just want the password information
+
+      $changePasswordForm->handleRequest($request); // HAndle the request
+
+      if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid())
+      {
+        $plainPassword = $changePasswordForm['plainPassword']->getData();               // Retrieve plain password
+        $encodedPassword = $this->get('security.password_encoder')
+                                ->encodePassword($user, $plainPassword);         // Generate a per-user salt
+
+
+        $em = $this->getDoctrine()->getManager();        // Get doctrine
+        $user->setPassword($encodedPassword);           // Set the encoded password
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('logout');  // Just for safety, redirect to logout
+      }
+
+
+      return $this->render('AppBundle:admin:user_settings.html.twig',
+                            array('quickProfileForm' => $quickProfileForm->createView(),
+                            'changePasswordForm' => $changePasswordForm->createView()
+                          ));
 
     } catch (NullProfileException $e)
     {
