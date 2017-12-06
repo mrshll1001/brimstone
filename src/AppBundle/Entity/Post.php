@@ -64,9 +64,9 @@ class Post
     private $inReplyTo;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\Column(name="location", type="json_array", nullable=true)
      */
     private $location;
 
@@ -228,9 +228,9 @@ class Post
     /**
      * Set location
      *
-     * @param string $location
+     * @param array $location
      *
-     * @return Post
+     * @return TestLocation
      */
     public function setLocation($location)
     {
@@ -242,11 +242,10 @@ class Post
     /**
      * Get location
      *
-     * @return string
+     * @return array
      */
     public function getLocation()
     {
         return $this->location;
     }
 }
-
