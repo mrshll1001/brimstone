@@ -1,0 +1,16 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+
+{% block body %}
+
+{# Main navbar and profile section for the page #}
+{% block navbar %}
+  {% include 'AppBundle:nav:public_navbar.html.twig' with {'profile': profile} only %}
+{% endblock navbar %}
+
+
+{# Main content block for the page, designed to be overridden #}
+{% block content %}
+{% endblock content %}
+
+{% endblock body %}
