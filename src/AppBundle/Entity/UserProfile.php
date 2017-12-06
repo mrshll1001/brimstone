@@ -38,7 +38,7 @@ class UserProfile
     /**
      * @var string
      *
-     * @ORM\Column(name="about", type="string", length=500000, nullable=true)
+     * @ORM\Column(name="about", type="text", nullable=true)
      */
     private $about;
 
@@ -125,4 +125,3 @@ class UserProfile
         return $this->about;
     }
 }
-
