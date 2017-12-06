@@ -16,6 +16,7 @@ use AppBundle\Exception\NullProfileException;
 /* Forms */
 use AppBundle\Form\QuickProfileType;
 use AppBundle\Form\ChangePasswordType;
+use AppBundle\Form\WriteAboutType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -101,6 +102,42 @@ class AdminController extends Controller
                             array('quickProfileForm' => $quickProfileForm->createView(),
                             'changePasswordForm' => $changePasswordForm->createView()
                           ));
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
+  /**====================================================================================================================================
+   * Provides a page / form to allow the user to write their 'about' section. Once their 'About' isn't null, the about link shows up on the public side of teh site
+   * ====================================================================================================================================
+   */
+  public function writeAboutAction(Request $request)
+  {
+    /* Standard checks */
+    try
+    {
+      $user = $this->getUser(); // Get the user
+      $this->checkUser($user); // Check them
+
+      /* The WriteAbout form operates on the user profile object, so we create the form using it */
+      $form = $this->createForm(WriteAboutType::class, $user->getProfile());  // Create form
+
+      /* Handle request and check if the form was submitted */
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid())
+      {
+        // TODO store stuff
+
+        /* We don't need to redirect because we don't need an empty form AND don't need to change the page */
+      }
+
+      return $this->render('AppBundle:admin:write_about.html.twig', array('form' => $form->createView() ));
+
 
     } catch (NullProfileException $e)
     {

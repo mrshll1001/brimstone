@@ -9,3 +9,7 @@ configure_initial_profile:
 user_settings:
   path: /settings
   defaults: { _controller: AppBundle:Admin:userSettings }
+
+write_about:
+  path: /about
+  defaults: { _controller: AppBundle:Admin:writeAbout }
