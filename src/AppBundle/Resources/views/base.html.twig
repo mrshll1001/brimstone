@@ -18,13 +18,19 @@
     <title></title>
   </head>
   <body>
+    {# Load the materialize CSS and javascript #}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/materialize.min.js')}}"></script>
     {% block body %}
 
     {% endblock body %}
 
-    {# Load the materialize CSS and javascript #}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="{{asset('js/materialize.min.js')}}"></script>
+    <script type="text/javascript">
+      $( document ).ready(function(){
+        $(".dropdown-button").dropdown();
+      });
+    </script>
+
 
     {# Presume that custom scripts want to begin after the compulsory scripts have loaded #}
     {% block script %}{% endblock script %}
