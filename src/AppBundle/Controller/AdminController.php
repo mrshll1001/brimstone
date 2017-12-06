@@ -131,7 +131,12 @@ class AdminController extends Controller
 
       if ($form->isSubmitted() && $form->isValid())
       {
-        // TODO store stuff
+        /* Set the user's profile using the form data */
+        $user->setProfile($form->getData());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
 
         /* We don't need to redirect because we don't need an empty form AND don't need to change the page */
       }
