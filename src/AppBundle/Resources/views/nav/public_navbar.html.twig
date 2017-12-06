@@ -1,11 +1,11 @@
-<div class="section blue darken-4 white-text">
+<div id="public-navbar" class="section indigo darken-4 white-text readable">
   <div class="container">
 
     {# For descriptions and stuff #}
     <div class="row">
     {# TODO remember to put the profile image in at some point! Even just Gravatar for now #}
 
-      <div class="col s12 m6 offset-m2">
+      <div class="col s12 m8 offset-m2">
         <p>
           {{profile.description}}
         </p>
@@ -15,9 +15,9 @@
     {# For the links #}
     <div class="row">
       <div class="col s12 m6 offset-m3 center">
-        <a class="light-green-text" href="{{path('index')}}">Home</a> ::
-        <a href="#">Blog</a>
-        {% if profile.about is not null  %} :: <a href="#">About</a> {% endif %}
+        <a class="teal-text text-lighten-2" href="{{path('index')}}">Home</a> ::
+        <a class="teal-text text-lighten-2" href="#">Blog</a>
+        {% if profile.about is not null  %} :: <a class="teal-text text-lighten-2" href="#">About</a> {% endif %}
       </div>
     </div>
 
