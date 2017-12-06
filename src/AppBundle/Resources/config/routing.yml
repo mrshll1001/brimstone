@@ -17,3 +17,9 @@ login:
 
 logout:
     path: /logout
+
+# Begin the public facing pages
+
+about:
+  path: /about
+  defaults: { _controller: AppBundle:Default:about }
