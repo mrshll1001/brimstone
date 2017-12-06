@@ -1,5 +1,17 @@
 {% extends 'AppBundle:admin:admin_base.html.twig' %}
 
 {% block content %}
-<h1>Control Panel</h1>
+<div class="container">
+  <div class="row">
+
+    <div class="col s12 m10 offset-m1">
+
+      <div class="card-panel">
+        {% include 'AppBundle:form:quick_note_form.html.twig' with {'form': form} only %}
+      </div>
+
+    </div>
+
+  </div>
+</div>
 {% endblock content %}

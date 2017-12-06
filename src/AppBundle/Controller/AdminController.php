@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /* Entities */
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
+use AppBundle\Entity\Post;
 
 /* Exceptions */
 use AppBundle\Exception\NullProfileException;
@@ -17,6 +18,7 @@ use AppBundle\Exception\NullProfileException;
 use AppBundle\Form\QuickProfileType;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\WriteAboutType;
+use AppBundle\Form\QuickNoteType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -25,7 +27,7 @@ class AdminController extends Controller
 {
 
   /**=======================================================================================================
-   * Renders the Control Panel
+   * Renders the Control Panel, incl a shortform post form
    *=======================================================================================================
    */
   public function controlPanelAction(Request $request)
@@ -37,7 +39,31 @@ class AdminController extends Controller
       $user = $this->getUser(); // Get the User
       $this->checkUser($user);  // Check stuff about them
 
-      return $this->render('AppBundle:admin:control_panel.html.twig', array());
+      /* We have a form on the page to allow the user to quickly post some content, so let's render that */
+      $post = new Post(); // We're basing it around a NEW post
+      $form = $this->createForm(QuickNoteType::class, $post);
+
+      /* Check form submission */
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid())
+      {
+        $post = $form->getData(); // Retrieve the data ffrom the form
+
+        /* We're actually still missing some compulsory data like dates etc. So let's add them here */
+
+        $post->setDate(new \DateTime());  // Date wasn't given, so we can default to now.
+        $post->setVisible(true);         // TODO this is actually a bit presumptious, when the form develops further we should check this
+
+        /* We've handled the post now so we should be ok to save it */
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
+
+        /* If we're successful, we should probably want to redirect to a nice clean form */
+        return $this->redirectToRoute('control_panel');
+      }
+
+      return $this->render('AppBundle:admin:control_panel.html.twig', array('form' => $form->createView() ));
 
     } catch (NullProfileException $e)
     {
