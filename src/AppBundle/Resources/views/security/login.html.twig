@@ -1,19 +1,25 @@
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+{% extends 'AppBundle::base.html.twig' %}
 
-<form action="{{ path('login') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+{% block body %}
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+<div class="container">
 
-    {#
-        If you want to control the URL the user
-        is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
+  <div class="row">
 
-    <button type="submit">login</button>
-</form>
+    <div class="col s12 m4 offset-m4">
+      <div class="card-panel">
+          {% if error %}
+          <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+          {% endif %}
+
+          {% include 'AppBundle:form:login_form.html.twig'  %}
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+{% endblock body %}
