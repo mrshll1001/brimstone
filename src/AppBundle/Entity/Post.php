@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Taggable\Taggable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Post
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
  */
-class Post
+class Post implements Taggable
 {
     /**
      * @var int
@@ -249,5 +251,30 @@ class Post
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+    * TAGGABLE requirement
+    */
+    public function getTaggableType()
+    {
+      return 'post';
+    }
+
+    /**
+    * TAGGABLE requirement
+    */
+    public function getTaggableId()
+    {
+      return $this->getId();
+    }
+
+    /**
+     * TAGGABLE requirement
+     */
+    public function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+        return $this->tags;
     }
 }
