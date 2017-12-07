@@ -74,6 +74,30 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
+   * Page to write a full post / article
+   *=======================================================================================================
+   */
+  public function writeArticleAction(Request $request)
+  {
+    try
+    {
+      /* Perform standard checks */
+      $user = $this->getUser();
+      $this->checkUser($user);
+
+      /* TODO form stuff */
+
+      return $this->render('AppBundle:admin:write_article.html.twig', array());
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
+  /**=======================================================================================================
    * Settings page. Contains a variety of forms to allow the user to modify their profile or website settings
    *=======================================================================================================
    */

@@ -13,3 +13,7 @@ user_settings:
 write_about:
   path: /about
   defaults: { _controller: AppBundle:Admin:writeAbout }
+
+write_article:
+  path: /write-article
+  defaults: { _controller: AppBundle:Admin:writeArticle }
