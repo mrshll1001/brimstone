@@ -19,6 +19,7 @@ use AppBundle\Form\QuickProfileType;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\WriteAboutType;
 use AppBundle\Form\QuickNoteType;
+use AppBundle\Form\WriteArticleType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -85,9 +86,39 @@ class AdminController extends Controller
       $user = $this->getUser();
       $this->checkUser($user);
 
-      /* TODO form stuff */
+      /* Create the form and handle the submission */
+      $post = new Post(); // Articles are based off of a new post object
+      $form = $this->createForm(WriteArticleType::class, $post);
 
-      return $this->render('AppBundle:admin:write_article.html.twig', array());
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid())
+      {
+        /* Create the article from the form data */
+        $post = $form->getData();
+
+        /* Remember to set the compulsory things */
+        $post->setVisible(true);
+
+        /* TODO remember to generate a SLUG */
+
+        /* We actually might have a date from the date field. If so, then we're ok but we need to check for a null value */
+        if ($form['date']->getData() === null)
+        {
+          $post->setDate(new \DateTime());
+        }
+
+        /* Upload to the database */
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
+
+        /* Redirect here for now, but TODO make a posts table to show the user they were successful */
+        return $this->redirectToRoute('write_article');
+
+      }
+
+      return $this->render('AppBundle:admin:write_article.html.twig', array('form' => $form->createView() ));
 
     } catch (NullProfileException $e)
     {

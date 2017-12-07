@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="row">
+  <div class="input-field">
+    {{form_widget(form.title)}}
+    {{form_label(form.title)}}
+  </div>
+</div>
+
+  <div class="row">
+    <div class="input-field">
+      {{form_widget(form.content)}}
+      {{form_label(form.content)}}
+    </div>
+  </div>
+
+  <div class="row">
+    {{form_label(form.date)}}
+    {{form_widget(form.date)}}
+  </div>
+
+  <div class="row">
+    <div class="col m4">
+      <button type="submit" name="submit" class="btn">Post</button>
+    </div>
+  </div>
+
+{{ form_end(form) }}
