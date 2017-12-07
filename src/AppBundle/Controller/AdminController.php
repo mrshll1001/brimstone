@@ -100,7 +100,9 @@ class AdminController extends Controller
         /* Remember to set the compulsory things */
         $post->setVisible(true);
 
-        /* TODO remember to generate a SLUG */
+        /* Generate a SLUG */
+        $slug = $this->get('slugify')->slugify($post->getTitle());
+        $post->setSlug($slug);
 
         /* We actually might have a date from the date field. If so, then we're ok but we need to check for a null value */
         if ($form['date']->getData() === null)
