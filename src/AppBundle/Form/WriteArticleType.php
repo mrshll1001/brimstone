@@ -33,6 +33,10 @@ class WriteArticleType extends AbstractType
                       'required' => true,
                       'label' => "Content",
                       'attr'=>array('class'=>'materialize-textarea', 'placeholder'=>"What's on your mind?") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
-    ));
+    ))
+    ->add('tags', TextType::class, array(
+        'required' => false,
+        'mapped' => false,
+        'label' => "Enter some tags, separated by spaces e.g. one, two, three"));
   }
 }

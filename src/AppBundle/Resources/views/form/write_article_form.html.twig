@@ -14,8 +14,16 @@
   </div>
 
   <div class="row">
-    {{form_label(form.date)}}
-    {{form_widget(form.date)}}
+    <div class="col s12 m6">
+      {{form_label(form.date)}}
+      {{form_widget(form.date)}}
+    </div>
+
+    <div class="col s12 m6">
+      {{form_label(form.tags)}}
+      {{form_widget(form.tags)}}
+    </div>
+
   </div>
 
   <div class="row">

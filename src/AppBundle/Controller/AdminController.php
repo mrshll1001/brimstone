@@ -155,10 +155,21 @@ class AdminController extends Controller
           $post->setDate(new \DateTime());
         }
 
+        /* Handle Tagging using the FPN Tag Manager */
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        $tagString = $form['tags']->getData();  // Get tags data as cs-string "abc, xyz, etc"
+        $tagNames = $tagManager->splitTagNames($tagString); // Use Tag manager to splt the string into separate tags
+        $tags = $tagManager->loadOrCreateTags($tagNames); // Tag manager loads or creates the tag objects for us
+
+        $tagManager->addTags($tags, $post); // Get the tag manager to associate the tags with the post
+
         /* Upload to the database */
         $em = $this->getDoctrine()->getManager();
         $em->persist($post);
         $em->flush();
+
+        /* Now that the Post is in the database, we can safely save the tagging information we've created */
+        $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
         /* Redirect here for now, but TODO make a posts table to show the user they were successful */
         return $this->redirectToRoute('write_article');

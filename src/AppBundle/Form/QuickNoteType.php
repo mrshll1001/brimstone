@@ -26,6 +26,6 @@ class QuickNoteType extends AbstractType
     ->add('tags', TextType::class, array(
         'required' => false,
         'mapped' => false,
-        'label' => "Do you want to tag this?"));
+        'label' => "Enter some tags, separated by spaces e.g. one, two, three"));
   }
 }
