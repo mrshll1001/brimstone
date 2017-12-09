@@ -14,7 +14,7 @@
             <thead>
               <th>Date</th>
               <th>Title</th>
-              <th>Visible</th>
+              <th>Action</th>
             </thead>
 
             <tbody>
@@ -22,7 +22,9 @@
                 <tr>
                   <td>{{p.date|date('d/m/Y')}}</td>
                   <td>{{p.title}}</td>
-                  <td>{{p.visible}}</td>
+                  <td>
+                    {% include 'AppBundle:form:article_actions_form.html.twig' with {'post':p} only %}
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>

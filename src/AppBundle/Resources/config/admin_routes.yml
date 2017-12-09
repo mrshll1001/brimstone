@@ -25,3 +25,9 @@ my_posts:
 my_articles:
   path: /my-articles
   defaults: { _controller: AppBundle:Admin:myArticles }
+
+# Hidden actions that don't really have pages associated but should be Protected under the admin firewall
+
+remove_post_by_id:
+  path: /remove-post/{id}
+  defaults: { _controller: AppBundle:Post:removePostById }
