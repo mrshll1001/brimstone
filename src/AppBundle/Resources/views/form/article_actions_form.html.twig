@@ -1,3 +1,20 @@
-<form action="{{path('remove_post_by_id', {'id': post.id})}}" method="POST">
-  <button type="submit" class="btn red">Delete</button>
-</form>
+<div class="row">
+  <div class="col s12 m4">
+    <form action="{{path('change_post_visibilty_by_id', {'id': post.id})}}">
+      <button type="submit" class="btn blue">
+        {% if post.visible %}
+          Hide
+          {% else %}
+            Show
+        {% endif %}
+      </button>
+    </form>
+
+  </div>
+
+  <div class="col s12 m4">
+    <form action="{{path('remove_post_by_id', {'id': post.id})}}" method="POST">
+      <button type="submit" class="btn red">Delete</button>
+    </form>
+  </div>
+</div>

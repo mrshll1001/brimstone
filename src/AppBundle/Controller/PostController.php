@@ -36,4 +36,28 @@ class PostController extends Controller
 
   }
 
+  /**===========================================================================================
+   * Inverts a posts visibility
+   * ===========================================================================================
+   */
+  public function changePostVisibilityByIdAction(Request $request, $id)
+  {
+    /* Get the post */
+    $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+
+    /* Update the post's visibility */
+    if ($post !== NULL) // Double check the post isn't null, just in case there's weird behaviour
+    {
+      $post->setVisible( !$post->getVisible() ); // Invert using boolean
+
+      $em = $this->getDoctrine()->getManager(); // Get the manager
+      $em->flush();                             // Finish, since Doctrine has it stored already we're good to go
+    }
+
+    /* Redirect over to the Articles table TODO handle a submission wherein the routing information is hidden in the form for redirect */
+    return $this->redirectToRoute('my_articles');
+
+
+  }
+
 }
