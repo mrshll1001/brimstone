@@ -54,4 +54,26 @@ class DefaultController extends Controller
       /* We can load the page, so we can just get the profile object which contains about anyway */
       return $this->render('AppBundle:public:about.html.twig', array('profile' => $user->getProfile() ));
     }
+
+    /**===========================================================================================
+     * 'Blog' page, lists only Posts which have a title
+     * ===========================================================================================
+     */
+    public function listArticlesAction(Request $request)
+    {
+      /* First, try to load the user object */
+      $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
+
+      /* If the user object is null, then Brimstone hasn't been set up, so load the template that says so */
+      if ($user === null)
+      {
+        return $this->render('AppBundle:public:not_setup.html.twig', array());
+      }
+
+      /* Load the articles TODO and their tags */
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllArticles(true);  // Pass in true to restrict to visible articles
+
+      /* We can load the page yay */
+      return $this->render('AppBundle:public:list_articles.html.twig', array('profile' => $user->getProfile(), 'posts' => $posts ));
+    }
 }

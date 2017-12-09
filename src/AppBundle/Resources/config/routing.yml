@@ -23,3 +23,7 @@ logout:
 about:
   path: /about
   defaults: { _controller: AppBundle:Default:about }
+
+list_articles:
+  path: /blog
+  defaults: { _controller: AppBundle:Default:listArticles  }

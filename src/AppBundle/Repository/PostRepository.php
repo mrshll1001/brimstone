@@ -15,13 +15,22 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
    * Retrieves all posts that have titles
    *=======================================================================================================
    */
-  public function findAllArticles()
+  public function findAllArticles($showOnlyVisibile = false)
   {
     /* Fairly basic query, that searches for all posts where the title is not null */
     $qb = $this->createQueryBuilder('p');
     $qb->where('p.title IS NOT NULL');
+
+    /* Check to see if we need to restrict the visibility (usually for public facing posts) */
+    if ($showOnlyVisibile)
+    {
+      $qb->andWhere('p.visible = true');
+    }
+
+    /* Order by the published date, generally the most useful */
     $qb->orderBy('p.date', 'DESC');
 
     return $qb->getQuery()->getResult();
   }
+
 }

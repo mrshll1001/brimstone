@@ -1,0 +1,21 @@
+{% extends 'AppBundle:public:public_base.html.twig' %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <h1>Blog Posts</h1>
+  </div>
+
+  {% for post in posts %}
+
+    {% include 'AppBundle:post:list_of_articles_entry.html.twig' with {'post': post} only %}
+
+    {% else %}
+        <p>Oh no, there's no blog posts!</p>
+  {% endfor %}
+</div>
+
+
+{% endblock content %}
