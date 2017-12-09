@@ -1,4 +1,4 @@
-<h3>{{post.title}}</h3>
+<a href="{{path('view_article', {'slug': post.slug})}}"><h3>{{post.title}}</h3></a>
 <p>{{post.date|date('d F, Y')}}</p>
 
 {% for tag in post.tags %}

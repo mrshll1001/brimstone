@@ -1,0 +1,13 @@
+{% extends 'AppBundle:public:public_base.html.twig' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12">
+      {% include 'AppBundle:post:article.html.twig' with {'post':post} %}
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+<div class="row">
+  <h1>{{post.title}}</h1>
+  <p >Published {{post.date|date('d M Y')}} by {{profile.name}}</p>
+</div>
+
+<div class="row readable">
+
+  {{post.content|markdown}}
+</div>
+
+<div class="row">
+  {% for tag in post.tags %}
+      <div class="chip">
+        {{tag.name}}
+      </div>
+    {% else %}
+        <em>No tags!</em>
+  {% endfor %}
+</div>
