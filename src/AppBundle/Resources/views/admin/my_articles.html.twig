@@ -23,7 +23,7 @@
                   <td>{{p.date|date('d/m/Y')}}</td>
                   <td>{{p.title}}</td>
                   <td>
-                    {% include 'AppBundle:form:article_actions_form.html.twig' with {'post':p} only %}
+                    {% include 'AppBundle:form:post_actions_form.html.twig' with {'post':p} only %}
                   </td>
                 </tr>
               {% endfor %}

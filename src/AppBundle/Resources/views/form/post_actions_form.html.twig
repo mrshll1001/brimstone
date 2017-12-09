@@ -1,6 +1,8 @@
+
 <div class="row">
   <div class="col s12 m4">
     <form action="{{path('change_post_visibilty_by_id', {'id': post.id})}}">
+      <input type="hidden" name="redirect_route" value="{{ app.request.attributes.get('_route') }}">
       <button type="submit" class="btn blue">
         {% if post.visible %}
           Hide
@@ -14,6 +16,7 @@
 
   <div class="col s12 m4">
     <form action="{{path('remove_post_by_id', {'id': post.id})}}" method="POST">
+      <input type="hidden" name="redirect_route" value="{{ app.request.attributes.get('_route') }}">
       <button type="submit" class="btn red">Delete</button>
     </form>
   </div>
