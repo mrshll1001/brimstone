@@ -2,6 +2,24 @@
 
 {% block content %}
 
-<h1>Hello world</h1>
+<div class="container">
+  <div class="row">
+    <h1>DATE HERE</h1>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      {% for post in posts %}
+        <div class="row">
+          {% if post.title is not null %}
+            {% include 'AppBundle:post:article.html.twig' %}
+          {% elseif post.content is not null %} {# If title and content are null it might be a check-in, so we can't call an error yet #}
+              {% include 'AppBundle:post:note.html.twig' %}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

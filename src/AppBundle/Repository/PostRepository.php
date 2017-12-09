@@ -33,4 +33,18 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**=======================================================================================================
+   * Retrieve all visible TEMPORARY TODO DELETE ME
+   *=======================================================================================================
+   */
+  public function findAllVisible()
+  {
+    $qb = $this->createQueryBuilder('p');
+    $qb->where('p.visible = true');
+
+    $qb->orderBy('p.date', 'DESC');
+
+    return $qb->getQuery()->getResult();
+  }
+
 }

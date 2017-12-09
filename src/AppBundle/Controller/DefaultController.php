@@ -26,8 +26,13 @@ class DefaultController extends Controller
       /* Sweet, we can load the page */
       $userProfile = $user->getProfile();     // Posts are loaded separately, so we only need to pass in the user profile for the navbar.
 
+      /* Load all the posts TODO via the date values */
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllVisible();
 
-        return $this->render('AppBundle:public:index.html.twig', array('profile' => $userProfile));
+      /* TODO sort out their tags, but it's un-necessary here */
+
+
+      return $this->render('AppBundle:public:index.html.twig', array('profile' => $userProfile, 'posts' => $posts));
     }
 
     /**===========================================================================================

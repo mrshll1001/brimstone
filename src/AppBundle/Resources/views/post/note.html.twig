@@ -1,0 +1,12 @@
+<div class="card-panel">
+  {{post.content|markdown}}
+
+  <p class="light">Posted at {{post.date|date('H:i:s d M Y')}}</p>
+  {% for tag in post.tags %}
+    <div class="chip">
+      {{tag.name}}
+    </div>
+    {% else %}
+        <em>No tags!</em>
+  {% endfor %}
+</div>
