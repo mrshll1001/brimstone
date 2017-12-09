@@ -1,0 +1,35 @@
+{% extends 'AppBundle:admin:admin_base.html.twig' %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">My Articles</span>
+
+          <table>
+            <thead>
+              <th>Date</th>
+              <th>Title</th>
+            </thead>
+
+            <tbody>
+              {% for p in posts|reverse %}
+                <tr>
+                  <td>{{p.date|date('d/m/Y')}}</td>
+                  <td>{{p.title}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

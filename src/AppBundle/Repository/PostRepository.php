@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+
+  /**=======================================================================================================
+   * Retrieves all posts that have titles
+   *=======================================================================================================
+   */
+  public function findAllArticles()
+  {
+    /* Fairly basic query, that searches for all posts where the title is not null */
+    $qb = $this->createQueryBuilder('p');
+    $qb->where('p.title IS NOT NULL');
+
+    return $qb->getQuery()->getResult();
+  }
 }

@@ -120,6 +120,30 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
+   * Table of the user's articles
+   *=======================================================================================================
+   */
+  public function myArticlesAction(Request $request)
+  {
+    try
+    {
+      /* Perform the standard checks */
+      $user = $this->getUser();
+      $this->checkUser($user);
+
+      /* TODO load all the articles */
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllArticles();
+
+      return $this->render('AppBundle:admin:my_articles.html.twig', array('posts' => $posts));
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+    }
+
+  }
+
+  /**=======================================================================================================
    * Page to write a full post / article
    *=======================================================================================================
    */

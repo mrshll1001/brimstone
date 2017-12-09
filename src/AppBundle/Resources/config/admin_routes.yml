@@ -21,3 +21,7 @@ write_article:
 my_posts:
   path: /my-posts
   defaults: { _controller: AppBundle:Admin:myPosts }
+
+my_articles:
+  path: /my-articles
+  defaults: { _controller: AppBundle:Admin:myArticles }
