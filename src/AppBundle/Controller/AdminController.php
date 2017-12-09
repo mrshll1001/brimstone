@@ -55,10 +55,22 @@ class AdminController extends Controller
         $post->setDate(new \DateTime());  // Date wasn't given, so we can default to now.
         $post->setVisible(true);         // TODO this is actually a bit presumptious, when the form develops further we should check this
 
+        /* Handle Tagging using the FPN Tag Manager */
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        $tagString = $form['tags']->getData();  // Get tags data as cs-string "abc, xyz, etc"
+        $tagNames = $tagManager->splitTagNames($tagString); // Use Tag manager to splt the string into separate tags
+        $tags = $tagManager->loadOrCreateTags($tagNames); // Tag manager loads or creates the tag objects for us
+
+        $tagManager->addTags($tags, $post); // Get the tag manager to associate the tags with the post
+
         /* We've handled the post now so we should be ok to save it */
         $em = $this->getDoctrine()->getManager();
         $em->persist($post);
         $em->flush();
+
+        /* Now that the Post is in the database, we can safely save the tagging information we've created */
+        $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
+
 
         /* If we're successful, we should probably want to redirect to a nice clean form */
         return $this->redirectToRoute('control_panel');

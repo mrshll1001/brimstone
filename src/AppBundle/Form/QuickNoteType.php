@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 
@@ -21,6 +22,10 @@ class QuickNoteType extends AbstractType
       'required' => true,
       'label' => "Post",
       'attr'=>array('class'=>'materialize-textarea', 'placeholder'=>"What's on your mind?") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
-    ));
+    ))
+    ->add('tags', TextType::class, array(
+        'required' => false,
+        'mapped' => false,
+        'label' => "Do you want to tag this?"));
   }
 }

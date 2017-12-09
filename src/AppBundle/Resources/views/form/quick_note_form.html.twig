@@ -1,7 +1,20 @@
 {{ form_start(form) }}
+
+<div class="row">
   <div class="input-field">
-    {{form_widget(form)}}
+    {{form_widget(form.content)}}
+    {{form_label(form.content)}}
   </div>
+</div>
+
+<div class="row">
+  <div class="input-field">
+    {{form_widget(form.tags)}}
+    {{form_label(form.tags)}}
+  </div>
+</div>
+
+
   <div class="row">
     <div class="col m4 push-m10">
       <button type="submit" name="submit" class="btn">Post</button>

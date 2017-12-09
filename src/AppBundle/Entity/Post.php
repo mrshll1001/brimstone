@@ -73,6 +73,11 @@ class Post implements Taggable
      */
     private $location;
 
+    /**
+     * This isn't mapped as the mapping is handled by the tag manager
+     */
+    private $tags;
+
 
     /**
      * Get id
