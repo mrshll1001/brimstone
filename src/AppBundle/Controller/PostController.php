@@ -31,8 +31,9 @@ class PostController extends Controller
       $em->flush();                             // Finish
     }
 
-    /* Redirect over to the Articles table TODO handle a submission wherein the routing information is hidden in the form for redirect */
-    return $this->redirectToRoute('my_articles');
+    /* Redirect based on the form's origin */
+    $redirectRoute = $request->get('redirect_route');
+    return $this->redirectToRoute($redirectRoute);
 
   }
 
@@ -54,8 +55,9 @@ class PostController extends Controller
       $em->flush();                             // Finish, since Doctrine has it stored already we're good to go
     }
 
-    /* Redirect over to the Articles table TODO handle a submission wherein the routing information is hidden in the form for redirect */
-    return $this->redirectToRoute('my_articles');
+    /* Redirect based on the form's origin */
+    $redirectRoute = $request->get('redirect_route');
+    return $this->redirectToRoute($redirectRoute);
 
 
   }
