@@ -98,9 +98,16 @@ class DefaultController extends Controller
         return $this->render('AppBundle:public:not_setup.html.twig', array());
       }
 
-      /* Load the article via the slug and get the tags loaded */
+      /* Load the article via the slug */
       $post = $this->getDoctrine()->getRepository('AppBundle:Post')->findOneBySlug($slug);
 
+      /* Check the post isn't null or invisible. */
+      if ($post === NULL || $post->getVisible() === false)
+      {
+        return $this->redirectToRoute('list_articles'); // Returning to /blog sounds sensible for a bad blog url or secret post
+      }
+
+      /* Load the tags on the post object */
       $tagManager = $this->get('fpn_tag.tag_manager');
       $tagManager->loadTagging($post);
 
