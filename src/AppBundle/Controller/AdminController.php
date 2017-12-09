@@ -87,6 +87,39 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
+   * Page to view all posts
+   *=======================================================================================================
+   */
+  public function myPostsAction(Request $request)
+  {
+    try
+    {
+      /* Check profile */
+      $user = $this->getUser();
+      $this->checkUser($user);
+
+      /* Load all the posts and load the tagging info for each of them*/
+            // TODO probably should separate these out into articles and notes for the UI later
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+
+      $tagManager = $this->get('fpn_tag.tag_manager');
+      foreach ($posts as $p)
+      {
+        $tagManager->loadTagging($p);
+      }
+
+      return $this->render('AppBundle:admin:my_posts.html.twig', array('posts' => $posts));
+
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
+  /**=======================================================================================================
    * Page to write a full post / article
    *=======================================================================================================
    */
