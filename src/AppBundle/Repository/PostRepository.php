@@ -20,6 +20,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     /* Fairly basic query, that searches for all posts where the title is not null */
     $qb = $this->createQueryBuilder('p');
     $qb->where('p.title IS NOT NULL');
+    $qb->orderBy('p.date', 'DESC');
 
     return $qb->getQuery()->getResult();
   }

@@ -17,7 +17,7 @@
             </thead>
 
             <tbody>
-              {% for p in posts|reverse %}
+              {% for p in posts %}
                 <tr>
                   <td>{{p.date|date('d/m/Y')}}</td>
                   <td>{{p.title}}</td>
