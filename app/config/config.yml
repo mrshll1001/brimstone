@@ -60,6 +60,13 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+# fpn/TagBundle
+fpn_tag:
+    model:
+        tag_class:     AppBundle\Entity\Tag
+        tagging_class: AppBundle\Entity\Tagging
+
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
