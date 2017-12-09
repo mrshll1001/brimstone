@@ -72,6 +72,12 @@ class DefaultController extends Controller
 
       /* Load the articles TODO and their tags */
       $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllArticles(true);  // Pass in true to restrict to visible articles
+      $tagManager = $this->get('fpn_tag.tag_manager');
+
+      foreach ($posts as $post)
+      {
+        $tagManager->loadTagging($post);
+      }
 
       /* We can load the page yay */
       return $this->render('AppBundle:public:list_articles.html.twig', array('profile' => $user->getProfile(), 'posts' => $posts ));
