@@ -2,9 +2,22 @@ index:
   path: /
   defaults: { _controller: AppBundle:Default:index }
 
-index_by_year_month:
-  path: /{year}/{month}
-  defaults: { _controller: AppBundle:Default:index }
+# These all come first as the index by year and month will override the other logic
+about:
+  path: /about
+  defaults: { _controller: AppBundle:Default:about }
+
+list_articles:
+  path: /blog
+  defaults: { _controller: AppBundle:Default:listArticles  }
+
+view_article:
+  path: /blog/{slug}
+  defaults: { _controller: AppBundle:Default:viewArticle }
+
+view_post_by_id:
+  path: /post/{id}
+  defaults: { _controller: AppBundle:Default:viewPostById }
 
 admin:
   resource: "@AppBundle/Resources/config/admin_routes.yml"
@@ -22,20 +35,7 @@ login:
 logout:
     path: /logout
 
-# Begin the public facing pages
-
-about:
-  path: /about
-  defaults: { _controller: AppBundle:Default:about }
-
-list_articles:
-  path: /blog
-  defaults: { _controller: AppBundle:Default:listArticles  }
-
-view_article:
-  path: /blog/{slug}
-  defaults: { _controller: AppBundle:Default:viewArticle }
-
-view_post_by_id:
-  path: /post/{id}
-  defaults: { _controller: AppBundle:Default:viewPostById }
+# This comes last as it needs to match last to prevent it from interfering with other routes
+index_by_year_month:
+  path: /{year}/{month}
+  defaults: { _controller: AppBundle:Default:index }
