@@ -12,7 +12,7 @@ class DefaultController extends Controller
      * Home page
      * ===========================================================================================
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $year = null, $month = null)
     {
       /* First, try to load the user object */
       $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
@@ -26,16 +26,40 @@ class DefaultController extends Controller
       /* Sweet, we can load the page */
       $userProfile = $user->getProfile();     // Posts are loaded separately, so we only need to pass in the user profile for the navbar.
 
-      /* Load all the posts TODO via the date values */
-      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findByYearAndMonth();
+      /* Load all the posts via year and month -- if they're null all posts for this month are returned */
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findByYearAndMonth($year, $month);
 
-      /* Sort the tags their tags, but it's un-necessary here */
+      /* Sort the tags out */
       foreach ($posts as $post)
       {
         $this->get('fpn_tag.tag_manager')->loadTagging($post);
       }
 
-      return $this->render('AppBundle:public:index.html.twig', array('profile' => $userProfile, 'posts' => $posts));
+      /* Generate the links for current and last months */
+      $dates = array();
+      $dates['now'] = new \DateTime(); // Keep a copy of now so that we can choose not to show a 'next' link
+
+      if ($year === null && $month === null)  // If they're null, then we can just use this month
+      {
+        $dates['current'] = new \DateTime();
+
+        $dates['nextMonth'] = new \DateTime();
+        $dates['nextMonth']->modify('+1 month');
+
+        $dates['lastMonth'] = new \DateTime();
+        $dates['lastMonth']->modify('-1 month');
+      } else
+      {
+        $dates['current'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+
+        $dates['nextMonth'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+        $dates['nextMonth']->modify('+1 month');
+
+        $dates['lastMonth'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+        $dates['lastMonth']->modify('-1 month');
+      }
+
+      return $this->render('AppBundle:public:index.html.twig', array('profile' => $userProfile, 'dates' => $dates, 'posts' => $posts));
     }
 
     /**===========================================================================================

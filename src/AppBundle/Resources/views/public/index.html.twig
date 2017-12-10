@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <h1>DATE HERE</h1>
+    {% include 'AppBundle:nav:public_date_navigation.html.twig' %}
   </div>
 
   <div class="row">
@@ -13,6 +13,8 @@
         <div class="row">
           {% include 'AppBundle:post:post_master.html.twig' %}
         </div>
+        {% else %}
+            <p class="readable">Yikes, looks like there's no posts for that date!</p>
       {% endfor %}
     </div>
   </div>
