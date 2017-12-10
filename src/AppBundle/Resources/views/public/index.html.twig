@@ -11,11 +11,7 @@
     <div class="col s12 m10 offset-m1">
       {% for post in posts %}
         <div class="row">
-          {% if post.title is not null %}
-            {% include 'AppBundle:post:article.html.twig' %}
-          {% elseif post.content is not null %} {# If title and content are null it might be a check-in, so we can't call an error yet #}
-              {% include 'AppBundle:post:note.html.twig' %}
-          {% endif %}
+          {% include 'AppBundle:post:post_master.html.twig' %}
         </div>
       {% endfor %}
     </div>

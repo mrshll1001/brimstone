@@ -1,0 +1,11 @@
+{# Provides logic to render different post types differently, meaning that all other templates need to do is include this one with a post #}
+
+{% if post.title is not null %}
+
+  {% include 'AppBundle:post:article.html.twig' %}
+
+{% elseif post.content is not null %} {# If title and content are null it might be a check-in, so we can't call an error yet #}
+    {% include 'AppBundle:post:note.html.twig' %}
+
+    {# TODO logic and template for checkin rendering #}
+{% endif %}
