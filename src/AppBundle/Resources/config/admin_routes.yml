@@ -14,8 +14,8 @@ write_about:
   path: /about
   defaults: { _controller: AppBundle:Admin:writeAbout }
 
-write_article:
-  path: /write-article
+write_post:
+  path: /write-post
   defaults: { _controller: AppBundle:Admin:writeArticle }
 
 my_posts:

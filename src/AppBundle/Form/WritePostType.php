@@ -15,12 +15,13 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 /**
  * Allows the user to write their about page
  */
-class WriteArticleType extends AbstractType
+class WritePostType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder->add('title', TextType::class, array(
-                              'required' => true,
+                              'required' => false,
+                              'label' => "Title (Leave blank to treat this as a Note)"
 
     ))
     ->add('date', DateType::class, array(

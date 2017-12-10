@@ -2,6 +2,12 @@
    <div class="nav-wrapper">
      <a href="{{path('control_panel')}}" class="brand-logo center"><img id="navbar_central_logo" src="{{asset('img/brimstone_light.svg')}}" alt=""></a>
 
+     <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{{path('write_post')}}">Write Post</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+
      <ul id="right-nav" class="right hide-on-med-and-down">
        <li><a href="{{path('write_about')}}"><i class="material-icons left">account_circle</i>About</a></li>
       <li><a href="{{path('user_settings')}}"><i class="material-icons left">settings</i>Settings</a></li>

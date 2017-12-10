@@ -19,7 +19,7 @@ use AppBundle\Form\QuickProfileType;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\WriteAboutType;
 use AppBundle\Form\QuickNoteType;
-use AppBundle\Form\WriteArticleType;
+use AppBundle\Form\WritePostType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -157,7 +157,7 @@ class AdminController extends Controller
 
       /* Create the form and handle the submission */
       $post = new Post(); // Articles are based off of a new post object
-      $form = $this->createForm(WriteArticleType::class, $post);
+      $form = $this->createForm(WritePostType::class, $post);
 
       $form->handleRequest($request);
 
@@ -200,7 +200,7 @@ class AdminController extends Controller
 
       }
 
-      return $this->render('AppBundle:admin:write_article.html.twig', array('form' => $form->createView() ));
+      return $this->render('AppBundle:admin:write_post.html.twig', array('form' => $form->createView() ));
 
     } catch (NullProfileException $e)
     {
