@@ -34,6 +34,28 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
   }
 
   /**=======================================================================================================
+   * Retrieves all posts that have NO titles
+   *=======================================================================================================
+   */
+  public function findAllNotes($showOnlyVisibile = false)
+  {
+    /* Fairly basic query, that searches for all posts where the title is null */
+    $qb = $this->createQueryBuilder('p');
+    $qb->where('p.title IS NULL');
+
+    /* Check to see if we need to restrict the visibility (usually for public facing posts) */
+    if ($showOnlyVisibile)
+    {
+      $qb->andWhere('p.visible = true');
+    }
+
+    /* Order by the published date, generally the most useful */
+    $qb->orderBy('p.date', 'DESC');
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**=======================================================================================================
    * Finds the next visible post to it based on date
    *=======================================================================================================
    */

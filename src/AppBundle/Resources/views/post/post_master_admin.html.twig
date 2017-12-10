@@ -1,0 +1,5 @@
+{% extends 'AppBundle:post:post_master.html.twig' %}
+
+{% block actions %}
+{% include 'AppBundle:form:post_actions_form.html.twig' with {'post': post} only %}
+{% endblock actions %}

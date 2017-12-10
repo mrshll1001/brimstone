@@ -98,9 +98,8 @@ class AdminController extends Controller
       $user = $this->getUser();
       $this->checkUser($user);
 
-      /* Load all the posts and load the tagging info for each of them*/
-            // TODO probably should separate these out into articles and notes for the UI later
-      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+      /* Load all the notes and load the tagging info for each of them*/
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllNotes();
 
       $tagManager = $this->get('fpn_tag.tag_manager');
       foreach ($posts as $p)
