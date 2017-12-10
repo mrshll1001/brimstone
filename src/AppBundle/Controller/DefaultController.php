@@ -35,29 +35,8 @@ class DefaultController extends Controller
         $this->get('fpn_tag.tag_manager')->loadTagging($post);
       }
 
-      /* Generate the links for current and last months */
-      $dates = array();
-      $dates['now'] = new \DateTime(); // Keep a copy of now so that we can choose not to show a 'next' link
-
-      if ($year === null && $month === null)  // If they're null, then we can just use this month
-      {
-        $dates['current'] = new \DateTime();
-
-        $dates['nextMonth'] = new \DateTime();
-        $dates['nextMonth']->modify('+1 month');
-
-        $dates['lastMonth'] = new \DateTime();
-        $dates['lastMonth']->modify('-1 month');
-      } else
-      {
-        $dates['current'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
-
-        $dates['nextMonth'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
-        $dates['nextMonth']->modify('+1 month');
-
-        $dates['lastMonth'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
-        $dates['lastMonth']->modify('-1 month');
-      }
+      /* Generate the dates for current and last months for linking */
+      $dates = $this->generateDatesArray($year, $month);
 
       return $this->render('AppBundle:public:index.html.twig', array('profile' => $userProfile, 'dates' => $dates, 'posts' => $posts));
     }
@@ -181,5 +160,36 @@ class DefaultController extends Controller
 
       return $this->render('AppBundle:public:view_post.html.twig', array('profile' => $user->getProfile(), 'post' => $post, 'previous' => $previous, 'next' => $next ));
 
+    }
+
+    /**===========================================================================================
+     * Returns the date objects utilised by the index pages for back and forward links
+     * ===========================================================================================
+     */
+    protected function generateDatesArray($year, $month)
+    {
+      $dates = array();
+
+      if ($year === null && $month === null)  // If they're null, then we can just use this month
+      {
+        $dates['current'] = new \DateTime();
+
+        $dates['nextMonth'] = new \DateTime();
+        $dates['nextMonth']->modify('+1 month');
+
+        $dates['lastMonth'] = new \DateTime();
+        $dates['lastMonth']->modify('-1 month');
+      } else
+      {
+        $dates['current'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+
+        $dates['nextMonth'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+        $dates['nextMonth']->modify('+1 month');
+
+        $dates['lastMonth'] = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+        $dates['lastMonth']->modify('-1 month');
+      }
+
+      return $dates;
     }
 }
