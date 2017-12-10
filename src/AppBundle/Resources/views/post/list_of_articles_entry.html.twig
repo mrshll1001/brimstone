@@ -1,14 +1,4 @@
 <a href="{{path('view_article', {'slug': post.slug})}}"><h3>{{post.title}}</h3></a>
 <p>{{post.date|date('d F, Y')}}</p>
 
-{% for tag in post.tags %}
-  {# Only add in the comma if we're not the last in the list #}
-  {% if not loop.last %}
-    <div class="chip">
-      {{tag.name}}
-    </div>
-  {% endif %}
-
-  {% else %}
-      No tags!
-{% endfor %}
+{% include 'AppBundle:post:post_tags.html.twig' %}

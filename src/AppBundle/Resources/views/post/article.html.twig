@@ -10,11 +10,5 @@
 </div>
 
 <div class="row">
-  {% for tag in post.tags %}
-      <div class="chip">
-        {{tag.name}}
-      </div>
-    {% else %}
-        <em>No tags!</em>
-  {% endfor %}
+  {% include 'AppBundle:post:post_tags.html.twig' %}
 </div>
