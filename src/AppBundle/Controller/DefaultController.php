@@ -29,8 +29,11 @@ class DefaultController extends Controller
       /* Load all the posts TODO via the date values */
       $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllVisible();
 
-      /* TODO sort out their tags, but it's un-necessary here */
-
+      /* Sort the tags their tags, but it's un-necessary here */
+      foreach ($posts as $post)
+      {
+        $this->get('fpn_tag.tag_manager')->loadTagging($post);
+      }
 
       return $this->render('AppBundle:public:index.html.twig', array('profile' => $userProfile, 'posts' => $posts));
     }
@@ -118,5 +121,37 @@ class DefaultController extends Controller
 
       /* We can load the page yay */
       return $this->render('AppBundle:public:view_article.html.twig', array('profile' => $user->getProfile(), 'post' => $post ));
+    }
+
+    /**===========================================================================================
+     * View a single post via its id
+     * ===========================================================================================
+     */
+    public function viewPostByIdAction(Request $request, $id)
+    {
+      /* First, try to load the user object */
+      $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
+
+      /* If the user object is null, then Brimstone hasn't been set up, so load the template that says so */
+      if ($user === null)
+      {
+        return $this->render('AppBundle:public:not_setup.html.twig', array());
+      }
+
+      /* Load the article via id */
+      $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+
+      /* Check the post isn't null or invisible. */
+      if ($post === NULL || $post->getVisible() === false)
+      {
+        return $this->redirectToRoute('index'); // Returning to / sounds sensible for a bad id or secret post TODO maybe throw a 404
+      }
+
+      /* Load the tags on the post object */
+      $tagManager = $this->get('fpn_tag.tag_manager');
+      $tagManager->loadTagging($post);
+
+      return $this->render('AppBundle:public:view_post.html.twig', array('profile' => $user->getProfile(), 'post' => $post ));
+
     }
 }

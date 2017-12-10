@@ -31,3 +31,7 @@ list_articles:
 view_article:
   path: /blog/{slug}
   defaults: { _controller: AppBundle:Default:viewArticle }
+
+view_post_by_id:
+  path: /post/{id}
+  defaults: { _controller: AppBundle:Default:viewPostById }

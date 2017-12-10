@@ -1,6 +1,6 @@
 <div class="row">
   <h1>{{post.title}}</h1>
-  <p >Published {{post.date|date('d M Y')}} by {{profile.name}}</p>
+  <p >Published {{post.date|date('d M Y')}} {% if profile is defined and profile is not null %}by {{profile.name}}{% endif %}</p>
 </div>
 
 <div class="row readable">
