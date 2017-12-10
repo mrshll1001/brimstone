@@ -33,8 +33,9 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  /**
-   * Finds the next visible post based on a date
+  /**=======================================================================================================
+   * Finds the next visible post to it based on date
+   *=======================================================================================================
    */
   public function findNextPost(\DateTime $date)
   {
@@ -56,8 +57,9 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
   }
 
 
-  /**
+  /**=======================================================================================================
    * Finds the post previous to it based on date
+   *=======================================================================================================
    */
   public function findPreviousPost(\DateTime $date)
   {
@@ -76,6 +78,48 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
 
     /* Return a singe entry or null as sometimes there won't be a previous or next post */
     return $qb->getQuery()->getOneOrNullResult();
+
+  }
+
+  /**=======================================================================================================
+   * Given a year and a month, returns all posts for that period of time
+   *=======================================================================================================
+   */
+  public function findByYearAndMonth($year = null, $month = null)
+  {
+    /* Given null, use the current year and month */
+    if ($month === null)
+    {
+      $month = (int) date('n');
+    }
+
+    if ($year === null)
+    {
+      $year = (int) date('Y');
+    }
+
+    /* Generate date time objects for the queries */
+    $startDate = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+    $startDate->setTime(0, 0 ,0); // First second
+
+    /* Set the end date to be the same date but modify to be the last day of the month */
+    $endDate = \DateTime::createFromFormat('d-n-Y', "01-".$month."-".$year);
+    $endDate->modify('last day of this month');
+    $endDate->setTime(23, 59, 59); // Last second
+
+    /* Build the query to search between the two dates  */
+    $qb = $this->createQueryBuilder('p');
+    $qb->where('p.date BETWEEN :start AND :end');
+    $qb->setParameter(':start', $startDate);
+    $qb->setParameter(':end', $endDate);
+
+    /* Only retrieve visible posts */
+    $qb->andWhere('p.visible = true');
+
+    /* Order by descending */
+    $qb->orderBy('p.date', 'DESC');
+
+    return $qb->getQuery()->getResult();
 
   }
 

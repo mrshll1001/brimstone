@@ -27,7 +27,7 @@ class DefaultController extends Controller
       $userProfile = $user->getProfile();     // Posts are loaded separately, so we only need to pass in the user profile for the navbar.
 
       /* Load all the posts TODO via the date values */
-      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllVisible();
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findByYearAndMonth();
 
       /* Sort the tags their tags, but it's un-necessary here */
       foreach ($posts as $post)
