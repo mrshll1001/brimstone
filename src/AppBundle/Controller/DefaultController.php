@@ -147,11 +147,15 @@ class DefaultController extends Controller
         return $this->redirectToRoute('index'); // Returning to / sounds sensible for a bad id or secret post TODO maybe throw a 404
       }
 
+      /* Load the previous TODO and the next posts */
+      $previous = $this->getDoctrine()->getRepository('AppBundle:Post')->findPreviousPost($post->getDate()); // Previous by date !id
+      $next = $this->getDoctrine()->getRepository('AppBundle:Post')->findNextPost($post->getDate());
+
       /* Load the tags on the post object */
       $tagManager = $this->get('fpn_tag.tag_manager');
       $tagManager->loadTagging($post);
 
-      return $this->render('AppBundle:public:view_post.html.twig', array('profile' => $user->getProfile(), 'post' => $post ));
+      return $this->render('AppBundle:public:view_post.html.twig', array('profile' => $user->getProfile(), 'post' => $post, 'previous' => $previous, 'next' => $next ));
 
     }
 }

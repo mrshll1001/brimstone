@@ -33,6 +33,52 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * Finds the next visible post based on a date
+   */
+  public function findNextPost(\DateTime $date)
+  {
+    /* Query for all entries with a greater date */
+    $qb = $this->createQueryBuilder('p');
+    $qb->where('p.date > :date');
+    $qb->setParameter(':date', $date);
+
+    /* Restrain for visibility */
+    $qb->andWhere('p.visible = true');
+
+    /* Limit to a single entry, and order by ascending to get the very bottom entry */
+    $qb->orderBy('p.date', 'ASC');
+    $qb->setFirstResult(0);
+    $qb->setMaxResults(1);
+
+    /* Return a singe entry or null as sometimes there won't be a previous or next post */
+    return $qb->getQuery()->getOneOrNullResult();
+  }
+
+
+  /**
+   * Finds the post previous to it based on date
+   */
+  public function findPreviousPost(\DateTime $date)
+  {
+    /* Run a query to find all entries with a previous date */
+    $qb = $this->createQueryBuilder('p');
+    $qb->where('p.date < :date');
+    $qb->setParameter(':date', $date);
+
+    /* Remember the constrant for visibility */
+    $qb->andWhere('p.visible = true');
+
+    /* Limit to a single entry and order by descending to get the top entry in the result */
+    $qb->orderBy('p.date', 'DESC');
+    $qb->setFirstResult(0);
+    $qb->setMaxResults(1);
+
+    /* Return a singe entry or null as sometimes there won't be a previous or next post */
+    return $qb->getQuery()->getOneOrNullResult();
+
+  }
+
   /**=======================================================================================================
    * Retrieve all visible TEMPORARY TODO DELETE ME
    *=======================================================================================================
