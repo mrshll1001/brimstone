@@ -12,7 +12,14 @@
 
 
   {# Block designed to be overridden to provide the page's content space. Note: you still need a <div class=container> #}
-  {% block content %}
-  {% endblock content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m11 offset-m1">
+        {% block content %}
+        {% endblock content %}
+
+      </div>
+    </div>
+  </div>
 
 {% endblock body %}

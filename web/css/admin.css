@@ -1,5 +1,20 @@
 #navbar_central_logo {
   margin-top: 0.3em;
-  height: 30%;
-  width: 30%;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+ul.side-nav.fixed li.logo {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 80px;
+}
+
+ul.side-nav.fixed .material-icons {
+  color: #FFFFFF;
+}
+
+ul.side-nav.fixed a {
+  color: #FFFFFF;
 }
