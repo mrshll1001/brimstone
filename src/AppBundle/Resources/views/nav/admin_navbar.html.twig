@@ -1,5 +1,6 @@
 <!-- <nav class="indigo darken-4">
    <div class="nav-wrapper">
+     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
      <a href="{{path('control_panel')}}" class="brand-logo center"><img id="navbar_central_logo" src="{{asset('img/brimstone_light.svg')}}" alt=""></a>
 
      <ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -14,19 +15,32 @@
       <li><a href="{{path('logout')}}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
      </ul>
    </div>
+
+   <ul class="side-nav" id="mobile-demo">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">Javascript</a></li>
+        <li><a href="mobile.html">Mobile</a></li>
+      </ul>
  </nav> -->
-<ul id="nav-mobile" class="side-nav fixed indigo darken-4" style="overflow: auto; transform: translateX(0%);">
-  <li class="logo" >
-    <a id="logo-container" href="{{path('control_panel')}}" class="brand-logo">
-      <img id="navbar_central_logo" type="image/svg+xml" src="{{asset('img/brimstone_light.svg')}}"/>
-    </a>
-  </li>
 
-  <li class="bold"><a href="{{path('write_post')}}">Write Post</a></li>
-  <li class="bold"><a href="{{path('my_articles')}}">My Articles</a></li>
-  <li class="bold"><a href="{{path('my_posts')}}">My Notes</a></li>
 
-  <li><a href="{{path('write_about')}}"><i class="material-icons left">account_circle</i>About</a></li>
- <li><a href="{{path('user_settings')}}"><i class="material-icons left">settings</i>Settings</a></li>
- <li><a href="{{path('logout')}}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
-</ul>
+   <nav>
+     <div class="nav-wrapper">
+       <a id="navbar-page-title" href="#!" class="brand-logo left-padded">Page Title</a>
+       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+       <ul class="side-nav fixed" id="mobile-demo">
+         <li><a href="{{path('write_post')}}">Write Post</a></li>
+         <li><a href="{{path('my_articles')}}">My Articles</a></li>
+         <li><a href="{{path('my_posts')}}">My Notes</a></li>
+
+
+         <li><a href="{{path('write_about')}}"><i class="material-icons left">account_circle</i>About</a></li>
+         <li><a href="{{path('user_settings')}}"><i class="material-icons left">settings</i>Settings</a></li>
+         <li><a href="{{path('logout')}}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+
+
+       </ul>
+     </div>
+   </nav>

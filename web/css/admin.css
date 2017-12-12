@@ -11,10 +11,28 @@ ul.side-nav.fixed li.logo {
     margin-bottom: 80px;
 }
 
-ul.side-nav.fixed .material-icons {
+#navbar-page-title {
+  padding-left: 2em;
+}
+
+/*ul.side-nav.fixed .material-icons {
   color: #FFFFFF;
 }
 
 ul.side-nav.fixed a {
   color: #FFFFFF;
-}
+}*/
+
+header, main, footer {
+     padding-left: 300px;
+   }
+
+@media only screen and (max-width : 992px) {
+   header, main, footer {
+     padding-left: 0;
+     }
+
+    #navbar-page-title {
+      padding-left: 0;
+    }
+  }

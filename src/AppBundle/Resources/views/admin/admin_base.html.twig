@@ -5,13 +5,14 @@
 {% endblock css %}
 
 {% block body %}
+<header>
+{% block navbar %}
+{% include 'AppBundle:nav:admin_navbar.html.twig'  %}
+{% endblock navbar %}
+
+</header>
   {# Holds the navigation bar #}
-  {% block navbar %}
-    {% include 'AppBundle:nav:admin_navbar.html.twig'  %}
-  {% endblock navbar %}
-
-
-  {# Block designed to be overridden to provide the page's content space. Note: you still need a <div class=container> #}
+<main>
   <div class="container">
     <div class="row">
       <div class="col s12 m11 offset-m1">
@@ -21,5 +22,9 @@
       </div>
     </div>
   </div>
+  
+</main>
+
+  {# Block designed to be overridden to provide the page's content space. Note: you still need a <div class=container> #}
 
 {% endblock body %}
