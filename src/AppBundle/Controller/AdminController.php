@@ -76,7 +76,7 @@ class AdminController extends Controller
         return $this->redirectToRoute('control_panel');
       }
 
-      return $this->render('AppBundle:admin:control_panel.html.twig', array('form' => $form->createView() ));
+      return $this->render('AppBundle:admin:control_panel.html.twig', array('title' => "Control Panel", 'form' => $form->createView() ));
 
     } catch (NullProfileException $e)
     {
@@ -107,7 +107,7 @@ class AdminController extends Controller
         $tagManager->loadTagging($p);
       }
 
-      return $this->render('AppBundle:admin:my_posts.html.twig', array('posts' => $posts));
+      return $this->render('AppBundle:admin:my_posts.html.twig', array('title' => "My Notes", 'posts' => $posts));
 
 
     } catch (NullProfileException $e)
@@ -133,7 +133,7 @@ class AdminController extends Controller
       /* TODO load all the articles */
       $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllArticles();
 
-      return $this->render('AppBundle:admin:my_articles.html.twig', array('posts' => $posts));
+      return $this->render('AppBundle:admin:my_articles.html.twig', array('title' => "My Articles", 'posts' => $posts));
 
     } catch (NullProfileException $e)
     {
@@ -199,7 +199,7 @@ class AdminController extends Controller
 
       }
 
-      return $this->render('AppBundle:admin:write_post.html.twig', array('form' => $form->createView() ));
+      return $this->render('AppBundle:admin:write_post.html.twig', array('title' => "Write Post", 'form' => $form->createView() ));
 
     } catch (NullProfileException $e)
     {
@@ -261,7 +261,7 @@ class AdminController extends Controller
 
 
       return $this->render('AppBundle:admin:user_settings.html.twig',
-                            array('quickProfileForm' => $quickProfileForm->createView(),
+                            array('title' => "Settings", 'quickProfileForm' => $quickProfileForm->createView(),
                             'changePasswordForm' => $changePasswordForm->createView()
                           ));
 
@@ -303,7 +303,7 @@ class AdminController extends Controller
         /* We don't need to redirect because we don't need an empty form AND don't need to change the page */
       }
 
-      return $this->render('AppBundle:admin:write_about.html.twig', array('form' => $form->createView() ));
+      return $this->render('AppBundle:admin:write_about.html.twig', array('title' => "About", 'form' => $form->createView() ));
 
 
     } catch (NullProfileException $e)

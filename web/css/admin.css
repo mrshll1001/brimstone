@@ -15,13 +15,13 @@ ul.side-nav.fixed li.logo {
   padding-left: 2em;
 }
 
-/*ul.side-nav.fixed .material-icons {
+ul.side-nav.fixed.grey .material-icons {
   color: #FFFFFF;
 }
 
-ul.side-nav.fixed a {
+ul.side-nav.fixed.grey a {
   color: #FFFFFF;
-}*/
+}
 
 header, main, footer {
      padding-left: 300px;
