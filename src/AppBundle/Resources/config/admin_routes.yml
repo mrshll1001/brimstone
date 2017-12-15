@@ -18,9 +18,9 @@ write_post:
   path: /write-post
   defaults: { _controller: AppBundle:Admin:writeArticle }
 
-my_posts:
+my_notes:
   path: /my-notes
-  defaults: { _controller: AppBundle:Admin:myPosts }
+  defaults: { _controller: AppBundle:Admin:myNotes }
 
 my_articles:
   path: /my-articles

@@ -90,7 +90,7 @@ class AdminController extends Controller
    * Page to view all posts
    *=======================================================================================================
    */
-  public function myPostsAction(Request $request)
+  public function myNotesAction(Request $request)
   {
     try
     {
