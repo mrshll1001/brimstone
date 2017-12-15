@@ -3,15 +3,10 @@
 {% block content %}
 
     <div class="row">
-      <div class="col s12 m12 offset-m1">
+      <div class="col s12 m12">
 
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Write a Post</span>
-
+        <div class="card-panel">
             {% include 'AppBundle:form:write_post_form.html.twig' with {'form': form} only %}
-
-          </div>
         </div>
 
       </div>

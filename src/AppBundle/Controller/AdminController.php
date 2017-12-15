@@ -107,7 +107,7 @@ class AdminController extends Controller
         $tagManager->loadTagging($p);
       }
 
-      return $this->render('AppBundle:admin:my_posts.html.twig', array('title' => "My Notes", 'posts' => $posts));
+      return $this->render('AppBundle:admin:my_notes.html.twig', array('title' => "My Notes", 'posts' => $posts));
 
 
     } catch (NullProfileException $e)
