@@ -194,7 +194,6 @@ class DefaultController extends Controller
           $ids = array_merge($ids, $results); // Merge the results in
         }
 
-        var_dump($ids);
         $ids = array_unique($ids);  // Purge duplicates
 
         foreach ($ids as $id) // Loop over ids, adding the results to the posts array
@@ -209,8 +208,6 @@ class DefaultController extends Controller
         }
 
       }
-
-
 
       return $this->render('AppBundle:public:tags.html.twig', array('profile' => $user->getProfile(), 'tags' => $tags, 'search' => $tagString, 'posts' => $posts ));
     }
