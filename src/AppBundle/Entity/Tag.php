@@ -26,4 +26,9 @@ class Tag extends BaseTag
      * @ORM\OneToMany(targetEntity="Tagging", mappedBy="tag", fetch="EAGER")
      **/
     protected $tagging;
+
+    public function __toString()
+    {
+      return parent::getName();
+    }
 }

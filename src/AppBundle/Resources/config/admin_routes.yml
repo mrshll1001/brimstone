@@ -18,6 +18,10 @@ write_post:
   path: /write-post
   defaults: { _controller: AppBundle:Admin:writeArticle }
 
+edit_post:
+  path: /edit-post/{id}
+  defaults: { _controller: AppBundle:Admin:editPost }
+
 my_notes:
   path: /my-notes
   defaults: { _controller: AppBundle:Admin:myNotes }

@@ -15,6 +15,10 @@
   </div>
 
   <div class="col s12 m4">
+    <a href="{{path('edit_post', {'id': post.id})}}" class="btn orange">Edit</a>
+  </div>
+
+  <div class="col s12 m4">
     <form action="{{path('remove_post_by_id', {'id': post.id})}}" method="POST">
       <input type="hidden" name="redirect_route" value="{{ app.request.attributes.get('_route') }}">
       <button type="submit" class="btn red">Delete</button>

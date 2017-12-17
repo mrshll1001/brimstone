@@ -194,8 +194,8 @@ class AdminController extends Controller
         /* Now that the Post is in the database, we can safely save the tagging information we've created */
         $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
-        /* Redirect here for now, but TODO make a posts table to show the user they were successful */
-        return $this->redirectToRoute('write_article');
+        /* Redirect to my articles */
+        return $this->redirectToRoute('my_articles');
 
       }
 
@@ -205,6 +205,91 @@ class AdminController extends Controller
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
 
+    }
+
+  }
+
+  /**=======================================================================================================
+   * Edit a post via id
+   *=======================================================================================================
+   */
+  public function editPostAction(Request $request, $id)
+  {
+    try
+    {
+      /* Perform standard checks */
+      $user = $this->getUser();
+      $this->checkUser($user);
+
+      /* Retrieve post and set up form */
+      $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+      $this->get('fpn_tag.tag_manager')->loadTagging($post);
+      $form = $this->createForm(WritePostType::class, $post);
+
+      /* Symfony can't map the tags in the forms, so we set it manually here */
+      $tags = array();
+      foreach ($post->getTags() as $tag)
+      {
+        array_push($tags, $tag->getName());
+      }
+      $tagString = implode(", ", $tags);
+      $form->get('tags')->setData($tagString);
+
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid())
+      {
+        /* Create the article from the form data */
+        $post = $form->getData();
+
+        /* Generate a SLUG */
+        $slug = $this->get('slugify')->slugify($post->getTitle());
+        $post->setSlug($slug);
+
+        /* We actually might have a date from the date field. If so, then we're ok but we need to check for a null value */
+        if ($form['date']->getData() === null)
+        {
+          $post->setDate(new \DateTime());
+        }
+
+        /* Handle Tagging using the FPN Tag Manager */
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        $tagString = $form['tags']->getData();  // Get tags data as cs-string "abc, xyz, etc"
+        $tagNames = $tagManager->splitTagNames($tagString); // Use Tag manager to splt the string into separate tags
+        $tags = $tagManager->loadOrCreateTags($tagNames); // Tag manager loads or creates the tag objects for us
+
+        foreach ($tags as $tag)
+        {
+          if (!in_array($tag, $post->getTags()->toArray()))
+          {
+            $tagManager->addTag($tag, $post);
+          }
+        }
+
+        // $tagManager->addTags($tags, $post); // Get the tag manager to associate the tags with the post
+
+        /* Upload to the database */
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
+
+        /* Now that the Post is in the database, we can safely save the tagging information we've created */
+        $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
+
+        /* Redirect to my articles */
+        return $this->redirectToRoute('my_articles');
+
+      }
+
+      return $this->render('AppBundle:admin:write_post.html.twig', array('title' => "Write Post", 'form' => $form->createView() ));
+
+
+
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
     }
 
   }
