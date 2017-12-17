@@ -255,19 +255,11 @@ class AdminController extends Controller
 
         /* Handle Tagging using the FPN Tag Manager */
         $tagManager = $this->get('fpn_tag.tag_manager');
-        $tagString = $form['tags']->getData();  // Get tags data as cs-string "abc, xyz, etc"
+        $tagString = $form['tags']->getData();               // Get tags data as cs-string "abc, xyz, etc"
         $tagNames = $tagManager->splitTagNames($tagString); // Use Tag manager to splt the string into separate tags
         $tags = $tagManager->loadOrCreateTags($tagNames); // Tag manager loads or creates the tag objects for us
 
-        foreach ($tags as $tag)
-        {
-          if (!in_array($tag, $post->getTags()->toArray()))
-          {
-            $tagManager->addTag($tag, $post);
-          }
-        }
-
-        // $tagManager->addTags($tags, $post); // Get the tag manager to associate the tags with the post
+        $tagManager->replaceTags($tags, $post);     // Replace the entire taglist
 
         /* Upload to the database */
         $em = $this->getDoctrine()->getManager();
