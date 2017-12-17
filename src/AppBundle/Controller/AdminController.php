@@ -277,8 +277,6 @@ class AdminController extends Controller
       return $this->render('AppBundle:admin:write_post.html.twig', array('title' => "Edit Post", 'form' => $form->createView() ));
 
 
-
-
     } catch (NullProfileException $e)
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page

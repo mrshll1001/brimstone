@@ -1,0 +1,23 @@
+{% extends 'AppBundle:public:public_base.html.twig' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <h1>Tags:</h1>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m12">
+
+      {% for tag, count in tags %}
+        <div class="chip">
+          {{tag}} ({{count}})
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

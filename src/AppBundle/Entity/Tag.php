@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Acme\TagBundle\Entity\Tag
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DoctrineExtensions\Taggable\Entity\TagRepository")
  */
 class Tag extends BaseTag
 {

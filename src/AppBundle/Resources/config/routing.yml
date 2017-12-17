@@ -19,6 +19,11 @@ view_post_by_id:
   path: /post/{id}
   defaults: { _controller: AppBundle:Default:viewPostById }
 
+view_tags:
+  path: /tags
+  defaults: { _controller: AppBundle:Default:viewTags }
+
+
 admin:
   resource: "@AppBundle/Resources/config/admin_routes.yml"
   prefix: /admin

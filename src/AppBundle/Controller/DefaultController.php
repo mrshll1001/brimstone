@@ -162,6 +162,29 @@ class DefaultController extends Controller
 
     }
 
+    public function viewTagsAction(Request $request)
+    {
+      /* First, try to load the user object */
+      $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
+
+      /* If the user object is null, then Brimstone hasn't been set up, so load the template that says so */
+      if ($user === null)
+      {
+        return $this->render('AppBundle:public:not_setup.html.twig', array());
+      }
+
+      /* TODO search for some tags and posts and stuff */
+      $ids = $this->getDoctrine()->getManager()->getRepository('AppBundle:Tag')->getResourceIdsForTag('post', 'brimstone');
+      $tags = $this->getDoctrine()->getRepository('AppBundle:Tag')->getTagsWithCountArray('post');
+      
+      // foreach ($tags as $name => $count)
+      // {
+      //   echo $name."($count)";
+      // }
+
+      return $this->render('AppBundle:public:tags.html.twig', array('profile' => $user->getProfile(), 'ids'=>$ids, 'tags' => $tags ));
+    }
+
     /**===========================================================================================
      * Returns the date objects utilised by the index pages for back and forward links
      * ===========================================================================================
