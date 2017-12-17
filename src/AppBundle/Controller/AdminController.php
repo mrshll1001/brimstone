@@ -274,7 +274,7 @@ class AdminController extends Controller
 
       }
 
-      return $this->render('AppBundle:admin:write_post.html.twig', array('title' => "Write Post", 'form' => $form->createView() ));
+      return $this->render('AppBundle:admin:write_post.html.twig', array('title' => "Edit Post", 'form' => $form->createView() ));
 
 
 
