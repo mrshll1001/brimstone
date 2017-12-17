@@ -23,6 +23,10 @@ view_tags:
   path: /tags
   defaults: { _controller: AppBundle:Default:viewTags }
 
+search_tags:
+  path: /tags/{tagString}
+  defaults: { _controller: AppBundle:Default:viewTags }
+
 
 admin:
   resource: "@AppBundle/Resources/config/admin_routes.yml"

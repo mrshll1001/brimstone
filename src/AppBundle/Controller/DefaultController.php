@@ -162,7 +162,11 @@ class DefaultController extends Controller
 
     }
 
-    public function viewTagsAction(Request $request)
+    /**===========================================================================================
+    * Displays all tags available in the system, and if a tagstring is present all posts for that tag
+    * ===========================================================================================
+    */
+    public function viewTagsAction(Request $request, $tagString = null)
     {
       /* First, try to load the user object */
       $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
@@ -173,16 +177,42 @@ class DefaultController extends Controller
         return $this->render('AppBundle:public:not_setup.html.twig', array());
       }
 
-      /* TODO search for some tags and posts and stuff */
-      $ids = $this->getDoctrine()->getManager()->getRepository('AppBundle:Tag')->getResourceIdsForTag('post', 'brimstone');
+      /* Get all the tags with the count */
       $tags = $this->getDoctrine()->getRepository('AppBundle:Tag')->getTagsWithCountArray('post');
-      
-      // foreach ($tags as $name => $count)
-      // {
-      //   echo $name."($count)";
-      // }
 
-      return $this->render('AppBundle:public:tags.html.twig', array('profile' => $user->getProfile(), 'ids'=>$ids, 'tags' => $tags ));
+      /* If the tagstring isn't null, we have a search so do a search for all posts for those tags */
+      $posts = null;
+      if ($tagString !== null) // Check for a tag query
+      {
+        $posts = array(); // Initialise posts, it'll now be picked up by the template
+        $ids = array();   // Taggable provides an interface that returns ids, so we need to collect these
+
+        foreach (explode('+', $tagString) as $tString) // Explode the tagstring and loop
+        {
+          $results = $this->getDoctrine()->getRepository('AppBundle:Tag')->getResourceIdsForTag('post', $tString); // Get the post ids for the tag
+
+          $ids = array_merge($ids, $results); // Merge the results in
+        }
+
+        var_dump($ids);
+        $ids = array_unique($ids);  // Purge duplicates
+
+        foreach ($ids as $id) // Loop over ids, adding the results to the posts array
+        {
+
+          $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+          if ($post)
+          {
+            $this->get('fpn_tag.tag_manager')->loadTagging($post);  // Load tags for display
+            $posts[] = $post; // Add to array
+          }
+        }
+
+      }
+
+
+
+      return $this->render('AppBundle:public:tags.html.twig', array('profile' => $user->getProfile(), 'tags' => $tags, 'search' => $tagString, 'posts' => $posts ));
     }
 
     /**===========================================================================================
