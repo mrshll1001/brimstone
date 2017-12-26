@@ -416,8 +416,8 @@ class AdminController extends Controller
 
         foreach ($xml->children() as $postData)
         {
-          
-          print($postData->content);
+
+          print($postData->blahblah);
         }
 
       }
