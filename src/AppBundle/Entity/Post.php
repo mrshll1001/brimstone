@@ -24,6 +24,13 @@ class Post implements Taggable
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="note_id", type="integer")
+     */
+    private $nodeId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true, unique=true)
@@ -281,5 +288,29 @@ class Post implements Taggable
     {
         $this->tags = $this->tags ?: new ArrayCollection();
         return $this->tags;
+    }
+
+    /**
+     * Set nodeId
+     *
+     * @param integer $nodeId
+     *
+     * @return Post
+     */
+    public function setNodeId($nodeId)
+    {
+        $this->nodeId = $nodeId;
+
+        return $this;
+    }
+
+    /**
+     * Get nodeId
+     *
+     * @return integer
+     */
+    public function getNodeId()
+    {
+        return $this->nodeId;
     }
 }

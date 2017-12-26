@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Taggable\Taggable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Post
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
  */
-class Post
+class Post implements Taggable
 {
     /**
      * @var int
@@ -20,6 +22,13 @@ class Post
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="note_id", type="integer")
+     */
+    private $nodeId;
 
     /**
      * @var string
@@ -70,6 +79,11 @@ class Post
      * @ORM\Column(name="location", type="json_array", nullable=true)
      */
     private $location;
+
+    /**
+     * This isn't mapped as the mapping is handled by the tag manager
+     */
+    private $tags;
 
 
     /**
@@ -178,29 +192,6 @@ class Post
         return $this->visible;
     }
 
-    /**
-     * Set permalink
-     *
-     * @param string $permalink
-     *
-     * @return Post
-     */
-    public function setPermalink($permalink)
-    {
-        $this->permalink = $permalink;
-
-        return $this;
-    }
-
-    /**
-     * Get permalink
-     *
-     * @return string
-     */
-    public function getPermalink()
-    {
-        return $this->permalink;
-    }
 
     /**
      * Set inReplyTo
@@ -248,5 +239,54 @@ class Post
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Post
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+    * TAGGABLE requirement
+    */
+    public function getTaggableType()
+    {
+      return 'post';
+    }
+
+    /**
+    * TAGGABLE requirement
+    */
+    public function getTaggableId()
+    {
+      return $this->getId();
+    }
+
+    /**
+     * TAGGABLE requirement
+     */
+    public function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+        return $this->tags;
     }
 }

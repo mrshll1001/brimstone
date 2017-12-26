@@ -411,9 +411,15 @@ class AdminController extends Controller
       if ($importForm->isSubmitted() && $importForm->isValid()) // Check submission
       {
         /* If form was submitted, we should have a valid XML file, so we parse it and begin storing posts */
-        $file = $form['file']->getData();
+        $file = $importForm['file']->getData();
+        $xml = simplexml_load_file($file);
 
-        
+        foreach ($xml->children() as $postData)
+        {
+          
+          print($postData->content);
+        }
+
       }
 
       return $this->render('AppBundle:admin:import_export.html.twig', array('title' => "Import and Export Posts", 'import_form' => $importForm->createView() ));
