@@ -1,0 +1,18 @@
+{% extends 'AppBundle:admin:admin_base.html.twig' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col s12 m12">
+
+      <div class="card">
+        <div class="card-content">
+            <span class="card-title">Import Posts</span>
+            <p>If you have posts that you exported from a previous Brimstone installation, you can import them here. Find the <em>.xml</em> file that you exported previously, and upload it to the form below.</p>
+
+            {% include 'AppBundle:form:import_post_form.html.twig' with {'form': import_form} only %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}

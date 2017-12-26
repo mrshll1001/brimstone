@@ -20,6 +20,7 @@ use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\WriteAboutType;
 use AppBundle\Form\QuickNoteType;
 use AppBundle\Form\WritePostType;
+use AppBundle\Form\UploadFileType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -385,6 +386,41 @@ class AdminController extends Controller
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
 
+    }
+
+  }
+
+  /**=======================================================================================================
+   * Page to import and export posts
+   *=======================================================================================================
+   */
+  public function importExportAction(Request $request)
+  {
+    /* Standard checks */
+    try
+    {
+      $user = $this->getUser(); // Get the user
+      $this->checkUser($user); // Check them
+
+      /* Reusable upload file type is used for the form */
+      $importForm = $this->createForm(UploadFileType::class);
+
+      /* Handle form submission */
+      $importForm->handleRequest($request);
+
+      if ($importForm->isSubmitted() && $importForm->isValid()) // Check submission
+      {
+        /* If form was submitted, we should have a valid XML file, so we parse it and begin storing posts */
+        $file = $form['file']->getData();
+
+        
+      }
+
+      return $this->render('AppBundle:admin:import_export.html.twig', array('title' => "Import and Export Posts", 'import_form' => $importForm->createView() ));
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
     }
 
   }

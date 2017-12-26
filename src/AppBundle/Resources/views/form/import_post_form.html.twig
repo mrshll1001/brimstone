@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+  {# This stuff makes it look like materialize #}
+  <span class="red-text">{{form_errors(form)}}</span>
+<div class="file-field input-field">
+    <div class="btn">
+      <span>Choose File</span>
+            {{ form_widget(form) }}
+    </div>
+
+    <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+    </div>
+</div>
+
+<button type="submit" class="btn" name="submit">Upload</button>
+
+{{ form_end(form) }}

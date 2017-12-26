@@ -10,6 +10,10 @@ user_settings:
   path: /settings
   defaults: { _controller: AppBundle:Admin:userSettings }
 
+import_export:
+  path: /import-and-export
+  defaults: { _controller: AppBundle:Admin:importExport }
+
 write_about:
   path: /about
   defaults: { _controller: AppBundle:Admin:writeAbout }
