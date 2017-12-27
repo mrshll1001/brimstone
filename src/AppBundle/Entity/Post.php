@@ -26,9 +26,9 @@ class Post implements Taggable
     /**
      * @var int
      *
-     * @ORM\Column(name="note_id", type="integer")
+     * @ORM\Column(name="note_id", type="integer", nullable=true, unique=true)
      */
-    private $nodeId;
+    private $noteId;
 
     /**
      * @var string
@@ -291,26 +291,26 @@ class Post implements Taggable
     }
 
     /**
-     * Set nodeId
+     * Set noteId
      *
-     * @param integer $nodeId
+     * @param integer $noteId
      *
      * @return Post
      */
-    public function setNodeId($nodeId)
+    public function setnoteId($noteId)
     {
-        $this->nodeId = $nodeId;
+        $this->noteId = $noteId;
 
         return $this;
     }
 
     /**
-     * Get nodeId
+     * Get noteId
      *
      * @return integer
      */
-    public function getNodeId()
+    public function getnoteId()
     {
-        return $this->nodeId;
+        return $this->noteId;
     }
 }

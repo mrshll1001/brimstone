@@ -414,10 +414,11 @@ class AdminController extends Controller
         $file = $importForm['file']->getData();
         $xml = simplexml_load_file($file);
 
+        $em = $this->getDoctrine()->getManager();
+
         foreach ($xml->children() as $postData)
         {
-
-          print($postData->blahblah);
+          
         }
 
       }
