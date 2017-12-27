@@ -23,6 +23,10 @@ view_post_by_note_id:
   path: /note/{id}
   defaults: { _controller: AppBundle:Default:viewNoteById }
 
+view_post_by_note_id_too:
+  path: /notes/{id}
+  defaults: { _controller: AppBundle:Default:viewNoteById }
+
 view_tags:
   path: /tags
   defaults: { _controller: AppBundle:Default:viewTags }
