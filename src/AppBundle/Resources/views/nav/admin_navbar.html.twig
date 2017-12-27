@@ -6,15 +6,44 @@
        <ul class="side-nav fixed grey darken-4" id="mobile-demo">
          <li class="logo"><img id="navbar_central_logo" src="{{asset('img/brimstone_light.svg')}}" alt=""></li>
 
-         <li><a href="{{path('control_panel')}}">Home</a></li>
-         <li><a href="{{path('write_post')}}">Write Post</a></li>
-         <li><a href="{{path('my_articles')}}">My Articles</a></li>
-         <li><a href="{{path('my_notes')}}">My Notes</a></li>
+         <li><a class="collapsible-header" href="{{path('control_panel')}}"><i class="material-icons">home</i>Home</a></li>
+         <li>
+           <ul class="collapsible collapsible-accordion">
+             <li>
+               <a class="collapsible-header">Posts<i class="material-icons">assignment</i></a>
+               <div class="collapsible-body">
+                 <ul class="grey darken-4">
+
+                   <li><a href="{{path('write_post')}}">Write Post</a></li>
+                   <li><a href="{{path('my_articles')}}">My Articles</a></li>
+                   <li><a href="{{path('my_notes')}}">My Notes</a></li>
+
+                 </ul>
+               </div>
+             </li>
+           </ul>
+         </li>
+
+         <li>
+           <ul class="collapsible collapsible-accordion">
+             <li>
+               <a class="collapsible-header"><i class="material-icons left">settings</i>Settings</a>
+               <div class="collapsible-body">
+                 <ul class="grey darken-4">
+
+                   <li><a href="{{path('write_about')}}">About</a></li>
+                   <li><a href="{{path('user_settings')}}">Settings</a></li>
+
+                 </ul>
+               </div>
+             </li>
+           </ul>
+         </li>
 
 
-         <li><a href="{{path('write_about')}}"><i class="material-icons left">account_circle</i>About</a></li>
-         <li><a href="{{path('user_settings')}}"><i class="material-icons left">settings</i>Settings</a></li>
-         <li><a href="{{path('logout')}}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+
+         <li><a class="collapsible-header" href="{{path('logout')}}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+
 
 
        </ul>
