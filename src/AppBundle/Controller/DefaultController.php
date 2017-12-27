@@ -150,7 +150,7 @@ class DefaultController extends Controller
         return $this->redirectToRoute('index'); // Returning to / sounds sensible for a bad id or secret post TODO maybe throw a 404
       }
 
-      /* Load the previous TODO and the next posts */
+      /* Load the previous and the next posts */
       $previous = $this->getDoctrine()->getRepository('AppBundle:Post')->findPreviousPost($post->getDate()); // Previous by date !id
       $next = $this->getDoctrine()->getRepository('AppBundle:Post')->findNextPost($post->getDate());
 
@@ -159,6 +159,33 @@ class DefaultController extends Controller
       $tagManager->loadTagging($post);
 
       return $this->render('AppBundle:public:view_post.html.twig', array('profile' => $user->getProfile(), 'post' => $post, 'previous' => $previous, 'next' => $next ));
+
+    }
+
+    /**===========================================================================================
+    * Because there's old URLs out there with the /note/{id} links, handle redirect here
+    * ===========================================================================================
+    */
+    public function viewNoteByIdAction(Request $request, $id)
+    {
+      /* First, try to load the user object */
+      $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
+
+      /* If the user object is null, then Brimstone hasn't been set up, so load the template that says so */
+      if ($user === null)
+      {
+        return $this->render('AppBundle:public:not_setup.html.twig', array());
+      }
+
+      /* Load the post via the note id, extract the new id and redirect */
+      $post = $this->getDoctrine()->getRepository('AppBundle:Post')->findOneByNoteId($id);
+
+      if ($post === NULL)
+      {
+        return $this->redirectToRoute('index'); // Returning to / sounds sensible for a bad id
+      }
+
+      return $this->redirectToRoute('view_post_by_id', array('id'=>$post->getId() ));
 
     }
 
