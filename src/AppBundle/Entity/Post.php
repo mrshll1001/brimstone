@@ -222,7 +222,7 @@ class Post implements Taggable
      *
      * @param array $location
      *
-     * @return TestLocation
+     * @return Post
      */
     public function setLocation($location)
     {

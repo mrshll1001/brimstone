@@ -411,14 +411,74 @@ class AdminController extends Controller
       if ($importForm->isSubmitted() && $importForm->isValid()) // Check submission
       {
         /* If form was submitted, we should have a valid XML file, so we parse it and begin storing posts */
-        $file = $importForm['file']->getData();
-        $xml = simplexml_load_file($file);
-
-        $em = $this->getDoctrine()->getManager();
+        $file = $importForm['file']->getData();      //   Get file
+        $xml = simplexml_load_file($file);          //    Parse it
+        $em = $this->getDoctrine()->getManager();  //     Get manager to store posts
 
         foreach ($xml->children() as $postData)
         {
-          
+          $post = new Post();
+
+          /* Because XML doesn't return a null value we need to cast results to desired types and check */
+
+          if ( (string)$postData->title !== "" )
+          {
+            $post->setTitle((string) $postData->title);
+            $slug = $this->get('slugify')->slugify($post->getTitle());
+            $post->setSlug($slug);
+
+          }
+
+          if ( (string)$postData->content !== "" )
+          {
+            $post->setContent((string) $postData->content);
+          }
+
+          if ((string) $postData->content === "" && (string) $postData->location !== "" )
+          {
+            $post->setContent("I checked in to ".(string)$postData->location);
+
+            $location = array();
+            $location['lat'] = null;
+            $location['long'] = null;
+            $location['location'] = (string) $postData->location;
+
+            $post->setLocation($location);
+          }
+
+          if ( (integer)$postData->note_id > 0 )
+          {
+            $post->setNoteId((integer) $postData->note_id);
+          }
+
+          if ( (string)$postData->inReplyTo !== "" )
+          {
+            $post->setInReplyTo((string) $postData->inReplyTo);
+          }
+
+          $date = \DateTime::createFromFormat('Y-m-d\TH:i:sT', $postData->date); // Can't use 'c' format in this function for whatever reason
+          $post->setDate($date);
+
+          $post->setVisible($postData->visible);
+
+
+          /* Iterate over all the tags and add them to the post */
+          $tagManager = $this->get('fpn_tag.tag_manager');
+          foreach ($postData->tags->children() as $tag)
+          {
+            if((string) $tag !== "")
+            {
+              $newTag = $tagManager->loadOrCreateTag($tag);
+              $tagManager->addTag($newTag, $post);
+            }
+          }
+
+          /* Save everything */
+          $em->persist($post);
+          $em->flush();
+
+          $tagManager->saveTagging($post);
+
         }
 
       }
