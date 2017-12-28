@@ -289,31 +289,13 @@ class AdminController extends Controller
    * Settings page. Contains a variety of forms to allow the user to modify their profile or website settings
    *=======================================================================================================
    */
-  public function userSettingsAction(Request $request)
+  public function changePasswordAction(Request $request)
   {
     /* Perform standard checks */
     try
     {
       $user = $this->getUser(); // Get the user
       $this->checkUser($user); // Check them
-
-      /* We need multiple forms on this page so we're going to handle them each in turn */
-
-      /* First, the QuickProfile form to let the user update their profile information */
-      $quickProfileForm = $this->createForm(QuickProfileType::class, $user->getProfile()); // Create the form with the profile object on the user
-
-      $quickProfileForm->handleRequest($request); // Handle the request here first
-
-      if ($quickProfileForm->isSubmitted() && $quickProfileForm->isValid())
-      {
-        $user->setProfile($quickProfileForm->getData()); // Update the object
-        $em = $this->getDoctrine()->getManager();       // Get the Doctrine EM
-        $em->persist($user);
-        $em->flush();
-
-        return $this->redirectToRoute('user_settings'); // Return to the settings page
-      }
-
 
       /* Now we handle the change password form */
       $changePasswordForm = $this->createForm(ChangePasswordType::class); // We don't give this a user object as we just want the password information
@@ -336,9 +318,8 @@ class AdminController extends Controller
       }
 
 
-      return $this->render('AppBundle:admin:user_settings.html.twig',
-                            array('title' => "Settings", 'quickProfileForm' => $quickProfileForm->createView(),
-                            'changePasswordForm' => $changePasswordForm->createView()
+      return $this->render('AppBundle:admin:change_password.html.twig',
+                            array('title' => "Change Password", 'changePasswordForm' => $changePasswordForm->createView()
                           ));
 
     } catch (NullProfileException $e)

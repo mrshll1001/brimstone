@@ -6,9 +6,9 @@ configure_initial_profile:
   path: /configure
   defaults: { _controller: AppBundle:Admin:configureInitialProfile }
 
-user_settings:
-  path: /settings
-  defaults: { _controller: AppBundle:Admin:userSettings }
+change_password:
+  path: /change-password
+  defaults: { _controller: AppBundle:Admin:changePassword }
 
 import_export:
   path: /import-and-export
