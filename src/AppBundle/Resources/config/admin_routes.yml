@@ -14,9 +14,9 @@ import_export:
   path: /import-and-export
   defaults: { _controller: AppBundle:Admin:importExport }
 
-write_about:
-  path: /about
-  defaults: { _controller: AppBundle:Admin:writeAbout }
+edit_profile:
+  path: /profile
+  defaults: { _controller: AppBundle:Admin:editProfile }
 
 write_post:
   path: /write-post

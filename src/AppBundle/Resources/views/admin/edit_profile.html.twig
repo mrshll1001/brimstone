@@ -1,0 +1,14 @@
+{% extends 'AppBundle:admin:admin_base.html.twig' %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col s12 m12">
+
+      {% include 'AppBundle:form:full_profile_form.html.twig' with {'form': form} only %}
+
+
+
+    </div>
+  </div>
+{% endblock content %}

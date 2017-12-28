@@ -16,6 +16,7 @@ use AppBundle\Exception\NullProfileException;
 
 /* Forms */
 use AppBundle\Form\QuickProfileType;
+use AppBundle\Form\FullProfileType;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\WriteAboutType;
 use AppBundle\Form\QuickNoteType;
@@ -353,7 +354,7 @@ class AdminController extends Controller
    * Provides a page / form to allow the user to write their 'about' section. Once their 'About' isn't null, the about link shows up on the public side of teh site
    * ====================================================================================================================================
    */
-  public function writeAboutAction(Request $request)
+  public function editProfileAction(Request $request)
   {
     /* Standard checks */
     try
@@ -361,8 +362,8 @@ class AdminController extends Controller
       $user = $this->getUser(); // Get the user
       $this->checkUser($user); // Check them
 
-      /* The WriteAbout form operates on the user profile object, so we create the form using it */
-      $form = $this->createForm(WriteAboutType::class, $user->getProfile());  // Create form
+      /* The EditProfile form operates on the user profile object, so we create the form using it */
+      $form = $this->createForm(FullProfileType::class, $user->getProfile());  // Create form
 
       /* Handle request and check if the form was submitted */
       $form->handleRequest($request);
@@ -379,7 +380,7 @@ class AdminController extends Controller
         /* We don't need to redirect because we don't need an empty form AND don't need to change the page */
       }
 
-      return $this->render('AppBundle:admin:write_about.html.twig', array('title' => "About", 'form' => $form->createView() ));
+      return $this->render('AppBundle:admin:edit_profile.html.twig', array('title' => "Edit Profile", 'form' => $form->createView() ));
 
 
     } catch (NullProfileException $e)
