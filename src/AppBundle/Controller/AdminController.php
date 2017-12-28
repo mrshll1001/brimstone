@@ -18,7 +18,6 @@ use AppBundle\Exception\NullProfileException;
 use AppBundle\Form\QuickProfileType;
 use AppBundle\Form\FullProfileType;
 use AppBundle\Form\ChangePasswordType;
-use AppBundle\Form\WriteAboutType;
 use AppBundle\Form\QuickNoteType;
 use AppBundle\Form\WritePostType;
 use AppBundle\Form\UploadFileType;
