@@ -1,0 +1,32 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{# Make a nice greyish background #}
+{% block css %}
+<link rel="stylesheet" href="{{asset('css/login_registration.css')}}">
+{% endblock css %}
+
+
+{% block body %}
+
+<div class="container">
+
+
+  <div class="row center">
+    <div class="col s12">
+      <img src="{{asset('/img/brimstone_light.svg')}}" alt="brimstone_logo" />
+    </div>
+  </div>
+
+  <div class="row">
+
+
+    <div class="col s12 m4 offset-m4">
+      <div class="card-panel">
+        {% block form %}{% endblock form %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock body %}

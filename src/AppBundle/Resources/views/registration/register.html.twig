@@ -1,8 +1,5 @@
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+{% extends 'AppBundle:security:login_registration_base.html.twig' %}
 
-    <button type="submit">Register!</button>
-{{ form_end(form) }}
+{% block form %}
+{% include 'AppBundle:form:setup_form.html.twig' with {'form' : form} only %}
+{% endblock form %}

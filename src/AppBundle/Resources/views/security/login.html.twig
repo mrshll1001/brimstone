@@ -1,25 +1,11 @@
-{% extends 'AppBundle::base.html.twig' %}
+{% extends 'AppBundle:security:login_registration_base.html.twig' %}
 
-{% block body %}
+{% block form %}
 
-<div class="container">
-
-  <div class="row">
-
-    <div class="col s12 m4 offset-m4">
-      <div class="card-panel">
           {% if error %}
-          <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+          <div class="red-text">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
           {% endif %}
 
-          {% include 'AppBundle:form:login_form.html.twig'  %}
+          {% include 'AppBundle:form:login_form.html.twig' %}
 
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-
-{% endblock body %}
+{% endblock form %}
