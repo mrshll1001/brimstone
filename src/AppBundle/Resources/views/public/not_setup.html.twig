@@ -1,6 +1,31 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block css %}
+<link rel="stylesheet" href="{{asset('css/login_registration.css')}}">
+{% endblock css %}
+
 {% block body %}
 
-<h1>The User of this site has not finished setting up yet! Please be patient</h1>
+<div class="container">
+
+  <div class="row center">
+    <div class="col s12">
+      <img src="{{asset('/img/brimstone_light.svg')}}" alt="brimstone_logo" />
+    </div>
+  </div>
+</div>
+
+
+  <div class="row center grey white-text">
+    <div class="col s12">
+      <h1>Welcome to Brimstone!</h1>
+      <h2 class="light">Let's get you set up</h2>
+
+      <div class="readable">
+
+        <p>Brimstone has been installed successfully and is ready for you to create your user account. Head to <a class="yellow-text" href="{{path('setup')}}">the setup page</a> to create your account, and get started.</p>
+      </div>
+    </div>
+  </div>
+
 {% endblock body %}
