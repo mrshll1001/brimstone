@@ -18,7 +18,7 @@ class DefaultController extends Controller
       $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
 
       /* If the user object is null, then Brimstone hasn't been set up, so load the template that says so */
-      if ($user === null)
+      if ($user === null || $user->getProfile() === null)
       {
         return $this->render('AppBundle:public:not_setup.html.twig', array());
       }
