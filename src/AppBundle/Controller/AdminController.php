@@ -22,6 +22,7 @@ use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\QuickNoteType;
 use AppBundle\Form\WritePostType;
 use AppBundle\Form\UploadFileType;
+use AppBundle\Form\AddRssFeedType;
 
 /**
  * Provides controllers for Protected actions such as the control panel and creating content
@@ -486,10 +487,40 @@ class AdminController extends Controller
       $user = $this->getUser(); // Get the user
       $this->checkUser($user); // Check them
 
-      $feedIo = $this->get('feedio');
+      /* Set up the add feed form and handle the request */
+      $feed = new Feed();
+      $form = $this->createForm(AddRssFeedType::class, $feed);
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid())
+      {
+        $feed = $form->getData();
+
+        /* We have the URL stored but it's convenient to try and parse the feed's title for the user so attempt that via feedIo */
+        $feedIo = $this->get('feedio');
+        $title = $feedIo->read($form['url']->getData())->getFeed()->getTitle();
+
+        $feed->setTitle($title);
+
+        /* We should also set the feed type and colour */
+        $feed->setFormat(Feed::FORMAT_RSS);
+
+        $feed->setRandomColour();
+
+        /* Store the feed */
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($feed);
+        $em->flush();
+
+        return $this->redirectToRoute('rss_feeds');
+      }
+
+      /* Retrieve all of the feeds for display */
+      $feeds = $this->getDoctrine()->getRepository('AppBundle:Feed')->findAll();
 
 
-      return $this->render('AppBundle:admin:feeds.html.twig', array('title' => "Feeds",));
+      return $this->render('AppBundle:admin:feeds.html.twig', array('title' => "Feeds", 'form' => $form->createView(), 'feeds' => $feeds ));
     } catch (NullProfileException $e)
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page

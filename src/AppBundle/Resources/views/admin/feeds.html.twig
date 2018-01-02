@@ -1,5 +1,31 @@
 {% extends 'AppBundle:admin:admin_base.html.twig' %}
 
 {% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card-panel">
 
+      {% include 'AppBundle:form:add_rss_feed.html.twig' with {'form' : form} only %}
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+{% for feed in feeds %}
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title" style="color: {{feed.colour}}">{{feed.title}}</span>
+
+        <br>
+        <a href="#" class="btn">View</a> <a href="#" class="btn red">Delete</a>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+      <p>You've not added any RSS feeds yet!</p>
+{% endfor %}
+</div>
 {% endblock content %}

@@ -53,6 +53,9 @@ class Feed
     const FORMAT_RSS = "rss";
     const FORMAT_MF = "microformat";
 
+    /* Declare an array of possible colours for an RSS feed to be */
+    const COLOURS = ['#D91E18', '#D2527F', '#8E44AD', '#446CB3', '#049372', '#F4D03F', '#EB9532'];
+
 
 
     /**
@@ -159,5 +162,17 @@ class Feed
     public function getColour()
     {
         return $this->colour;
+    }
+
+    /**
+     * Set a random colour from the available arrays
+     * @return Feed
+     */
+    public function setRandomColour()
+    {
+      $key = array_rand(Feed::COLOURS);
+      $this->colour = Feed::COLOURS[$key];
+
+      return $this;
     }
 }
