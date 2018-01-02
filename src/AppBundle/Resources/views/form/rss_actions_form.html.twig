@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col s12 m6">
+    <a href="#" class="btn">View</a>
+  </div>
+
+  <div class="col s12 m6">
+    <form  action="{{path('remove_feed_by_id', {'id': feed.id})}}" method="post">
+      <input type="hidden" name="redirect_route" value="{{ app.request.attributes.get('_route') }}">
+      <button type="submit" class="btn red" name="button">Delete</button>
+    </form>
+  </div>
+
+</div>

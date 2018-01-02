@@ -46,3 +46,7 @@ change_post_visibilty_by_id:
 remove_post_by_id:
   path: /remove-post/{id}
   defaults: { _controller: AppBundle:Post:removePostById }
+
+remove_feed_by_id:
+  path: /remove-feed/{id}
+  defaults: { _controller: AppBundle:Feed:removeFeedById }
