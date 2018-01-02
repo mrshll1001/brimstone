@@ -14,7 +14,7 @@
             </section>
             <div class="card-content">
               <p class="light">Posted {{item.lastModified|date('d M Y')}}</p>
-              <span class="card-title"><a href="{{item.link}}" target="_blank">{{item.title}}</a></span>
+              <span class="card-title"><a href="{{item.link}}" target="_blank">{{item.title|raw}}</a></span>
             </div>
           </div>
 
