@@ -530,6 +530,44 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
+   * View an RSS feed's contents
+   *=======================================================================================================
+   */
+  public function viewRssFeedAction(Request $request, $id)
+  {
+    /* Standard checks */
+    try
+    {
+      $user = $this->getUser(); // Get the user
+      $this->checkUser($user); // Check them
+
+      /* TODO stuff with editing feed details e.g. title and colour */
+
+      /* Load the feed via its id (it doesn't need to be overly pretty here) and display it */
+      $feed = $this->getDoctrine()->getRepository('AppBundle:Feed')->find($id);
+
+      if ($feed === null) // Redirect if we're null
+      {
+        return $this->redirectToRoute('rss_feeds');
+      }
+
+      /* Use the feed object to load the actual feed data fia feedIo */
+      $feedIo = $this->get('feedio');
+      $feedData = $feedIo->read($feed->getUrl())->getFeed();
+      $title = $feedData->getTitle();
+
+      /* Finally, render */
+      return $this->render('AppBundle:admin:view_rss_feed.html.twig', array('title' => "Viewing $title", 'feed' => $feedData, 'colour' => $feed->getColour() ));
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
+  /**=======================================================================================================
    * After logging in for the first time users should be directed here to initialise their UserProfile object
    *=======================================================================================================
    */

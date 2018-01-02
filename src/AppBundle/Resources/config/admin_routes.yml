@@ -38,6 +38,10 @@ rss_feeds:
   path: /feeds
   defaults: { _controller: AppBundle:Admin:feeds }
 
+view_rss_feed:
+  path: /feeds/{id}
+  defaults: { _controller: AppBundle:Admin:viewRssFeed }
+
 # Hidden actions that don't really have pages associated but should be Protected under the admin firewall
 change_post_visibilty_by_id:
   path: /change-visible/{id}

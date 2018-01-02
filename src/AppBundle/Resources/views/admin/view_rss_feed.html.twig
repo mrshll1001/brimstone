@@ -1,0 +1,27 @@
+{% extends 'AppBundle:admin:admin_base.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  {% for row in feed|batch(3) %}
+    <div class="row">
+      {% for item in row %}
+        <div class="col s12 m4">
+
+          <div class="card">
+            <section class="card-stripe" style="background-color: {{colour}}">
+
+            </section>
+            <div class="card-content">
+              <p class="light">Posted {{item.lastModified|date('d M Y')}}</p>
+              <span class="card-title"><a href="{{item.link}}" target="_blank">{{item.title}}</a></span>
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
