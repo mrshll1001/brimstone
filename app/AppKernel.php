@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
             new FPN\TagBundle\FPNTagBundle(),
+            new Debril\RssAtomBundle\DebrilRssAtomBundle(),
             new AppBundle\AppBundle(),
         ];
 

@@ -474,6 +474,29 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
+  * Renders the feeds page
+  * =======================================================================================================
+  */
+  public function feedsAction(Request $request)
+  {
+    /* Standard checks */
+    try
+    {
+      $user = $this->getUser(); // Get the user
+      $this->checkUser($user); // Check them
+
+      $feedIo = $this->get('feedio');
+
+      return $this->render('AppBundle:admin:feeds.html.twig', array('title' => "Feeds"));
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
+  /**=======================================================================================================
    * After logging in for the first time users should be directed here to initialise their UserProfile object
    *=======================================================================================================
    */
@@ -515,6 +538,7 @@ class AdminController extends Controller
     // Form handling
     return $this->render('AppBundle:admin:configure_initial_profile.html.twig', array('form' => $form->createView() ));
   }
+
 
 
   /**=======================================================================================================

@@ -22,10 +22,11 @@
     "require": {
         "php": ">=5.5.9",
         "cocur/slugify": "^3.0",
+        "debril/rss-atom-bundle": "^4.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "fpn/doctrine-extensions-taggable": "^0.9.0",
-        "fpn/tag-bundle":"dev-master",
+        "fpn/tag-bundle": "dev-master",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-markdown-bundle": "^1.6",
         "sensio/distribution-bundle": "^5.0.19",
@@ -69,6 +70,9 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "branch-alias": null
+        "branch-alias": null,
+        "symfony": {
+            "allow-contrib": "true"
+        }
     }
 }

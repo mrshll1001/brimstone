@@ -34,6 +34,10 @@ my_articles:
   path: /my-articles
   defaults: { _controller: AppBundle:Admin:myArticles }
 
+rss_feeds:
+  path: /feeds
+  defaults: { _controller: AppBundle:Admin:feeds }
+
 # Hidden actions that don't really have pages associated but should be Protected under the admin firewall
 change_post_visibilty_by_id:
   path: /change-visible/{id}
