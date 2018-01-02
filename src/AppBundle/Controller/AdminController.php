@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Feed;
 
 /* Exceptions */
 use AppBundle\Exception\NullProfileException;
@@ -487,7 +488,8 @@ class AdminController extends Controller
 
       $feedIo = $this->get('feedio');
 
-      return $this->render('AppBundle:admin:feeds.html.twig', array('title' => "Feeds"));
+
+      return $this->render('AppBundle:admin:feeds.html.twig', array('title' => "Feeds",));
     } catch (NullProfileException $e)
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
