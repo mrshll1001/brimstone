@@ -2,6 +2,8 @@
 # https://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
+    debril.provider.default.class: AppBundle\Service\ArticleRssFeedProvider
+
 
 services:
     # default configuration for services in *this* file
@@ -30,6 +32,9 @@ services:
         tags: ['controller.service_arguments']
 
     # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    AppBundle\Repository\PostRepository:
+      factory: 'doctrine.orm.entity_manager:getRepository'
+      arguments: ['AppBundle\Entity\Post']
+
+    debril.provider.mock:
+        class: '%debril.provider.default.class%'
