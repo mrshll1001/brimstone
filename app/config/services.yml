@@ -35,6 +35,8 @@ services:
     AppBundle\Repository\PostRepository:
       factory: 'doctrine.orm.entity_manager:getRepository'
       arguments: ['AppBundle\Entity\Post']
-
-    debril.provider.mock:
-        class: '%debril.provider.default.class%'
+    #
+    # debril.provider.default:
+    #     class: '%debril.provider.default.class%'
+    #     arguments:
+    #       $repo: 'AppBundle\Repository\PostRepository'
