@@ -25,6 +25,10 @@ class OverrideServiceCompilerPass implements CompilerPassInterface
     {
         $definition = $container->getDefinition('debril.provider.default');
         $definition->setClass(ArticleRssFeedProvider::class);
-        $definition->addArgument(new Reference('AppBundle\Repository\PostRepository'));
+        // $definition->addArgument(new Reference('AppBundle\Repository\PostRepository'));
+        $definition->addArgument(new Reference('doctrine.orm.entity_manager'));
+        $definition->addArgument(new Reference('router'));
+
+
     }
 }
