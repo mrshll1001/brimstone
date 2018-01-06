@@ -9,7 +9,8 @@ use Debril\RssAtomBundle\Provider\FeedContentProviderInterface;
 use AppBundle\Repository\PostRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\RequestContext;
 
 
 /**
@@ -19,15 +20,17 @@ class ArticleRssFeedProvider implements FeedContentProviderInterface
 {
   protected $em;
   protected $router;
+  protected $requestStack;
 
   const TITLE_SUFFIX = "'s Articles";
   const ARTICLE_LIMIT = 20;
   const ITEM_DESCRIPTION_PREFIX = "Article posted at ";
 
-  public function __construct(EntityManager $em, Router $router)
+  public function __construct(EntityManager $em, Router $router, RequestStack $requestStack)
   {
     $this->em = $em;
     $this->router = $router;
+    $this->requestStack = $requestStack;
   }
 
   public function getFeedContent(array $options)
@@ -46,7 +49,7 @@ class ArticleRssFeedProvider implements FeedContentProviderInterface
     $rssFeed->setLink($this->router->generate('index'));  // Use the routing component to get the URL
 
     /* Use the EM to retrieve latest 20 articles and use these as the feed items */
-    $posts = $this->em->getRepository('AppBundle:Post')->findAllArticles(true); // Only retrieve visible articles
+    $posts = $this->em->getRepository('AppBundle:Post')->findAllArticles(true, 10); // Only retrieve visible articles
 
     foreach ($posts as $post)
     {

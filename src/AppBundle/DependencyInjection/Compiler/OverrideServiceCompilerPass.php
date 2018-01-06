@@ -28,6 +28,7 @@ class OverrideServiceCompilerPass implements CompilerPassInterface
         // $definition->addArgument(new Reference('AppBundle\Repository\PostRepository'));
         $definition->addArgument(new Reference('doctrine.orm.entity_manager'));
         $definition->addArgument(new Reference('router'));
+        $definition->addArgument(new Reference('request_stack'));
 
 
     }
