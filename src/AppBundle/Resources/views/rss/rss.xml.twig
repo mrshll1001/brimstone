@@ -10,7 +10,7 @@
  <item>
    <title>{{item.title}}</title>
    <link>{{url('view_post_by_id', {'id': item.id})}}</link>
-   <description>New RSS tutorial on W3Schools</description>
+   <description>An article published at {{item.date|date('d M Y H:i:s')}}</description>
    <pubDate>{{item.date|date('d M Y H:i:s')}}</pubDate>
  </item>
 
