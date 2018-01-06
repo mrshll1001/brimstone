@@ -256,6 +256,13 @@ class AdminController extends Controller
           $post->setDate(new \DateTime());
         }
 
+        /* Notes complain when being updated due to the unique title constraint, so manually set title as null */
+        if($form['title']->getData() === null || $form['title']->getData() === "")
+        {
+          $post->setTitle(null);
+          $post->setSlug(null);
+        }
+
         /* Handle Tagging using the FPN Tag Manager */
         $tagManager = $this->get('fpn_tag.tag_manager');
         $tagString = $form['tags']->getData();               // Get tags data as cs-string "abc, xyz, etc"
@@ -266,7 +273,7 @@ class AdminController extends Controller
 
         /* Upload to the database */
         $em = $this->getDoctrine()->getManager();
-        $em->persist($post);
+        // $em->persist($post);
         $em->flush();
 
         /* Now that the Post is in the database, we can safely save the tagging information we've created */
