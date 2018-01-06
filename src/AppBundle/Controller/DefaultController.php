@@ -240,6 +240,28 @@ class DefaultController extends Controller
     }
 
     /**===========================================================================================
+     * Returns an RSS feed of the last n articles (posts with titles)
+     * ===========================================================================================
+     */
+    public function viewRssFeedAction(Request $request)
+    {
+      /* First, try to load the user object */
+      $user = $this->getDoctrine()->getRepository('AppBundle:User')->getSingleUser();
+
+      /* If the user object is null, then Brimstone hasn't been set up, so load the template that says so */
+      if ($user === null)
+      {
+        return $this->render('AppBundle:public:not_setup.html.twig', array());
+      }
+
+      /* Retrieve the last n posts, defined by limit TODO make the limit part of the settings */
+      $limit = 20;
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAllArticles(true, $limit);
+
+      return $this->render('AppBundle:rss:rss.xml.twig', array('profile' => $user->getProfile(), 'posts' => $posts ));
+    }
+
+    /**===========================================================================================
      * Returns the date objects utilised by the index pages for back and forward links
      * ===========================================================================================
      */

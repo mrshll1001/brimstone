@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+ <title>{{profile.name}}'s Articles</title>
+ <link>{{url('index')}}</link>
+ <description>{{profile.description}}</description>
+
+ {% for item in posts %}
+ <item>
+   <title>{{item.title}}</title>
+   <link>{{url('view_post_by_id', {'id': item.id})}}</link>
+   <description>New RSS tutorial on W3Schools</description>
+   <pubDate>{{item.date|date('d M Y H:i:s')}}</pubDate>
+ </item>
+
+ {% endfor %}
+
+</channel>
+
+</rss>

@@ -3,6 +3,10 @@ index:
   defaults: { _controller: AppBundle:Default:index }
 
 # These all come first as the index by year and month will override the other logic
+rss_feed:
+  path: /rss
+  defaults: { _controller: AppBundle:Default:viewRssFeed }
+
 about:
   path: /about
   defaults: { _controller: AppBundle:Default:about }
