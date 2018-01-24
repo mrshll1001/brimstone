@@ -26,9 +26,9 @@ class Post implements Taggable
     /**
      * @var int
      *
-     * @ORM\Column(name="note_id", type="integer")
+     * @ORM\Column(name="note_id", type="integer", nullable=true, unique=true)
      */
-    private $nodeId;
+    private $noteId;
 
     /**
      * @var string
@@ -222,7 +222,7 @@ class Post implements Taggable
      *
      * @param array $location
      *
-     * @return TestLocation
+     * @return Post
      */
     public function setLocation($location)
     {
@@ -288,5 +288,29 @@ class Post implements Taggable
     {
         $this->tags = $this->tags ?: new ArrayCollection();
         return $this->tags;
+    }
+
+    /**
+     * Set noteId
+     *
+     * @param integer $noteId
+     *
+     * @return Post
+     */
+    public function setnoteId($noteId)
+    {
+        $this->noteId = $noteId;
+
+        return $this;
+    }
+
+    /**
+     * Get noteId
+     *
+     * @return integer
+     */
+    public function getnoteId()
+    {
+        return $this->noteId;
     }
 }

@@ -131,28 +131,4 @@ class UserProfile
     {
         return $this->about;
     }
-
-    /**
-     * Set twitterKeys
-     *
-     * @param array $twitterKeys
-     *
-     * @return UserProfile
-     */
-    public function setTwitterKeys($twitterKeys)
-    {
-        $this->twitterKeys = $twitterKeys;
-
-        return $this;
-    }
-
-    /**
-     * Get twitterKeys
-     *
-     * @return array
-     */
-    public function getTwitterKeys()
-    {
-        return $this->twitterKeys;
-    }
 }
