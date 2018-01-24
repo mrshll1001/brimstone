@@ -526,7 +526,6 @@ class AdminController extends Controller
       /* Retrieve all of the feeds for display */
       $feeds = $this->getDoctrine()->getRepository('AppBundle:Feed')->findAll();
 
-
       return $this->render('AppBundle:admin:feeds.html.twig', array('title' => "Feeds", 'form' => $form->createView(), 'feeds' => $feeds ));
     } catch (NullProfileException $e)
     {
