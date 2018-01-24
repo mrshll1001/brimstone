@@ -6,17 +6,22 @@ configure_initial_profile:
   path: /configure
   defaults: { _controller: AppBundle:Admin:configureInitialProfile }
 
-change_password:
-  path: /change-password
-  defaults: { _controller: AppBundle:Admin:changePassword }
 
 import_export:
   path: /import-and-export
   defaults: { _controller: AppBundle:Admin:importExport }
 
+change_password:
+  path: /settings/change-password
+  defaults: { _controller: AppBundle:Admin:changePassword }
+
 edit_profile:
-  path: /profile
+  path: /settings/profile
   defaults: { _controller: AppBundle:Admin:editProfile }
+
+edit_social_settings:
+  path: /settings/social
+  defaults: { _controller: AppBundle:Admin:editSocialSettings }
 
 write_post:
   path: /write-post

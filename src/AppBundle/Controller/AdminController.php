@@ -380,6 +380,28 @@ class AdminController extends Controller
 
   }
 
+  /**====================================================================================================================================
+   * Page to edit their social settings e.g. for post syndication and feed reading
+   * ====================================================================================================================================
+   */
+  public function editSocialSettingsAction(Request $request)
+  {
+    /* Standard checks */
+    try
+    {
+      $user = $this->getUser(); // Get the user
+      $this->checkUser($user); // Check them
+
+      return $this->render('AppBundle:admin:edit_social_settings.html.twig', array('title' => "Social Settings") );
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
   /**=======================================================================================================
    * Page to import and export posts
    *=======================================================================================================
