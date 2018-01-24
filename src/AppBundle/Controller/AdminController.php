@@ -19,6 +19,7 @@ use AppBundle\Exception\NullProfileException;
 use AppBundle\Form\QuickProfileType;
 use AppBundle\Form\FullProfileType;
 use AppBundle\Form\ChangePasswordType;
+use AppBundle\Form\SocialSettingsType;
 use AppBundle\Form\QuickNoteType;
 use AppBundle\Form\WritePostType;
 use AppBundle\Form\UploadFileType;
@@ -392,7 +393,17 @@ class AdminController extends Controller
       $user = $this->getUser(); // Get the user
       $this->checkUser($user); // Check them
 
-      return $this->render('AppBundle:admin:edit_social_settings.html.twig', array('title' => "Social Settings") );
+      /* Form is un-mapped to the settings object because the settings are stored in a JSOn array */
+      $form = $this->createForm(SocialSettingsType::class);
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid())
+      {
+        // TODO form stuff
+      }
+
+      return $this->render('AppBundle:admin:edit_social_settings.html.twig', array('title' => "Social Settings", 'form' => $form->createView() ) );
 
     } catch (NullProfileException $e)
     {

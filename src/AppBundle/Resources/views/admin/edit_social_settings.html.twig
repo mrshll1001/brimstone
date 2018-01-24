@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="row">
-<h1>Yay Social settings</h1>
+  <div class="col s12">
+    {% include 'AppBundle:form:social_settings_form.html.twig' with {'form': form} only %}
+  </div>
 </div>
 
 {% endblock content %}
