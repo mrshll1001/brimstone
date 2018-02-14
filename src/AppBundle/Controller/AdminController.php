@@ -12,6 +12,9 @@ use AppBundle\Entity\UserProfile;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Feed;
 
+/* Services */
+use AppBundle\Service\Syndicator;
+
 /* Exceptions */
 use AppBundle\Exception\NullProfileException;
 
@@ -35,7 +38,7 @@ class AdminController extends Controller
    * Renders the Control Panel, incl a shortform post form
    *=======================================================================================================
    */
-  public function controlPanelAction(Request $request)
+  public function controlPanelAction(Request $request, Syndicator $syndicator)
   {
 
     /* try to execute the code, but if there's no profile yet we need to set it up */
@@ -76,22 +79,7 @@ class AdminController extends Controller
         $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
         /* TODO sort out the proper POSSE behaviour */
-
-        $twitterKeys = $user->getProfile()->getTwitterKeys();
-        $settings = array(
-    'oauth_access_token' => $twitterKeys['twitter_oauth_access_token'],
-    'oauth_access_token_secret' => $twitterKeys['twitter_oauth_access_token_secret'],
-    'consumer_key' => $twitterKeys['twitter_consumer_key'],
-    'consumer_secret' => $twitterKeys['twitter_consumer_secret']
-);
-        
-
-        $twitter = new \TwitterAPIExchange($settings);
-
-        $url = "https://api.twitter.com/1.1/statuses/update.json";
-        $method = "POST";
-        $postFields = array('status' => "I am a test tweet delete me");
-        $twitter->buildOauth($url, $method)->setPostfields($postFields)->performRequest();
+        $syndicator->postToTwitter($post);
 
         /* If we're successful, we should probably want to redirect to a nice clean form */
         return $this->redirectToRoute('control_panel');

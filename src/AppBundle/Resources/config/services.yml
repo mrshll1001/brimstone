@@ -1,6 +1,0 @@
-services:
-
-  debril.provider.default:
-    class: AppBundle\Service\ArticleRssFeedProvider
-    arguments:
-      $em: '@doctrine.orm.entity_manager'
