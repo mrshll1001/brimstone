@@ -9,15 +9,15 @@ List of jobs and features on the immediate horizon
 * ~~Editable profile with about page~~
 * ~~Write in Markdown (a la Daring Fireball syntax)~~
 * ~~Import old posts via uploading an XML file~~
+* ~~Consume RSS feeds~~
+* ~~Produce an RSS feed containing one's articles~~
+
 
 * Export posts in an xml file
-* Consume RSS feeds
 * Consume Indieweb content via reading microformats
 * Consume Mastodon content via configurable profile
 * Consume Twitter content via configurable profile
-* Produce an RSS feed containing one's articles
 * POSSE Posts to Mastodon
 * POSSE posts to Twitter
 * Support microformats for Indieweb feed compatibility
-
 * Support media attachments to posts e.g. images
