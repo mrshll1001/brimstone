@@ -396,11 +396,39 @@ class AdminController extends Controller
       /* Form is un-mapped to the settings object because the settings are stored in a JSOn array */
       $form = $this->createForm(SocialSettingsType::class);
 
+      /* Because it's unmapped, we also need to manually populate the form upon loading */
+      $userProfile = $user->getProfile();
+      $twitterData = $userProfile->getTwitterKeys();
+
+      if ($twitterData !== null)
+      {
+        $form['twitter_oauth_access_token']->setData($twitterData['twitter_oauth_access_token']);
+        $form['twitter_oauth_access_token_secret']->setData($twitterData['twitter_oauth_access_token_secret']);
+        $form['twitter_consumer_key']->setData($twitterData['twitter_consumer_key']);
+        $form['twitter_consumer_secret']->setData($twitterData['twitter_consumer_secret']);
+
+      }
+
       $form->handleRequest($request);
 
       if ($form->isSubmitted() && $form->isValid())
       {
-        // TODO form stuff
+        /* Build the JSON array from the form data */
+        $twitterKeys = array();
+
+        $twitterKeys['twitter_oauth_access_token'] = $form['twitter_oauth_access_token']->getData();
+        $twitterKeys['twitter_oauth_access_token_secret'] = $form['twitter_oauth_access_token_secret']->getData();
+        $twitterKeys['twitter_consumer_key'] = $form['twitter_consumer_key']->getData();
+        $twitterKeys['twitter_consumer_secret'] = $form['twitter_consumer_secret']->getData();
+
+        /* Retrieve the user profile object and update */
+        $userProfile->setTwitterKeys($twitterKeys);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($userProfile);
+        $em->flush();
+
+
       }
 
       return $this->render('AppBundle:admin:edit_social_settings.html.twig', array('title' => "Social Settings", 'form' => $form->createView() ) );
