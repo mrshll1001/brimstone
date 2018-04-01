@@ -424,6 +424,7 @@ class AdminController extends Controller
             $post->setContent((string) $postData->content);
           }
 
+          // TODO update the location input to match current export format
           if ((string) $postData->content === "" && (string) $postData->location !== "" )
           {
             $post->setContent("I checked in to ".(string)$postData->location);

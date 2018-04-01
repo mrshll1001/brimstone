@@ -1,0 +1,24 @@
+<data>
+  {% for p in posts %}
+  <post>
+    <note_id>{{p.noteId}}</noteId>
+    <title>{{p.title}}</title>
+    <content>{{p.content}}</content>
+    <date>{{p.date|date('c')}}</date>
+    <visible>{{p.visible}}</visible>
+    <location>
+      <lat>{{p.location.lat}}</lat>
+      <long>{{p.location.long}}</long>
+      <location>{{p.location.location}}</location>
+    </location>
+
+    <inReplyTo>{{p.inReplyTo}}</inReplyTo>
+
+    <tags>
+      {% for tag in p.tags %}
+        <tag>{{tag.name}}</tag>
+      {% endfor %}
+    </tags>
+  </post>
+  {% endfor %}
+</data>
