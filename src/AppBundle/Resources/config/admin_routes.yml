@@ -15,6 +15,8 @@ change_password:
   path: /settings/change-password
   defaults: { _controller: AppBundle:Admin:changePassword }
 
+
+
 edit_profile:
   path: /settings/profile
   defaults: { _controller: AppBundle:Admin:editProfile }
