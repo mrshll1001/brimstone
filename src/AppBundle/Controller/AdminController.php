@@ -90,7 +90,7 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
-   * Page to view all posts
+   * Page to view all notes
    *=======================================================================================================
    */
   public function myNotesAction(Request $request)
@@ -479,6 +479,48 @@ class AdminController extends Controller
     } catch (NullProfileException $e)
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+    }
+
+  }
+
+  /**========================================================================================================
+  * Fetches all posts in an XML file based off of posts.xml.twig
+  * =======================================================================================================
+  */
+  public function downloadPostsAction(Request $request)
+  {
+    try
+    {
+      $user = $this->getUser(); // Get user
+      $this->checkUser($user); // Check them
+
+      /* Get Posts */
+      $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+
+      /* Load the tags */
+      $tm = $this->get('fpn_tag.tag_manager');
+
+      foreach ($posts as $post)
+      {
+        $tm->loadTagging($post);
+      }
+
+      /* Render the template */
+      $response = $this->render('AppBundle:export:posts_export.xml.twig', array('posts' => $posts));
+
+      /* Configure the response to return a file instead of render a page */
+      $response->headers->set('Content-Type', 'application/xml');
+      $response->headers->set('Content-Disposition', 'attachment; filename=brimstone_posts.xml');
+
+      /* Return XML file */
+      return $response;
+
+
+
+    } catch (\Exception $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
     }
 
   }
