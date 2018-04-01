@@ -1,15 +1,16 @@
 <data>
   {% for p in posts %}
   <post>
-    <note_id>{{p.noteId}}</noteId>
+    <note_id>{{p.noteId}}</note_id>
     <title>{{p.title}}</title>
     <content>{{p.content}}</content>
     <date>{{p.date|date('c')}}</date>
     <visible>{{p.visible}}</visible>
+
     <location>
-      <lat>{{p.location.lat}}</lat>
-      <long>{{p.location.long}}</long>
-      <location>{{p.location.location}}</location>
+      <lat>{% if p.location.lat is defined %}{{p.location.lat}}{% endif %}</lat>
+      <long>{% if p.location.long is defined %}{{p.location.long}}{% endif %}</long>
+      <location>{% if p.location.location is defined %}{{p.location.location}}{% endif %}</location>
     </location>
 
     <inReplyTo>{{p.inReplyTo}}</inReplyTo>

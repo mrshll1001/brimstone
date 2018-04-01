@@ -517,7 +517,7 @@ class AdminController extends Controller
 
 
 
-    } catch (\Exception $e)
+    } catch (NullProfileException $e)
     {
       return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
 
@@ -625,7 +625,7 @@ class AdminController extends Controller
     /* First perform a check to see if they've actually got a profile. If they have, redirect to the settings page */
     if (!is_null($this->getUser()->getProfile()))
     {
-      return $this->redirectToRoute('user_settings');
+      return $this->redirectToRoute('edit_profile');
     }
 
 

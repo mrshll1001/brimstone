@@ -14,6 +14,10 @@ import_export:
   path: /import-and-export
   defaults: { _controller: AppBundle:Admin:importExport }
 
+download_posts:
+  path: /download-posts
+  defaults: { _controller: AppBundle:Admin:downloadPosts }
+
 edit_profile:
   path: /profile
   defaults: { _controller: AppBundle:Admin:editProfile }
