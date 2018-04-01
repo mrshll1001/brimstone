@@ -15,6 +15,9 @@ change_password:
   path: /settings/change-password
   defaults: { _controller: AppBundle:Admin:changePassword }
 
+download_posts:
+  path: /download-posts
+  defaults: { _controller: AppBundle:Admin:downloadPosts }
 
 
 edit_profile:
