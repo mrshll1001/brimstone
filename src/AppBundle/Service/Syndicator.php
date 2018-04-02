@@ -47,11 +47,11 @@ class Syndicator
   'consumer_secret' => $this->twitterKeys['twitter_consumer_secret']
   );
 
-    $context = new RequestContext();
-    $context->fromRequest($this->requestStack->getCurrentRequest());
-    $this->router->setContext($context);
 
-    die($this->router->generate('view_post_by_id', array('id'=>$post->getId())));
+
+
+    die($this->getPostUrl($post));
+
     // $twitter = new \TwitterAPIExchange($settings);
     //
     // $url = "https://api.twitter.com/1.1/statuses/update.json";
@@ -62,5 +62,18 @@ class Syndicator
     //
     // $postFields = array('status' => $status);
     // $twitter->buildOauth($url, $method)->setPostfields($postFields)->performRequest();
+  }
+
+  /**=======================================================================================================
+   * Generates the absolute url for sharing the post externally
+   *=======================================================================================================
+   */
+  public function getPostUrl(Post $post)
+  {
+    $context = new RequestContext();
+    $context->fromRequest($this->requestStack->getCurrentRequest());
+    $this->router->setContext($context);
+    
+    return $this->router->generate('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL);
   }
 }

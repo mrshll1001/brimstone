@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /* Entities */
 use AppBundle\Entity\User;
@@ -80,6 +81,8 @@ class AdminController extends Controller
 
         /* TODO sort out the proper POSSE behaviour */
         $syndicator->postToTwitter($post);
+        // die($this->generateUrl('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL));
+
 
         /* If we're successful, we should probably want to redirect to a nice clean form */
         return $this->redirectToRoute('control_panel');
