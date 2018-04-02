@@ -23,6 +23,9 @@ class Syndicator
   private $requestStack;
   private $twitterKeys;
 
+  const TWITTER_UPDATE_STATUS = "https://api.twitter.com/1.1/statuses/update.json";
+  const TWITTER_STATUS_LIMIT = 280;
+
   public function __construct(EntityManager $em, Router $router, RequestStack $requestStack)
   {
     $this->em = $em;
@@ -41,6 +44,7 @@ class Syndicator
    */
   public function postToTwitter(Post $post)
   {
+    /* Retrieve access tokens */
     $settings = array(
   'oauth_access_token' => $this->twitterKeys['twitter_oauth_access_token'],
   'oauth_access_token_secret' => $this->twitterKeys['twitter_oauth_access_token_secret'],
@@ -48,16 +52,16 @@ class Syndicator
   'consumer_secret' => $this->twitterKeys['twitter_consumer_secret']
   );
 
-
+    /* Instantiate twitter */
     $twitter = new \TwitterAPIExchange($settings);
 
-    $url = "https://api.twitter.com/1.1/statuses/update.json";
+    // $url = "https://api.twitter.com/1.1/statuses/update.json";
     $method = "POST";
 
     $status = "Please delete me ".$this->getPostUrl($post);
 
     $postFields = array('status' => $status);
-    $twitter->buildOauth($url, $method)->setPostfields($postFields)->performRequest();
+    $twitter->buildOauth(self::TWITTER_UPDATE_STATUS, $method)->setPostfields($postFields)->performRequest();
   }
 
   /**=======================================================================================================
