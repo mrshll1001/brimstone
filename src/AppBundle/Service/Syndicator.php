@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 
+
 /**
  * A class that handles syndication of post content to various services
  *
@@ -48,20 +49,15 @@ class Syndicator
   );
 
 
+    $twitter = new \TwitterAPIExchange($settings);
 
+    $url = "https://api.twitter.com/1.1/statuses/update.json";
+    $method = "POST";
 
-    die($this->getPostUrl($post));
+    $status = "Please delete me ".$this->getPostUrl($post);
 
-    // $twitter = new \TwitterAPIExchange($settings);
-    //
-    // $url = "https://api.twitter.com/1.1/statuses/update.json";
-    // $method = "POST";
-    //
-    // $status = "Please delete me ".$this->baseUrl.$this->router->generate('view_post_by_id', array('id'=>$post->getId() ));
-    // echo($this->baseUrl);
-    //
-    // $postFields = array('status' => $status);
-    // $twitter->buildOauth($url, $method)->setPostfields($postFields)->performRequest();
+    $postFields = array('status' => $status);
+    $twitter->buildOauth($url, $method)->setPostfields($postFields)->performRequest();
   }
 
   /**=======================================================================================================
@@ -73,7 +69,7 @@ class Syndicator
     $context = new RequestContext();
     $context->fromRequest($this->requestStack->getCurrentRequest());
     $this->router->setContext($context);
-    
+
     return $this->router->generate('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL);
   }
 }
