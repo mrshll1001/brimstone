@@ -407,10 +407,27 @@ class AdminController extends Controller
 
       if ($twitterData !== null)
       {
-        $form['twitter_oauth_access_token']->setData($twitterData['twitter_oauth_access_token']);
-        $form['twitter_oauth_access_token_secret']->setData($twitterData['twitter_oauth_access_token_secret']);
-        $form['twitter_consumer_key']->setData($twitterData['twitter_consumer_key']);
-        $form['twitter_consumer_secret']->setData($twitterData['twitter_consumer_secret']);
+        /* Keys are only created after they're populated initially, so perform a check to see if the key exists */
+
+        if (array_key_exists('twitter_oauth_access_token', $twitterData))
+        {
+          $form['twitter_oauth_access_token']->setData($twitterData['twitter_oauth_access_token']);
+        }
+
+        if (array_key_exists('twitter_oauth_access_token_secret', $twitterData))
+        {
+          $form['twitter_oauth_access_token_secret']->setData($twitterData['twitter_oauth_access_token_secret']);
+        }
+
+        if (array_key_exists('twitter_consumer_key', $twitterData))
+        {
+          $form['twitter_consumer_key']->setData($twitterData['twitter_consumer_key']);
+        }
+
+        if (array_key_exists('twitter_consumer_secret', $twitterData))
+        {
+          $form['twitter_consumer_secret']->setData($twitterData['twitter_consumer_secret']);
+        }
 
       }
 
