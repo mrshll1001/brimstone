@@ -8,7 +8,6 @@ List of jobs and features on the immediate horizon
 * Consume Mastodon content via configurable profile
 * Consume Twitter content via configurable profile
 * POSSE Posts to Mastodon
-* POSSE posts to Twitter
 * Support microformats for Indieweb feed compatibility
 * Support media attachments to posts e.g. images
 
@@ -21,3 +20,4 @@ List of jobs and features on the immediate horizon
 * Export posts in an xml file
 * Consume RSS feeds
 * Produce an RSS feed containing one's articles
+* POSSE posts to Twitter with checkbox
