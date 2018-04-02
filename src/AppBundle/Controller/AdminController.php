@@ -79,7 +79,7 @@ class AdminController extends Controller
         /* Now that the Post is in the database, we can safely save the tagging information we've created */
         $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
-        /* TODO sort out the proper POSSE behaviour */
+        /* TODO consent to POSSE with checkbox */
         $syndicator->postToTwitter($post);
         // die($this->generateUrl('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL));
 
@@ -158,7 +158,7 @@ class AdminController extends Controller
    * Page to write a full post / article
    *=======================================================================================================
    */
-  public function writeArticleAction(Request $request)
+  public function writeArticleAction(Request $request, Syndicator $syndicator)
   {
     try
     {
@@ -206,6 +206,8 @@ class AdminController extends Controller
         /* Now that the Post is in the database, we can safely save the tagging information we've created */
         $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
+        /* POSSE */
+        $syndicator->postToTwitter($post);
         /* Redirect to my articles */
         return $this->redirectToRoute('my_articles');
 

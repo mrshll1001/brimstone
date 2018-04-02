@@ -54,21 +54,42 @@ class Syndicator
 
     /* Instantiate twitter */
     $twitter = new \TwitterAPIExchange($settings);
-
-    // $url = "https://api.twitter.com/1.1/statuses/update.json";
     $method = "POST";
 
-    $status = "Please delete me ".$this->getPostUrl($post);
+    /* Retrieve status */
+    $status = $this->getPostAsStatus($post, self::TWITTER_STATUS_LIMIT);
 
+    /* TODO check if $status is an array, and make a chained series of posts if it is. */
+
+    /* Post status */
     $postFields = array('status' => $status);
     $twitter->buildOauth(self::TWITTER_UPDATE_STATUS, $method)->setPostfields($postFields)->performRequest();
+  }
+
+  /**=======================================================================================================
+   * Transforms post into status based on rules so will appear differently in tweets etc.
+   *=======================================================================================================
+   */
+  private function getPostAsStatus(Post $post, int $charLimit = 0)
+  {
+    /* If post is an article, can just return the title and the permalink */
+    if ($post->getTitle() !== NULL)
+    {
+      return $post->getTitle()." ".$this->getPostUrl($post);
+    }
+
+    // TODO if post content > charLimit for status, split into array
+
+    return $post->getContent()." ".$this->getPostUrl($post);
+
+
   }
 
   /**=======================================================================================================
    * Generates the absolute url for sharing the post externally
    *=======================================================================================================
    */
-  public function getPostUrl(Post $post)
+  private function getPostUrl(Post $post)
   {
     $context = new RequestContext();
     $context->fromRequest($this->requestStack->getCurrentRequest());
