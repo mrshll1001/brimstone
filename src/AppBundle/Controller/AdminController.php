@@ -50,7 +50,7 @@ class AdminController extends Controller
 
       /* We have a form on the page to allow the user to quickly post some content, so let's render that */
       $post = new Post(); // We're basing it around a NEW post
-      $form = $this->createForm(QuickNoteType::class, $post);
+      $form = $this->createForm(QuickNoteType::class, $post, array('profile'=>$user->getProfile() ));
 
       /* Check form submission */
       $form->handleRequest($request);
@@ -79,9 +79,15 @@ class AdminController extends Controller
         /* Now that the Post is in the database, we can safely save the tagging information we've created */
         $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
-        /* TODO consent to POSSE with checkbox */
-        $syndicator->postToTwitter($post);
-        // die($this->generateUrl('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL));
+        /* Check form has added elements for posse. If they have, check they're ticked before posse'ing */
+
+        if ($form->has('twitter'))
+        {
+          if ($form['twitter']->getData())
+          {
+            $syndicator->postToTwitter($post);
+          }
+        }
 
 
         /* If we're successful, we should probably want to redirect to a nice clean form */
@@ -168,7 +174,7 @@ class AdminController extends Controller
 
       /* Create the form and handle the submission */
       $post = new Post(); // Articles are based off of a new post object
-      $form = $this->createForm(WritePostType::class, $post);
+      $form = $this->createForm(WritePostType::class, $post, array('profile' => $user->getProfile() ));
 
       $form->handleRequest($request);
 
@@ -206,8 +212,15 @@ class AdminController extends Controller
         /* Now that the Post is in the database, we can safely save the tagging information we've created */
         $tagManager->saveTagging($post);  // This saves the tagging info and must be called AFTER the $post has been persisted && flushed
 
-        /* POSSE */
-        $syndicator->postToTwitter($post);
+        /* Check form has added elements for posse. If they have, check they're ticked before posse'ing */
+        if ($form->has('twitter'))
+        {
+          if ($form['twitter']->getData())
+          {
+            $syndicator->postToTwitter($post);
+          }
+        }
+
         /* Redirect to my articles */
         return $this->redirectToRoute('my_articles');
 
