@@ -12,24 +12,20 @@
 </div>
 
 <div class="row">
-{% for row in feeds|batch(3) %}
-  <div class="row">
-    {% for item in row %}
+  <div class="col s12">
 
-      <div class="col s12 m4">
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title" style="color: {{item.colour}}">{{item.title}}</span>
-            <br>
-            {% include 'AppBundle:form:rss_actions_form.html.twig' with {'feed': item} %}
-          </div>
-        </div>
-      </div>
+    <ul class="collection">
+      {% for feed in feeds %}
+        <li class="collection-item">
+          <h4 style="color: {{feed.colour}}" class="light">{{feed.title}}</h4>
 
-    {% endfor %}
+          {% include 'AppBundle:form:rss_actions_form.html.twig' with {'feed': feed} only %}
+
+        </li>
+      {% endfor %}
+
+    </ul>
+
   </div>
-{% else %}
-    <p>You've not added any RSS feeds yet!</p>
-{% endfor %}
 </div>
 {% endblock content %}
