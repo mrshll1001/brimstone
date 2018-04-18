@@ -10,6 +10,7 @@ List of jobs and features on the immediate horizon
 * POSSE Posts to Mastodon
 * Support microformats for Indieweb feed compatibility
 * Support media attachments to posts e.g. images
+* Remove Materialize css and replace with PureCSS
 
 ## Implemented
 * Basic blogging and microblogging with Posts.
