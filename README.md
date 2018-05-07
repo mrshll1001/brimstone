@@ -9,7 +9,11 @@ List of jobs and features on the immediate horizon
 * Consume Twitter content via configurable profile
 * POSSE Posts to Mastodon
 * Support microformats for Indieweb feed compatibility
+* Support h-card properly
 * Support media attachments to posts e.g. images
+* Add CardDav and CalDav support to act as a host (no client interface)
+
+## Currently working on
 * Remove Materialize css and replace with PureCSS
 
 ## Implemented
