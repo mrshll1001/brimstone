@@ -34,7 +34,11 @@ class Syndicator
 
     /* Set up twitter keys for the session, if using */
     $user = $em->getRepository('AppBundle:User')->getSingleUser();
-    $this->twitterKeys = $user->getProfile()->getTwitterKeys();
+
+    if ($user->getProfile() !== NULL)
+    {
+      $this->twitterKeys = $user->getProfile()->getTwitterKeys();
+    }
 
   }
 
