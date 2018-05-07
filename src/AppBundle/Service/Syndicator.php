@@ -32,13 +32,6 @@ class Syndicator
     $this->router = $router;
     $this->requestStack = $requestStack;
 
-    /* Set up twitter keys if you can */
-    $user = $em->getRepository('AppBundle:User')->getSingleUser();
-    if ($user->getProfile() !== NULL)
-    {
-      $this->setupTwitterKeys();
-    }
-
   }
 
   /**=======================================================================================================
@@ -47,9 +40,8 @@ class Syndicator
    */
   public function postToTwitter(Post $post)
   {
-
-    /* Syndicator might've been initialised w/o a profile or keys. Check we have Twitter keys, if not then set them up now */
-    if ($this->twitterKeys === null || $this->twitterKeys === "")
+    /* Check twitter keys */
+    if ($this->twitterKeys === NULL)
     {
       $this->setupTwitterKeys();
     }
@@ -110,12 +102,13 @@ class Syndicator
   }
 
   /**=======================================================================================================
-   * Sets the Syndicator's Twitter keys for sharing posts
+   * Re-fetches the user and updates the Syndicator's Twitter keys if null.
    *=======================================================================================================
    */
   private function setupTwitterKeys()
   {
     $user = $this->em->getRepository('AppBundle:User')->getSingleUser();
     $this->twitterKeys = $user->getProfile()->getTwitterKeys();
+
   }
 }
