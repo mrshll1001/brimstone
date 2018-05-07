@@ -40,7 +40,8 @@ class Syndicator
    */
   public function postToTwitter(Post $post)
   {
-    /* Check twitter keys */
+
+    /* Check twitter keys and set up if null */
     if ($this->twitterKeys === NULL)
     {
       $this->setupTwitterKeys();
@@ -102,13 +103,12 @@ class Syndicator
   }
 
   /**=======================================================================================================
-   * Re-fetches the user and updates the Syndicator's Twitter keys if null.
+   * Sets the Syndicator's Twitter keys for sharing posts
    *=======================================================================================================
    */
   private function setupTwitterKeys()
   {
     $user = $this->em->getRepository('AppBundle:User')->getSingleUser();
     $this->twitterKeys = $user->getProfile()->getTwitterKeys();
-
   }
 }
