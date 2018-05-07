@@ -32,12 +32,11 @@ class Syndicator
     $this->router = $router;
     $this->requestStack = $requestStack;
 
-    /* Set up twitter keys for the session, if using */
+    /* Set up twitter keys if you can */
     $user = $em->getRepository('AppBundle:User')->getSingleUser();
-
     if ($user->getProfile() !== NULL)
     {
-      $this->twitterKeys = $user->getProfile()->getTwitterKeys();
+      $this->setupTwitterKeys();
     }
 
   }
@@ -48,6 +47,14 @@ class Syndicator
    */
   public function postToTwitter(Post $post)
   {
+
+    /* Syndicator might've been initialised w/o a profile or keys. Check we have Twitter keys, if not then set them up now */
+    if ($this->twitterKeys === null || $this->twitterKeys === "")
+    {
+      $this->setupTwitterKeys();
+    }
+
+
     /* Retrieve access tokens */
     $settings = array(
   'oauth_access_token' => $this->twitterKeys['twitter_oauth_access_token'],
@@ -100,5 +107,15 @@ class Syndicator
     $this->router->setContext($context);
 
     return $this->router->generate('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL);
+  }
+
+  /**=======================================================================================================
+   * Sets the Syndicator's Twitter keys for sharing posts
+   *=======================================================================================================
+   */
+  private function setupTwitterKeys()
+  {
+    $user = $this->em->getRepository('AppBundle:User')->getSingleUser();
+    $this->twitterKeys = $user->getProfile()->getTwitterKeys();
   }
 }
