@@ -39,6 +39,19 @@ a {
   border-bottom: 1px solid #eee;
 }
 
+/* Tags */
+.tags a {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0.5em;
+  color: #000;
+}
+.tags a:hover{
+  background-color: #aec6cf;
+  color: #FFF;
+}
+
 /* Pure doesn't contain a container, so nab the bootstrap rules */
 .container {
   padding-right: 15px;
