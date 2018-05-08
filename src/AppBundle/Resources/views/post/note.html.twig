@@ -1,12 +1,12 @@
-<div class="card-panel">
-  {{post.content|markdown}}
+  <div class="readable">
+    {{post.content|markdown}}
 
-  <p class="light">Posted at {{post.date|date('H:i:s d M Y')}} {% if post.location is not null and post.location.location is defined %} from <em>{{post.location.location}}</em>{% endif %}</p>
+  </div>
+
+  <p class="light"><i>Posted at {{post.date|date('H:i:s d M Y')}}</i> {% if post.location is not null and post.location.location is defined %} from <em>{{post.location.location}}</em>{% endif %}</p>
 
   <p class="light">
      Available at <a href="{{path('view_post_by_id', {'id': post.id})}}">{{url('view_post_by_id', {'id': post.id})}}</a>
   </p>
 
   {% include 'AppBundle:post:post_tags.html.twig' %}
-
-</div>
