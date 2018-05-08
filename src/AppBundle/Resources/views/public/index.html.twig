@@ -9,7 +9,24 @@
       {% include 'AppBundle:nav:public_date_navigation.html.twig' %}
 
     </div>
+  </div>
 
+  <div class="pure-g">
+    <div class="pure-u-1-5">
+      &nbsp;
+    </div>
+
+    <div class="pure-u-3-5">
+      {% for post in posts %}
+        <div class="feed-item">
+          {% include 'AppBundle:post:post_master.html.twig' %}
+        </div>
+
+
+        {% else %}
+            <p class="readable">Yikes, looks like there's no posts for that date!</p>
+      {% endfor %}
+    </div>
   </div>
 
 
@@ -18,13 +35,7 @@
 
   <div class="row">
     <div class="col s12 m10 offset-m1">
-      {% for post in posts %}
-        <div class="row">
-          {% include 'AppBundle:post:post_master.html.twig' %}
-        </div>
-        {% else %}
-            <p class="readable">Yikes, looks like there's no posts for that date!</p>
-      {% endfor %}
+
     </div>
   </div> -->
 </div>

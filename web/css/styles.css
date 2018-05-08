@@ -33,6 +33,12 @@ a {
   padding-bottom: 1em;
 }
 
+/* Make posts listed in the field go all pretty */
+.feed-item {
+  padding: 1em;
+  border-bottom: 1px solid #eee;
+}
+
 /* Pure doesn't contain a container, so nab the bootstrap rules */
 .container {
   padding-right: 15px;
