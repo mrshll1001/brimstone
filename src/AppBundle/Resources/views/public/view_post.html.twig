@@ -4,23 +4,38 @@
 {% block content %}
 <div class="container">
   {# Previous and next links #}
-  <div class="row center">
 
-    <div class="col s6 m3 offset-m3">
-      {% if previous is not null %}<a href="{{path('view_post_by_id', {'id': previous.id})}}"><h4><i class="material-icons">chevron_left</i>Previous</h4></a>{% endif %}
+  <div class="pure-g">
+    <div class="pure-u-1-5">
+
+      {% if previous is not null %}<a href="{{path('view_post_by_id', {'id': previous.id})}}"><h4>&#12296; Previous</h4></a>{% endif %}
     </div>
 
-    <div class="col s6 m3">
-      {% if next is not null %}<a href="{{path('view_post_by_id', {'id': next.id})}}"><h4>Next<i class="material-icons">chevron_right</i></h4></a>{% endif %}
+    <div class="pure-u-3-5">
+      &nbsp;
     </div>
+
+    <div class="pure-u-1-5">
+      {% if next is not null %}<a href="{{path('view_post_by_id', {'id': next.id})}}"><h4>Next &#12297;</h4></a>{% endif %}
+    </div>
+  </div>
+
+<div class="pure-g">
+
+  <div class="pure-u-1-5">
 
   </div>
+  <div class="pure-u-3-5">
+
+    {% include 'AppBundle:post:post_master.html.twig' %}
+  </div>
+</div>
+
 
 
 {# Post content #}
   <div class="row">
     <div class="col s12 m10 offset-m1">
-      {% include 'AppBundle:post:post_master.html.twig' %}
     </div>
   </div>
 </div>
