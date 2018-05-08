@@ -2,3 +2,56 @@
 .readable {
   font-size: 18px;
 }
+
+.center
+{
+  text-align: center;
+}
+
+/* Define some colours for bgs, fillers, etc */
+.grey {
+  background-color: #212121;
+}
+
+.white-text {
+  color: #FFF;
+}
+
+.light-blue-text {
+  color: #4FC3F7;
+}
+
+/* Clean up anchors */
+a {
+  text-decoration: none;
+}
+
+
+/* Define a section (ie vertical padding) */
+.section {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+/* Pure doesn't contain a container, so nab the bootstrap rules */
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
