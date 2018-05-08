@@ -1,10 +1,10 @@
-<h4>
-  <a href="{{path('index_by_year_month', {'year': dates.lastMonth|date('Y'), 'month': dates.lastMonth|date('n')}) }}"><i class="material-icons">chevron_left</i></a>
+<h2>
+  <a href="{{path('index_by_year_month', {'year': dates.lastMonth|date('Y'), 'month': dates.lastMonth|date('n')}) }}">&#12296;</a>
 
   {{dates.current|date('F Y')}}
 
-  <a href="{{path('index_by_year_month', {'year': dates.nextMonth|date('Y'), 'month': dates.nextMonth|date('n')}) }}"><i class="material-icons">chevron_right</i></a>
+  <a href="{{path('index_by_year_month', {'year': dates.nextMonth|date('Y'), 'month': dates.nextMonth|date('n')}) }}"><i class="material-icons">&#12297;</a>
 
 
 
-</h4>
+</h2>
