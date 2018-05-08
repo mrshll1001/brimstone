@@ -1,24 +1,36 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block css %}
-<link rel="stylesheet" href="{{asset('css/admin.css')}}">
+<link rel="stylesheet" href="{{asset('css/side-menu.css')}}">
 {% endblock css %}
 
 {% block body %}
-<header>
-{% block navbar %}
-{% include 'AppBundle:nav:admin_navbar.html.twig'  %}
-{% endblock navbar %}
 
-</header>
-  {# Holds the navigation bar #}
-<main>
-{# Block designed to be overridden to provide the page's content space. Note: you still need a <div class=container> #}
-<div class="container">
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
 
-{% block content %}{% endblock content %}
+    {% include 'AppBundle:nav:admin_navbar.html.twig' %}
+
+    <div id="main">
+        <!-- <div class="header">
+            <h1>Page Title</h1>
+            <h2>A subtitle for your page goes here</h2>
+        </div> -->
+
+        <div class="content">
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
 </div>
-</main>
+
+
+
+
+<script src="{{asset('js/ui.js')}}"></script>
 
 
 {% endblock body %}
