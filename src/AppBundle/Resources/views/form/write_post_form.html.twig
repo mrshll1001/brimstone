@@ -1,45 +1,23 @@
-{{ form_start(form) }}
-<div class="row">
-  <div class="input-field">
-    {{form_widget(form.title)}}
-    {{form_label(form.title)}}
-  </div>
-</div>
+{{ form_start(form, {'attr': {'class': "pure-form pure-form-stacked"}}) }}
 
-  <div class="row">
-    <div class="input-field">
-      {{form_widget(form.content)}}
-      {{form_label(form.content)}}
-    </div>
-  </div>
+    {{form_row(form.title)}}
 
-  <div class="row">
-    <div class="col s12 m6">
-      {{form_label(form.date)}}
-      {{form_widget(form.date)}}
-    </div>
+    {{form_row(form.content)}}
 
-    <div class="col s12 m6">
-      {{form_label(form.tags)}}
+    {{form_label(form.date)}}
+    {{form_widget(form.date)}}
+
+    {{form_label(form.tags)}}
       {{form_widget(form.tags)}}
-    </div>
-
-  </div>
 
   {# Form may have dynamically added elements for POSSE. We can decide to render it here #}
   {% if form.twitter is defined %}
-    <div class="row">
-      <div class="col s6 m3">
-        {{form_widget(form.twitter)}}
-        {{form_label(form.twitter)}}
-      </div>
-    </div>
+  <label for="quick_note_form[twitter]">
+   {{form_widget(form.twitter)}} Twitter
+  </label>
+
   {% endif %}
 
-  <div class="row">
-    <div class="col m4">
-      <button type="submit" name="submit" class="btn">Post</button>
-    </div>
-  </div>
+  <button type="submit" name="submit" class="pure-button pure-button-primary">Post</button>
 
 {{ form_end(form) }}

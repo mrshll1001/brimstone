@@ -26,7 +26,7 @@ class WritePostType extends AbstractType
 
     $builder->add('title', TextType::class, array(
                               'required' => false,
-                              'label' => "Title (Leave blank to treat this as a Note)"
+                              'attr' => array('placeholder' => "Title (Leave blank to treat as a note)")
 
     ))
     ->add('date', DateType::class, array(
@@ -37,13 +37,12 @@ class WritePostType extends AbstractType
     ))
     ->add('content', TextareaType::class, array(
                       'required' => true,
-                      'label' => "Content",
-                      'attr'=>array('class'=>'materialize-textarea', 'placeholder'=>"What's on your mind?") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
+                      'attr'=>array('placeholder'=>"What's on your mind?") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
     ))
     ->add('tags', TextType::class, array(
         'required' => false,
         'mapped' => false,
-        'label' => "Enter some tags, separated by spaces e.g. one, two, three"));
+        'attr' => array('placeholder' => "Enter some tags, separated by commas e.g. one, two, three")));
 
 
         /* If the user has entered api keys, dynamically add extra fields to posse */
