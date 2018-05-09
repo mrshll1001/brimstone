@@ -13,8 +13,16 @@
   background-color: #212121;
 }
 
+.red {
+  background-color: #B71C1C;
+}
+
 .white-text {
   color: #FFF;
+}
+
+button.red {
+  color: white;
 }
 
 a, .light-blue-text {

@@ -1,37 +1,31 @@
 {% extends 'AppBundle:admin:admin_base.html.twig' %}
 
 {% block content %}
-  <div class="row">
-    <div class="col s12 m12">
 
-      <div class="card">
-        <div class="card-content">
-            <span class="card-title">Import Posts</span>
-            <p>If you have posts that you exported from a previous Brimstone installation, you can import them here. Find the <em>.xml</em> file that you exported previously, and upload it to the form below.</p>
-
-            {% include 'AppBundle:form:import_post_form.html.twig' with {'form': import_form} only %}
-        </div>
-      </div>
-
-    </div>
+<div class="pure-g">
+  <div class="pure-u-1">
+    <h1>Import and Export</h1>
   </div>
 
-  <div class="row">
-    <div class="col s12 m12">
+  <div class="pure-u-1">
+    <h2>Import</h2>
+    <p>If you have posts that you exported from a previous Brimstone installation, you can import them here. Find the <em>.xml</em> file that you exported previously, and upload it to the form below.</p>
 
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">Export Posts</span>
-          <p>
-            Click this button to download all of your Brimstone posts in <em>xml</em> format. Depending on how many posts you have, this may take a few moments whilst the data is collected.
-          </p>
+    {% include 'AppBundle:form:import_post_form.html.twig' with {'form': import_form} only %}
 
-          <br/>
-
-          <a href="{{path('download_posts')}}" class="btn">Export posts</a>
-        </div>
-      </div>
-
-    </div>
   </div>
+
+  <div class="pure-u-1">
+    <h2>Export</h2>
+    <p>
+      Click this button to download all of your Brimstone posts in <em>xml</em> format. Depending on how many posts you have, this may take a few moments whilst the data is collected.
+    </p>
+
+    <a href="{{path('download_posts')}}" class="pure-button pure-button-primary">Export posts</a>
+
+  </div>
+
+</div>
+
+
 {% endblock content %}
