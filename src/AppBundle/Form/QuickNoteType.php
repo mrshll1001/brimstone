@@ -25,11 +25,12 @@ class QuickNoteType extends AbstractType
     $builder->add('content', TextareaType::class, array(
       'required' => true,
       'label' => "Post",
-      'attr'=>array('class'=>'materialize-textarea', 'placeholder'=>"What's on your mind?") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
+      'attr'=>array('placeholder'=>"What's on your mind?") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
     ))
     ->add('tags', TextType::class, array(
         'required' => false,
         'mapped' => false,
+        'attr' => array('placeholder' => "Enter some tags, separated by commas e.g. one, two, three"),
         'label' => "Enter some tags, separated by spaces e.g. one, two, three"));
 
     /* If the user has entered api keys, dynamically add extra fields to posse */

@@ -52,6 +52,12 @@ a {
   color: #FFF;
 }
 
+/* Clean up forms */
+textarea, input[type='text'] {
+  width: 100%;
+}
+
+
 /* Pure doesn't contain a container, so nab the bootstrap rules */
 .container {
   padding-right: 15px;

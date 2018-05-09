@@ -2,15 +2,14 @@
 
 
 {% block content %}
-  <div class="row">
 
-    <div class="col s12 m12">
-
-      <div class="card-panel">
-        {% include 'AppBundle:form:quick_note_form.html.twig' with {'form': form} only %}
-      </div>
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <strong>Post</strong>
+      {% include 'AppBundle:form:quick_note_form.html.twig' with {'form': form} only %}
 
     </div>
-
   </div>
+
+
 {% endblock content %}
