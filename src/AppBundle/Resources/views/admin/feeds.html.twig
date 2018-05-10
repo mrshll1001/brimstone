@@ -1,31 +1,33 @@
 {% extends 'AppBundle:admin:admin_base.html.twig' %}
 
 {% block content %}
-<div class="row">
-  <div class="col s12">
-    <div class="card-panel">
 
-      {% include 'AppBundle:form:add_rss_feed.html.twig' with {'form' : form} only %}
+<div class="pure-g">
+  <div class="pure-u-1">
+    <h1>RSS Feeds</h1>
+    {% include 'AppBundle:form:add_rss_feed.html.twig' with {'form' : form} only %}
+  </div>
 
-    </div>
+
+  <div class="pure-u-1">
+    <table class="pure-table">
+        <thead>
+          <th>Feed Name</th>
+          <th>Actions</th>
+        </thead>
+
+        <tbody>
+          {% for feed in feeds %}
+            <tr>
+              <td> <a href="{{path('view_rss_feed', {'id': feed.id})}}" target="_blank">{{feed.title}}</a> </td>
+              <td>{% include 'AppBundle:form:rss_actions_form.html.twig' with {'feed': feed} only %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+
   </div>
 </div>
 
-<div class="row">
-  <div class="col s12">
 
-    <ul class="collection">
-      {% for feed in feeds %}
-        <li class="collection-item">
-          <h4 style="color: {{feed.colour}}" class="light">{{feed.title}}</h4>
-
-          {% include 'AppBundle:form:rss_actions_form.html.twig' with {'feed': feed} only %}
-
-        </li>
-      {% endfor %}
-
-    </ul>
-
-  </div>
-</div>
 {% endblock content %}

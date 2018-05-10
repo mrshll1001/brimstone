@@ -61,9 +61,15 @@ a {
 }
 
 /* Clean up forms */
-textarea, input[type='text'] {
+table,textarea, input[type='text'] {
   width: 100%;
 }
+
+table{
+  margin-top: 2em;
+}
+
+
 
 
 /* Pure doesn't contain a container, so nab the bootstrap rules */
