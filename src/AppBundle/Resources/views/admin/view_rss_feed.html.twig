@@ -2,26 +2,18 @@
 
 {% block content %}
 
-<div class="row">
-  {% for row in feed|batch(3) %}
-    <div class="row">
-      {% for item in row %}
-        <div class="col s12 m4">
+<div class="pure-g">
+  <div class="pure-u-1">
+    <h1>{{title}}</h1>
+  </div>
 
-          <div class="card">
-            <section class="card-stripe" style="background-color: {{colour}}">
-
-            </section>
-            <div class="card-content">
-              <p class="light">Posted {{item.lastModified|date('d M Y')}}</p>
-              <span class="card-title"><a href="{{item.link}}" target="_blank">{{item.title|raw}}</a></span>
-            </div>
-          </div>
-
-        </div>
-      {% endfor %}
+  {% for item in feed %}
+    <div class="pure-u-1">
+      <h2><a href="{{item.link}}" target="_blank">{{item.title|raw}}</a></h2>
+      <p>Posted {{item.lastModified|date('d M Y')}}</p>
     </div>
   {% endfor %}
 </div>
+
 
 {% endblock content %}
