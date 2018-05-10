@@ -1,4 +1,4 @@
-<form action="{{ path('login') }}" method="post">
+<form class="pure-form-stacked pure-form" action="{{ path('login') }}" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
@@ -11,5 +11,5 @@
         <input type="hidden" name="_target_path" value="/account" />
     #}
 
-    <button class="btn" type="submit">login</button>
+    <button class="pure-button pure-button-primary" type="submit">Login</button>
 </form>
