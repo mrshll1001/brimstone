@@ -1,8 +1,5 @@
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'class': "pure-form pure-form-stacked"}}) }}
       {{ form_widget(form) }}
-      <div class="row">
-        <div class="col m4 push-m8">
-          <button type="submit" name="submit" class="btn"><i class="material-icons left">done</i>Update</button>
-        </div>
-      </div>
+
+          <button type="submit" name="submit" class="pure-button pure-button-primary">Update</button>
     {{ form_end(form) }}

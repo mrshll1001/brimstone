@@ -1,8 +1,8 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': "pure-form pure-form-stacked"}}) }}
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
 
-    <button class="btn" type="submit">Submit</button>
+    <button class="pure-button pure-button-primary" type="submit">Submit</button>
 {{ form_end(form) }}

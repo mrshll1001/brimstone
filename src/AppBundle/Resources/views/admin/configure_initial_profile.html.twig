@@ -1,20 +1,5 @@
-{% extends 'AppBundle::base.html.twig' %}
+{% extends 'AppBundle:security:login_registration_base.html.twig' %}
 
-{% block body %}
-    <div class="row">
-      <div class="col m6 offset-m3">
-
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">Set up your profile</span>
-
-
-            {% include 'AppBundle:form:quick_profile.html.twig'  %}
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-{% endblock body %}
+{% block form %}
+{% include 'AppBundle:form:quick_profile.html.twig' with {'form' : form} only %}
+{% endblock form %}
