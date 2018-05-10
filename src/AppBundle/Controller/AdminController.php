@@ -251,7 +251,7 @@ class AdminController extends Controller
       /* Retrieve post and set up form */
       $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
       $this->get('fpn_tag.tag_manager')->loadTagging($post);
-      $form = $this->createForm(WritePostType::class, $post);
+      $form = $this->createForm(WritePostType::class, $post, array('profile' => $user->getProfile()));
 
       /* Symfony can't map the tags in the forms, so we set it manually here */
       $tags = array();
