@@ -2,7 +2,8 @@
 
     {{form_row(form.title)}}
 
-    {{form_row(form.content)}}
+    {{form_label(form.content)}}
+    {{form_widget(form.content, {'attr': {'class': 'article-textarea'}})}}
 
     {{form_label(form.date)}}
     {{form_widget(form.date)}}
