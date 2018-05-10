@@ -1,37 +1,19 @@
-{{ form_start(form) }}
+{{ form_start(form , {'attr': {'class': "pure-form pure-form-stacked"}}) }}
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">Basic Information</span>
+<h2>Basic Information</h2>
+{{form_row(form.name)}}
+<br>
+{{form_row(form.description)}}
 
-    <div class="input-field">
-      {{form_widget(form.name)}}
-      {{form_label(form.name)}}
-    </div>
+<h2>About Page</h2>
+{% include 'AppBundle:text:about_instructions.html.twig' %}
 
-    <div class="input-field">
-      {{form_widget(form.description)}}
-      {{form_label(form.description)}}
-    </div>
-  </div>
-</div>
+{{form_label(form.about)}}
+{{form_widget(form.about)}}
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">About Page</span>
-    <div class="light">
 
-      {% include 'AppBundle:text:about_instructions.html.twig' %}
-    </div>
-
-    <div class="input-field">
-      {{form_widget(form.about)}}
-      {{form_label(form.about)}}
-    </div>
-  </div>
-</div>
-
-<button type="submit" class="btn" name="submit">Update</button>
+<br>
+<button type="submit" class="pure-button pure-button-primary" name="submit">Update</button>
 
 
 

@@ -2,13 +2,19 @@
 
 {% block content %}
 
-  <div class="row">
-    <div class="col s12 m12">
-
-      {% include 'AppBundle:form:full_profile_form.html.twig' with {'form': form} only %}
-
-
-
-    </div>
+<div class="pure-g">
+  <div class="pure-u-1">
+    <h1>Edit Profile</h1>
   </div>
+
+  <div class="pure-u-1">
+
+    {% include 'AppBundle:form:full_profile_form.html.twig' with {'form': form} only %}
+  </div>
+</div>
+
+
+
+
+
 {% endblock content %}
