@@ -1,12 +1,12 @@
-{{ form_start(form) }}
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">Twitter Settings</span>
-    <p class="light">Use this form to enter information to connect your Twitter account. This will let you share your posts to Twitter.</p>
+{{ form_start(form, {'attr': {'class': "pure-form pure-form-stacked"}}) }}
+<h2>Twitter Settings</h2>
+  <p>
+    Use this form to enter information to connect your Twitter account. This will let you share your posts to Twitter.
+  </p>
 
     {{form_widget(form)}}
   </div>
 </div>
 
-<button type="submit" class="btn">Update</button>
+<button type="submit" class="pure-button pure-button-primary">Update</button>
 {{ form_end(form) }}

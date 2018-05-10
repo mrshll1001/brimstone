@@ -1,9 +1,20 @@
 {% extends 'AppBundle:admin:admin_base.html.twig' %}
 
 {% block content %}
+
+<div class="pure-g">
+  <div class="pure-u-1">
+    <h1>Social and Sharing Settings</h1>
+  </div>
+
+  <div class="pure-u-1">
+    {% include 'AppBundle:form:social_settings_form.html.twig' with {'form': form} only %}
+
+  </div>
+</div>
+
 <div class="row">
   <div class="col s12">
-    {% include 'AppBundle:form:social_settings_form.html.twig' with {'form': form} only %}
   </div>
 </div>
 
