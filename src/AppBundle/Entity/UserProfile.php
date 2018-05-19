@@ -43,6 +43,13 @@ class UserProfile
     private $about;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="site_title", type="string", length=255)
+     */
+    private $siteTitle;
+
+    /**
      * @var array
      *
      * @ORM\Column(name="twitter_keys", type="json_array", nullable=true)
@@ -154,5 +161,29 @@ class UserProfile
     public function getTwitterKeys()
     {
         return $this->twitterKeys;
+    }
+
+    /**
+     * Set siteTitle
+     *
+     * @param string $siteTitle
+     *
+     * @return UserProfile
+     */
+    public function setSiteTitle($siteTitle)
+    {
+        $this->siteTitle = $siteTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get siteTitle
+     *
+     * @return string
+     */
+    public function getSiteTitle()
+    {
+        return $this->siteTitle;
     }
 }
