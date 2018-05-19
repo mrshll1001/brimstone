@@ -27,6 +27,10 @@ class QuickProfileType extends AbstractType
       'required' => true,
       'label' => "A quick description of you",
       'attr'=>array('class'=>'materialize-textarea', 'placeholder'=>"(max 255 characters)") // Necessary for materialize as for some reason it doesn't pick up the textareas in its css
+    ))
+    ->add('siteTitle', TextType::class, array(
+      'required' => true,
+      'label' => "What would you like the title of this site to be?"
     ));
   }
 }

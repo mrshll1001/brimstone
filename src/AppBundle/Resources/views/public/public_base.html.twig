@@ -1,5 +1,14 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block title %}
+{% if profile.siteTitle is not null %}
+
+  {{profile.siteTitle}}
+
+{% endif %}
+
+{% endblock title %}
+
 {% block body %}
 
 
