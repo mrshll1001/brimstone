@@ -14,7 +14,6 @@ List of jobs and features on the immediate horizon
 * Add CardDav and CalDav support to act as a host (no client interface)
 
 ## Currently working on
-* Remove Materialize css and replace with PureCSS
 
 ## Implemented
 * Basic blogging and microblogging with Posts.
@@ -26,3 +25,4 @@ List of jobs and features on the immediate horizon
 * Consume RSS feeds
 * Produce an RSS feed containing one's articles
 * POSSE posts to Twitter with checkbox
+* Remove Materialize css and replace with PureCSS
