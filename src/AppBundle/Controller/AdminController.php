@@ -627,6 +627,44 @@ class AdminController extends Controller
   }
 
   /**=======================================================================================================
+  * Returns a single post in a markdown file
+  * =======================================================================================================
+  */
+  public function downloadPostAsMarkdownAction(Request $request, $id)
+  {
+    try
+    {
+      $user = $this->getUser(); // Get user
+      $this->checkUser($user); // Check them
+
+      /* Fetch post */
+      $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+
+      /* Get the user's screen name */
+      $author = $user->getProfile()->getName();
+
+      /* Render the template */
+      $response = $this->render('AppBundle:export:post.md.twig', array('post' => $post, 'author'=>$author));
+
+      /* Use the post id as the filename */
+      $filename = "post_".$post->getId().".md";
+
+      /* Configure response to download a file */
+      $response->headers->set('Content-Type', 'text/plain');
+      $response->headers->set('Content-Disposition', 'attachment; filename='.$filename);
+
+      /* Return md file */
+      return $response;
+
+    } catch (NullProfileException $e)
+    {
+      return $this->redirectToRoute('configure_initial_profile'); // Redirect to the configuration page
+
+    }
+
+  }
+
+  /**=======================================================================================================
   * Renders the feeds page
   * =======================================================================================================
   */

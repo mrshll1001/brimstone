@@ -19,6 +19,10 @@ download_posts:
   path: /download-posts
   defaults: { _controller: AppBundle:Admin:downloadPosts }
 
+download_post_markdown:
+  path: /download-post/{id}
+  defaults: { _controller: AppBundle:Admin:downloadPostAsMarkdown }
+
 
 edit_profile:
   path: /settings/profile

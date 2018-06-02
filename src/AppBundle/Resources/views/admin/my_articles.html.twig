@@ -23,7 +23,7 @@
             <td>{{p.date|date('d/m/Y')}}</td>
             <td>
             {{p.title}} <br>
-            <a href="#">Download</a>
+            <a href="{{path('download_post_markdown', {'id': p.id})}}">Download</a>
 
             </td>
             <td>
