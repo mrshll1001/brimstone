@@ -33,6 +33,14 @@ class SocialSettingsType extends AbstractType
     ->add('twitter_consumer_secret', TextType::class, array(
       'label' => 'Consumer Secret',
       'required' => false
+    ))
+    ->add('mastodon_domain', TextType::class, array(
+      'label' => 'Mastodon Instance Domain',
+      'required' => false
+    ))
+    ->add('mastodon_access_token', TextType::class, array(
+      'label' => 'Access Token',
+      'required' => false
     ));
   }
 }

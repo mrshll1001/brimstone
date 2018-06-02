@@ -422,6 +422,7 @@ class AdminController extends Controller
       /* Because it's unmapped, we also need to manually populate the form upon loading */
       $userProfile = $user->getProfile();
       $twitterData = $userProfile->getTwitterKeys();
+      $mastodonData = $userProfile->getMastodonKeys();
 
       if ($twitterData !== null)
       {
@@ -447,13 +448,25 @@ class AdminController extends Controller
           $form['twitter_consumer_secret']->setData($twitterData['twitter_consumer_secret']);
         }
 
+        if (array_key_exists('mastodon_domain', $mastodonData))
+        {
+          $form['mastodon_domain']->setData($mastodonData['mastodon_domain']);
+        }
+
+        if (array_key_exists('mastodon_access_token', $mastodonData))
+        {
+          $form['mastodon_access_token']->setData($mastodonData['mastodon_access_token']);
+        }
+
+
+
       }
 
       $form->handleRequest($request);
 
       if ($form->isSubmitted() && $form->isValid())
       {
-        /* Build the JSON array from the form data */
+        /* Build the JSON array from the form's twitter data */
         $twitterKeys = array();
 
         $twitterKeys['twitter_oauth_access_token'] = $form['twitter_oauth_access_token']->getData();
@@ -461,8 +474,15 @@ class AdminController extends Controller
         $twitterKeys['twitter_consumer_key'] = $form['twitter_consumer_key']->getData();
         $twitterKeys['twitter_consumer_secret'] = $form['twitter_consumer_secret']->getData();
 
+        /* Same for the Mastodon data */
+        $mastodonKeys = array();
+
+        $mastodonKeys['mastodon_domain'] = $form['mastodon_domain']->getData();
+        $mastodonKeys['mastodon_access_token'] = $form['mastodon_access_token']->getData();
+
         /* Retrieve the user profile object and update */
         $userProfile->setTwitterKeys($twitterKeys);
+        $userProfile->setMastodonKeys($mastodonKeys);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($userProfile);

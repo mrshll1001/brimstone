@@ -4,9 +4,16 @@
     Use this form to enter information to connect your Twitter account. This will let you share your posts to Twitter.
   </p>
 
-    {{form_widget(form)}}
-  </div>
-</div>
+    {{form_row(form.twitter_oauth_access_token)}}
+    {{form_row(form.twitter_oauth_access_token_secret)}}
+    {{form_row(form.twitter_consumer_key)}}
+    {{form_row(form.twitter_consumer_secret)}}
+
+
+  <h2>Mastodon Settings</h2>
+<p>Use these fields to connect your Mastodon instance account. This will let you share your posts to Mastodon</p>
+    {{form_row(form.mastodon_domain)}}
+    {{form_row(form.mastodon_access_token)}}
 
 <button type="submit" class="pure-button pure-button-primary">Update</button>
 {{ form_end(form) }}
