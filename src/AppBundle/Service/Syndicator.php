@@ -99,7 +99,7 @@ class Syndicator
     $context->fromRequest($this->requestStack->getCurrentRequest());
     $this->router->setContext($context);
 
-    return $this->router->generate('view_post_by_id', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL);
+    return $this->router->generate('view_post_by_id_short', array('id'=>$post->getId()), UrlGeneratorInterface::ABSOLUTE_URL);
   }
 
   /**=======================================================================================================

@@ -23,6 +23,10 @@ view_post_by_id:
   path: /post/{id}
   defaults: { _controller: AppBundle:Default:viewPostById }
 
+view_post_by_id_short:
+  path: /p/{id}
+  defaults: { _controller: AppBundle:Default:viewPostById }
+
 view_post_by_note_id:
   path: /note/{id}
   defaults: { _controller: AppBundle:Default:viewNoteById }
