@@ -21,7 +21,11 @@
         {% for p in posts %}
           <tr>
             <td>{{p.date|date('d/m/Y')}}</td>
-            <td>{{p.title}}</td>
+            <td>
+            {{p.title}} <br>
+            <a href="#">Download</a>
+
+            </td>
             <td>
               {% include 'AppBundle:form:post_actions_form.html.twig' with {'post':p} only %}
             </td>
