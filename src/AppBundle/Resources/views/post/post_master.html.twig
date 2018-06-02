@@ -8,6 +8,8 @@
     <p>
       <a class="grey-text u-url" href="{{path('view_post_by_id', {'id': post.id})}}">{{post.date|date('d M Y, H:i')}}</a>
       <span class="hidden dt-published">{{post.date|date('c')}}</span>
+      <span class="hidden"><a href="{{url('index')}}" rel="author"></a>
+      </span>
     </p>
 
     {% if post.location is not null and post.location.location is defined %} from <em>{{post.location.location}}</em>{% endif %}</p>
