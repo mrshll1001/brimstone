@@ -118,12 +118,9 @@ class DefaultController extends Controller
         return $this->redirectToRoute('list_articles'); // Returning to /blog sounds sensible for a bad blog url or secret post
       }
 
-      /* Load the tags on the post object */
-      $tagManager = $this->get('fpn_tag.tag_manager');
-      $tagManager->loadTagging($post);
+      /* For consistency, redirect to viewPostById */
+      return $this->redirectToRoute('view_post_by_id', array('id'=>$post->getId()));
 
-      /* We can load the page yay */
-      return $this->render('AppBundle:public:view_article.html.twig', array('profile' => $user->getProfile(), 'post' => $post ));
     }
 
     /**===========================================================================================
