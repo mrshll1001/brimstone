@@ -2,8 +2,6 @@
   <p class="light">Published {{post.date|date('d M Y')}} {% if profile is defined and profile is not null %}by {{profile.name}}{% endif %}</p>
   <p class="light">Available at <a href="{{path('view_article', {'slug': post.slug})}}">{{url('view_article', {'slug': post.slug})}}</a></p>
 
-<div class="post readable">
-  {{post.content|markdown}}
-</div>
+
 
 {% include 'AppBundle:post:post_tags.html.twig' %}

@@ -1,13 +1,26 @@
 {# Provides logic to render different post types differently, meaning that all other templates need to do is include this one with a post #}
 
-{% if post.title is not null %}
+<div class="pure-g">
 
-  {% include 'AppBundle:post:article.html.twig' %}
+  <div class="pure-u-1-5">
+    <p>
+      <a class="grey-text" href="{{path('view_post_by_id', {'id': post.id})}}">{{post.date|date('d M Y, H:i')}}</a>
+    </p>
 
-{% elseif post.content is not null %} {# If title and content are null it might be a check-in, so we can't call an error yet #}
-    {% include 'AppBundle:post:note.html.twig' %}
+    {% if post.location is not null and post.location.location is defined %} from <em>{{post.location.location}}</em>{% endif %}</p>
+  </div>
 
-    {# TODO logic and template for checkin rendering #}
-{% endif %}
+  <div class="pure-u-3-5">
+    {% if post.title is not null %}
+    <h1>{{post.title}}</h1>
+    {% endif %}
+
+    <div class="post readable">
+      {{post.content|markdown}}
+    </div>
+
+  </div>
+
+</div>
 
 {% block actions %}{% endblock actions %}

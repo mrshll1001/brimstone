@@ -11,23 +11,14 @@
     </div>
   </div>
 
-  <div class="pure-g">
-    <div class="pure-u-1-5">
-      &nbsp;
+  {% for post in posts %}
+    <div class="feed-item">
+      {% include 'AppBundle:post:post_master.html.twig' %}
     </div>
 
-    <div class="pure-u-3-5">
-      {% for post in posts %}
-        <div class="feed-item">
-          {% include 'AppBundle:post:post_master.html.twig' %}
-        </div>
-
-
-        {% else %}
-            <p class="readable">Yikes, looks like there's no posts for that date!</p>
-      {% endfor %}
-    </div>
-  </div>
+    {% else %}
+        <p class="readable">Yikes, looks like there's no posts for that date!</p>
+    {% endfor %}
 
 </div>
 

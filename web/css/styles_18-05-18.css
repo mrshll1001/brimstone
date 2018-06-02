@@ -33,6 +33,10 @@
   color: #00FF00;
 }
 
+.grey-text {
+  color: #ABB7B7;
+}
+
 button.red {
   color: white;
 }
@@ -63,6 +67,8 @@ a {
 
 /* Make posts listed in the field go all pretty */
 .feed-item {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
   padding: 1em;
   border-bottom: 1px solid #eee;
 }
