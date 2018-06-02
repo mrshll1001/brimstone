@@ -19,7 +19,7 @@
     <h1 class="p-name">{{post.title}}</h1>
     {% endif %}
 
-    <div class="post readable e-content">
+    <div class="post readable e-content {% if post.title is null %}p-name{% endif %}">
       {{post.content|markdown}}
     </div>
 
