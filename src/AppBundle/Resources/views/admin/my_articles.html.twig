@@ -14,7 +14,6 @@
       <thead>
         <th>Date</th>
         <th>Title</th>
-        <th>Action</th>
       </thead>
 
       <tbody>
@@ -23,12 +22,10 @@
             <td>{{p.date|date('d/m/Y')}}</td>
             <td>
             {{p.title}} <br>
-            <a href="{{path('download_post_markdown', {'id': p.id})}}">Download</a>
+            {% include 'AppBundle:form:post_actions_form.html.twig' with {'post':p} only %}
 
             </td>
-            <td>
-              {% include 'AppBundle:form:post_actions_form.html.twig' with {'post':p} only %}
-            </td>
+
           </tr>
         {% endfor %}
       </tbody>
