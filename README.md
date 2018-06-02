@@ -7,17 +7,17 @@ List of jobs and features on the immediate horizon
 * POSSE Posts to Mastodon
 * Upload pre-written posts via Markdown files
 * Consume Indieweb content via reading microformats
-* Support microformats for Indieweb feed compatibility
-* Support h-card properly
 * Support ActivityPub for outgoing posts
 * Support media attachments to posts e.g. images
 * Add CardDav and CalDav support to act as a host (no client interface)
 * Add a `/reflect` or `/summary` path which takes two dates, and presents summaries on posting habits (e.g. most used tags, average word length, average post frequency etc.)
 
 ## Currently working on
-* TLC pass on some templates
 
 ## Implemented
+* Support microformats for Indieweb feed compatibility
+* TLC pass on some templates
+* Support h-card properly
 * Basic blogging and microblogging with Posts.
 * Type inferred, so that posts w/o titles display different to posts with titles etc.
 * Editable profile with about page
