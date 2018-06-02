@@ -25,15 +25,41 @@ class Syndicator
 
   private $requestStack;
   private $twitterKeys;
+  private $mastodonKeys;
 
   const TWITTER_UPDATE_STATUS = "https://api.twitter.com/1.1/statuses/update.json";
   const TWITTER_STATUS_LIMIT = 280;
+
+  const MASTODON_STATUS_LIMIT = 500;
 
   public function __construct(EntityManager $em, Router $router, RequestStack $requestStack)
   {
     $this->em = $em;
     $this->router = $router;
     $this->requestStack = $requestStack;
+
+  }
+
+  /**=======================================================================================================
+   * Sends a single post to a Mastodon instance
+   *=======================================================================================================
+   */
+  public function postToMastodon(Post $post)
+  {
+    /* Check Mastodon keys and set up if null */
+    if ($this->mastodonKeys === NULL)
+    {
+      $this->setupMastodonKeys();
+    }
+
+    /* TODO generate status content */
+    $status = $this->getPostAsStatus($post, self::MASTODON_STATUS_LIMIT);
+
+    /* Set up Mastodon client and toot */
+    $mastodon = new MastodonClient(new Client());
+    $mastodon->domain($this->mastodonKeys['mastodon_domain'])
+             ->token($this->mastodonKeys['mastodon_access_token'])
+             ->createStatus($status);
 
   }
 
@@ -113,5 +139,11 @@ class Syndicator
   {
     $user = $this->em->getRepository('AppBundle:User')->getSingleUser();
     $this->twitterKeys = $user->getProfile()->getTwitterKeys();
+  }
+
+  private function setupMastodonKeys()
+  {
+    $user = $this->em->getRepository('AppBundle:User')->getSingleUser();
+    $this->mastodonKeys = $user->getProfile()->getMastodonKeys();
   }
 }

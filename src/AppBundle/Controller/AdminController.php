@@ -48,6 +48,8 @@ class AdminController extends Controller
       $user = $this->getUser(); // Get the User
       $this->checkUser($user);  // Check stuff about them
 
+      // $syndicator->postToMastodon();
+
       /* We have a form on the page to allow the user to quickly post some content, so let's render that */
       $post = new Post(); // We're basing it around a NEW post
       $form = $this->createForm(QuickNoteType::class, $post, array('profile'=>$user->getProfile() ));
@@ -88,6 +90,15 @@ class AdminController extends Controller
             $syndicator->postToTwitter($post);
           }
         }
+
+        if ($form->has('mastodon'))
+        {
+          if ($form['mastodon']->getData())
+          {
+            $syndicator->postToMastodon($post);
+          }
+        }
+
 
 
         /* If we're successful, we should probably want to redirect to a nice clean form */
@@ -218,6 +229,14 @@ class AdminController extends Controller
           if ($form['twitter']->getData())
           {
             $syndicator->postToTwitter($post);
+          }
+        }
+
+        if ($form->has('mastodon'))
+        {
+          if ($form['mastodon']->getData())
+          {
+            $syndicator->postToMastodon($post);
           }
         }
 

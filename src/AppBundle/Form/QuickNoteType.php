@@ -57,6 +57,26 @@ class QuickNoteType extends AbstractType
              }
     }
 
+    /* If the user has entered api keys, dynamically add extra fields to posse */
+    if ($profile->getMastodonKeys() !== NULL)
+    {
+        $mastodonData = $profile->getMastodonKeys();
+        if ( array_key_exists('mastodon_domain', $mastodonData) &&
+             array_key_exists('mastodon_access_token', $mastodonData) )
+             {
+               if ( $mastodonData['mastodon_domain'] !== NULL &&
+                    $mastodonData['mastodon_access_token'] !== NULL
+                    )
+               {
+                 $builder->add('mastodon', CheckboxType::class, array(
+                   'label' => "Mastodon",
+                    'mapped' => false,
+                    'required' => false
+                  ));
+               }
+             }
+    }
+
   }
 
 
