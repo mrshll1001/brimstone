@@ -30,6 +30,7 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "j7mbo/twitter-api-php": "^1.0",
         "knplabs/knp-markdown-bundle": "^1.6",
+        "revolution/laravel-mastodon-api": "^1.5",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/monolog-bundle": "^3.1.0",

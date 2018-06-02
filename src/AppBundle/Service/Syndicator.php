@@ -10,6 +10,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 
+use GuzzleHttp\Client;
+use Revolution\Mastodon\MastodonClient;
+
 
 /**
  * A class that handles syndication of post content to various services
