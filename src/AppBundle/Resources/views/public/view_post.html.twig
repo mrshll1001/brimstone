@@ -8,7 +8,7 @@
   <div class="pure-g">
     <div class="pure-u-1-5">
 
-      {% if previous is not null %}<a href="{{path('view_post_by_id', {'id': previous.id})}}"><h4>&#12296; Previous</h4></a>{% endif %}
+      {% if previous is not null %}<a href="{{path('view_post_by_id', {'id': previous.id})}}"><h4>&#12296; Previous Post</h4></a>{% endif %}
     </div>
 
     <div class="pure-u-3-5">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="pure-u-1-5">
-      {% if next is not null %}<a href="{{path('view_post_by_id', {'id': next.id})}}"><h4>Next &#12297;</h4></a>{% endif %}
+      {% if next is not null %}<a href="{{path('view_post_by_id', {'id': next.id})}}"><h4>Next Post &#12297;</h4></a>{% endif %}
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-<a href="{{path('view_article', {'slug': post.slug})}}"><h2>{{post.title}}</h2></a>
+<a href="{{path('view_post_by_id', {'id': post.id})}}"><h2>{{post.title}}</h2></a>
 <p>{{post.date|date('d F, Y')}}</p>
 
 {% include 'AppBundle:post:post_tags.html.twig' %}
