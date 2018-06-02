@@ -1,22 +1,25 @@
 {# Provides logic to render different post types differently, meaning that all other templates need to do is include this one with a post #}
+<article class="h-entry">
+
 
 <div class="pure-g">
 
   <div class="pure-u-1-5">
     <p>
-      <a class="grey-text" href="{{path('view_post_by_id', {'id': post.id})}}">{{post.date|date('d M Y, H:i')}}</a>
+      <a class="grey-text u-url" href="{{path('view_post_by_id', {'id': post.id})}}">{{post.date|date('d M Y, H:i')}}</a>
+      <span class="hidden dt-published">{{post.date|date('c')}}</span>
     </p>
 
     {% if post.location is not null and post.location.location is defined %} from <em>{{post.location.location}}</em>{% endif %}</p>
   </div>
 
   <div class="pure-u-3-5">
-    
+
     {% if post.title is not null %}
-    <h1>{{post.title}}</h1>
+    <h1 class="p-name">{{post.title}}</h1>
     {% endif %}
 
-    <div class="post readable">
+    <div class="post readable e-content">
       {{post.content|markdown}}
     </div>
 
@@ -25,5 +28,6 @@
   </div>
 
 </div>
+</article>
 
 {% block actions %}{% endblock actions %}
