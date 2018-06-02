@@ -56,6 +56,13 @@ class UserProfile
      */
     private $twitterKeys;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="mastodon_keys", type="json_array", nullable=true)
+     */
+    private $mastodonKeys;
+
 
     /**
      * Get id
@@ -185,5 +192,29 @@ class UserProfile
     public function getSiteTitle()
     {
         return $this->siteTitle;
+    }
+
+    /**
+     * Set mastodonKeys.
+     *
+     * @param array|null $mastodonKeys
+     *
+     * @return UserProfile
+     */
+    public function setMastodonKeys($mastodonKeys = null)
+    {
+        $this->mastodonKeys = $mastodonKeys;
+
+        return $this;
+    }
+
+    /**
+     * Get mastodonKeys.
+     *
+     * @return array|null
+     */
+    public function getMastodonKeys()
+    {
+        return $this->mastodonKeys;
     }
 }
