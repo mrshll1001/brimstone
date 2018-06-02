@@ -17,12 +17,32 @@
   background-color: #B71C1C;
 }
 
+.red-text {
+  color: #B71C1C;
+}
+
+.orange-text {
+  color: #E87E04;
+}
+
 .white-text {
   color: #FFF;
 }
 
+.green-text {
+  color: #00FF00;
+}
+
 button.red {
   color: white;
+}
+
+button.minimal {
+     background:none!important;
+     border:none;
+     padding:0!important;
+     font: inherit;
+     cursor: pointer;
 }
 
 a, .light-blue-text {

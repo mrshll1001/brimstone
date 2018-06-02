@@ -3,7 +3,7 @@
 
     <form action="{{path('change_post_visibilty_by_id', {'id': post.id})}}">
       <input type="hidden" name="redirect_route" value="{{ app.request.attributes.get('_route') }}">
-      <button type="submit" class="pure-button pure-button-primary">
+      <button type="submit" class="minimal green-text">
         {% if post.visible %}
         Hide
         {% else %}
@@ -14,13 +14,13 @@
   </div>
 
   <div class="pure-u-1-3">
-    <a href="{{path('edit_post', {'id': post.id})}}" class="pure-button">Edit</a>
+    <a href="{{path('edit_post', {'id': post.id})}}" class="orange-text">Edit</a>
   </div>
 
   <div class="pure-u-1-3">
     <form action="{{path('remove_post_by_id', {'id': post.id})}}" method="POST">
       <input type="hidden" name="redirect_route" value="{{ app.request.attributes.get('_route') }}">
-      <button type="submit" class="pure-button red">Delete</button>
+      <button type="submit" class="minimal red-text">Delete</button>
     </form>
 
   </div>
