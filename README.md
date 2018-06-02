@@ -16,7 +16,6 @@ List of jobs and features on the immediate horizon
 
 ## Currently working on
 * TLC pass on some templates
-* Exporting individual articles in Markdown files
 
 ## Implemented
 * Basic blogging and microblogging with Posts.
@@ -29,6 +28,7 @@ List of jobs and features on the immediate horizon
 * Produce an RSS feed containing one's articles
 * POSSE posts to Twitter with checkbox
 * Remove Materialize css and replace with PureCSS
+* Exporting individual articles in Markdown files
 
 ## Discarded / On hold
 * Consume Mastodon content via configurable profile
