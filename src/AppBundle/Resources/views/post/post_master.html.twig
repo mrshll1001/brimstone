@@ -11,6 +11,7 @@
   </div>
 
   <div class="pure-u-3-5">
+    
     {% if post.title is not null %}
     <h1>{{post.title}}</h1>
     {% endif %}
@@ -18,6 +19,8 @@
     <div class="post readable">
       {{post.content|markdown}}
     </div>
+
+      {% include 'AppBundle:post:post_tags.html.twig' %}
 
   </div>
 
